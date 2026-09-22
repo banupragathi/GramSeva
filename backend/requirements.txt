@@ -1,0 +1,36 @@
+# GramSeva Backend Dependencies
+# Core
+fastapi==0.115.6
+uvicorn[standard]
+pydantic>=2.0.0
+python-dotenv==1.0.1
+python-multipart==0.0.18
+
+# Database
+sqlalchemy
+# psycopg2-binary
+# geoalchemy2
+
+# GIS
+geopandas
+shapely
+pyproj
+fiona
+rasterio
+
+# AI/ML (optional — install as needed)
+# torch>=2.0
+# transformers>=4.40
+# sentence-transformers>=2.7
+# timm>=1.0
+
+# Auth
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+
+# Testing
+pytest==8.3.4
+httpx==0.28.1
+
+# Utils
+orjson==3.10.12

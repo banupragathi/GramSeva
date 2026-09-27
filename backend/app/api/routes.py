@@ -5,7 +5,9 @@ All demo endpoints return realistic structured data.
 When connected to PostGIS, these will query real spatial data.
 """
 
-from fastapi import APIRouter, UploadFile, File, HTTPException, Query
+import os
+import nh3
+from fastapi import APIRouter, UploadFile, File, HTTPException, Query, Response, Request
 from typing import List, Optional
 from datetime import datetime
 from app.schemas.schemas import (
@@ -23,43 +25,58 @@ from app.schemas.schemas import (
 
 router = APIRouter()
 
-# ──────────────────────────────────────────────────────────
-# DEMO DATA (used when PostGIS is not connected)
-# ──────────────────────────────────────────────────────────
-DEMO_DATASETS = [
-    {"id": "DS-001", "name": "cadastral_tn_2024.geojson", "source_type": "Cadastral", "file_format": "GeoJSON", "record_count": 487, "geometry_type": "Polygon", "original_crs": "EPSG:32644", "normalized_crs": "EPSG:4326", "status": "ready", "validity_pct": 98.2, "missing_attributes": 3, "duplicate_records": 0, "uploaded_at": "2024-08-15T09:42:00Z", "file_size": 4200000},
-    {"id": "DS-002", "name": "municipal_gis_export.shp", "source_type": "Municipal GIS", "file_format": "Shapefile", "record_count": 523, "geometry_type": "Polygon", "original_crs": "EPSG:4326", "normalized_crs": "EPSG:4326", "status": "ready", "validity_pct": 95.7, "missing_attributes": 12, "duplicate_records": 2, "uploaded_at": "2024-08-12T14:20:00Z", "file_size": 6800000},
-    {"id": "DS-003", "name": "drone_survey_aug24.geotiff", "source_type": "Drone Imagery", "file_format": "GeoTIFF", "record_count": 1, "geometry_type": "Raster", "original_crs": "EPSG:32644", "normalized_crs": "EPSG:4326", "status": "ready", "validity_pct": 100.0, "missing_attributes": 0, "duplicate_records": 0, "uploaded_at": "2024-08-10T11:15:00Z", "file_size": 234000000},
-]
-
-DEMO_PARCELS = [
-    {"id": "P-001", "parcel_id": "TN-1042", "survey_number": "SN-1042", "area_sqm": 1200.0, "land_use": "Residential", "building_count": 1, "building_area_sqm": 340.0, "road_access": True, "owner_name": "S. Kumar", "confidence": 94.0, "match_state": "MATCHED", "review_state": None, "sources": ["Cadastral", "Municipal", "Drone", "Revenue"], "created_at": "2024-08-22T00:00:00Z"},
-    {"id": "P-002", "parcel_id": "TN-1001", "survey_number": "SN-1001", "area_sqm": 1200.0, "land_use": "Residential", "building_count": 2, "building_area_sqm": 420.0, "road_access": True, "owner_name": "Suresh Kumar", "confidence": 96.0, "match_state": "MATCHED", "review_state": None, "sources": ["Cadastral", "Municipal", "Drone"], "created_at": "2024-06-15T00:00:00Z"},
-]
-
-DEMO_CONFLICTS = [
-    {"id": "C-001", "parcel_id": "TN-1042", "conflict_type": "area", "severity": "medium", "description": "Area mismatch between cadastral and municipal records", "source_a_name": "Cadastral", "source_a_value": "1200 sq.ft", "source_b_name": "Municipal", "source_b_value": "1267 sq.ft", "difference": "5.58%", "state": "HUMAN_REVIEW", "created_at": "2024-08-20T09:51:00Z"},
-    {"id": "C-002", "parcel_id": "TN-1011", "conflict_type": "boundary", "severity": "high", "description": "Boundary mismatch — cadastral boundary overlaps adjacent parcel", "source_a_name": "Cadastral", "source_a_value": "Original boundary", "source_b_name": "Municipal", "source_b_value": "Shifted 2.3m east", "difference": "2.3m offset", "state": "OPEN", "created_at": "2024-08-18T14:22:00Z"},
-]
-
-DEMO_CHANGES = [
-    {"id": "CH-001", "parcel_id": "TN-1020", "change_type": "new_building", "description": "New building detected in agricultural parcel", "before_date": "2022-03-15", "after_date": "2024-06-10", "before_value": "Vacant land", "after_value": "80 sq.m structure detected", "confidence": 91.0, "detected_by": "ChangeFormer"},
-]
-
+def sanitize_text(text: Optional[str]) -> Optional[str]:
+    """Helper to strip any HTML tags from free-text fields using nh3."""
+    if not text:
+        return text
+    return nh3.clean(text, tags=set())
 
 # ──────────────────────────────────────────────────────────
-# AUTH
+# AUTH & USER ME
 # ──────────────────────────────────────────────────────────
 @router.post("/auth/login", response_model=TokenResponse)
-async def login(request: LoginRequest):
-    """Authenticate user. Demo mode bypasses authentication."""
-    # Demo mode: accept any credentials
+async def login(request: LoginRequest, response: Response):
+    """Authenticate user and set HttpOnly SameSite=Strict cookie."""
+    token = "demo-token-gramseva-2024"
+    
+    # Set HttpOnly SameSite=Strict cookie
+    response.set_cookie(
+        key="jwt",
+        value=token,
+        httponly=True,
+        samesite="strict",
+        secure=os.getenv("NODE_ENV") == "production",
+        max_age=3600,
+    )
+    
     return TokenResponse(
-        access_token="demo-token-gramseva-2024",
+        access_token=token,
         token_type="bearer",
         role=request.role,
         user_id="demo-user"
     )
+
+@router.post("/auth/logout")
+async def logout(response: Response):
+    """Clear session cookie on logout."""
+    response.delete_cookie("jwt")
+    return {"success": True, "message": "Logged out successfully"}
+
+@router.get("/auth/me")
+async def get_me(request: Request):
+    """Fetch active user info from cookie or Bearer header."""
+    token = request.cookies.get("jwt") or request.headers.get("Authorization")
+    if not token:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+    return {
+        "success": True,
+        "user": {
+            "user_id": "demo-user",
+            "email": "admin@gramseva.in",
+            "role": "admin"
+        }
+    }
+
 
 
 # ──────────────────────────────────────────────────────────

@@ -1,229 +1,77 @@
 @import "tailwindcss";
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-primary: #860F61;
-  --color-primary-light: #a5247e;
-  --color-primary-dark: #6b0c4e;
-  --color-primary-muted: rgba(134, 15, 97, 0.1);
-  --color-secondary: #F4E9D8;
-  --color-secondary-dark: #e8d5b8;
-  --color-neutral: #A9ACAD;
-  --color-neutral-light: #d1d3d4;
-  --color-neutral-dark: #6b6e70;
-  --color-surface: #f8f6f3;
-  --color-surface-dark: #1a1a1e;
-  --color-surface-card: #ffffff;
-  --color-surface-card-dark: #242428;
-  --color-border: #e5e2de;
-  --color-border-dark: #2e2e33;
-  --color-success: #2d8a56;
-  --color-warning: #c0862e;
-  --color-error: #b84040;
-  --color-info: #4a7fb5;
-  --font-sans: 'Inter', 'DM Sans', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
-}
-
 :root {
-  --background: #faf8f5;
-  --foreground: #1a1a1e;
-}
+  --bg: #0A0B0D;
+  --bg-elevated: #131519;
+  --line: rgba(237, 237, 234, 0.09);
+  --line-strong: rgba(237, 237, 234, 0.16);
+  --ink: #EDEDEA;
+  --ink-muted: #8B8E94;
+  --ink-faint: #5C6067;
+  --magenta: #C41E7D;
+  --magenta-dim: #8A1657;
+  --magenta-glow: rgba(196, 30, 125, 0.16);
+  --moss: #4A6B4F;
+  --sand: #C9BFAE;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #111114;
-    --foreground: #e8e6e3;
-  }
+  /* Font variables */
+  --font-display: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 * {
+  box-sizing: border-box;
   scrollbar-width: thin;
-  scrollbar-color: var(--color-neutral) transparent;
+  scrollbar-color: var(--ink-faint) transparent;
 }
 
-*::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-*::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-*::-webkit-scrollbar-thumb {
-  background: var(--color-neutral);
-  border-radius: 3px;
+*:focus-visible {
+  outline: 2px solid var(--magenta);
+  outline-offset: 2px;
 }
 
 html {
   scroll-behavior: smooth;
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans);
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  margin: 0;
+  padding: 0;
 }
 
-/* MapLibre GL overrides */
-.maplibregl-map {
-  font-family: var(--font-sans) !important;
+/* Heading font styling */
+h1, h2, h3, h4, h5, h6, .font-display {
+  font-family: var(--font-display);
 }
 
-.maplibregl-popup-content {
-  background: var(--color-surface-card) !important;
-  border: 1px solid var(--color-border) !important;
-  border-radius: 8px !important;
-  padding: 12px 16px !important;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.12) !important;
-  font-family: var(--font-sans) !important;
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
-.maplibregl-popup-tip {
-  border-top-color: var(--color-surface-card) !important;
+/* Custom scrollbars */
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
 }
-
-.maplibregl-ctrl-group {
-  background: var(--color-surface-card) !important;
-  border: 1px solid var(--color-border) !important;
-  border-radius: 8px !important;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08) !important;
+*::-webkit-scrollbar-track {
+  background: transparent;
 }
-
-.maplibregl-ctrl-group button {
-  border-bottom: 1px solid var(--color-border) !important;
-}
-
-.maplibregl-ctrl-group button:last-child {
-  border-bottom: none !important;
-}
-
-/* Custom utility classes */
-.text-gradient-primary {
-  background: linear-gradient(135deg, #860F61 0%, #a5247e 50%, #860F61 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.bg-gradient-primary {
-  background: linear-gradient(135deg, #860F61 0%, #6b0c4e 100%);
-}
-
-.bg-gradient-warm {
-  background: linear-gradient(135deg, #F4E9D8 0%, #faf8f5 100%);
-}
-
-.glass-card {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.glass-card-dark {
-  background: rgba(26, 26, 30, 0.8);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-/* Pipeline connector line */
-.pipeline-connector {
-  position: relative;
-}
-
-.pipeline-connector::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  bottom: -24px;
-  width: 2px;
-  height: 24px;
-  background: linear-gradient(to bottom, #860F61, transparent);
-}
-
-/* Skeleton loading */
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-
-.skeleton {
-  background: linear-gradient(90deg, #e5e2de 25%, #f0ede8 50%, #e5e2de 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s ease-in-out infinite;
-  border-radius: 6px;
-}
-
-/* Animated counter */
-@keyframes countUp {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.animate-count {
-  animation: countUp 0.6s ease-out forwards;
-}
-
-/* Subtle pulse for status indicators */
-@keyframes subtlePulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.6; }
-}
-
-.pulse-status {
-  animation: subtlePulse 2s ease-in-out infinite;
-}
-
-/* Map parcel hover */
-.parcel-hover {
-  transition: all 0.2s ease;
-}
-
-.parcel-hover:hover {
-  filter: brightness(1.1);
-  cursor: pointer;
-}
-
-/* Landing page hero gradient overlay */
-.hero-gradient {
-  background: linear-gradient(
-    135deg,
-    rgba(134, 15, 97, 0.03) 0%,
-    rgba(244, 233, 216, 0.08) 50%,
-    rgba(134, 15, 97, 0.03) 100%
-  );
-}
-
-/* Confidence bar colors */
-.confidence-high { background-color: #2d8a56; }
-.confidence-medium { background-color: #c0862e; }
-.confidence-review { background-color: #b87940; }
-.confidence-low { background-color: #b84040; }
-
-/* Layer item transition */
-.layer-item {
-  transition: all 0.15s ease;
-}
-
-.layer-item:hover {
-  background: rgba(134, 15, 97, 0.04);
-}
-
-/* Page transition wrapper */
-.page-enter {
-  opacity: 0;
-  transform: translateY(8px);
-}
-
-.page-enter-active {
-  opacity: 1;
-  transform: translateY(0);
-  transition: all 0.3s ease;
+*::-webkit-scrollbar-thumb {
+  background: var(--ink-faint);
+  border-radius: 3px;
 }

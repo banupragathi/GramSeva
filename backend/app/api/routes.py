@@ -5,8 +5,12 @@ All demo endpoints return realistic structured data.
 When connected to PostGIS, these will query real spatial data.
 """
 
+import os
+import shutil
+import tempfile
+from pathlib import Path
 from fastapi import APIRouter, UploadFile, File, HTTPException, Query
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 from datetime import datetime
 from app.schemas.schemas import (
     LoginRequest, TokenResponse,
@@ -378,3 +382,169 @@ async def export_data(format: str = Query("geojson", enum=["geojson", "csv", "js
         "records": 1247,
         "includes_provenance": True
     }
+
+
+# ──────────────────────────────────────────────────────────
+# ML — BUILDING SEGMENTATION  (SegFormer-B2)
+# ──────────────────────────────────────────────────────────
+
+@router.get("/ml/info")
+async def ml_model_info():
+    """
+    Return metadata about the loaded SegFormer-B2 building segmentation model.
+    Safe to call whether or not torch is installed.
+    """
+    try:
+        from app.ml.segformer_service import model_info
+        return model_info()
+    except ImportError:
+        return {
+            "architecture": "SegFormer-B2",
+            "status": "unavailable",
+            "reason": "ML dependencies not installed (torch, transformers).",
+            "install": "pip install torch transformers",
+        }
+
+
+@router.post("/ml/segment")
+async def segment_buildings(
+    file: UploadFile = File(..., description="GeoTIFF or raster image for building segmentation"),
+    min_area_m2: float = Query(5.0, ge=0.0, description="Minimum building area to keep (m²)"),
+    source_name: Optional[str] = Query(None, description="Label for source_image property in output GeoJSON"),
+):
+    """
+    Run SegFormer-B2 building segmentation on an uploaded GeoTIFF.
+
+    **Returns**: GeoJSON FeatureCollection with one Polygon feature per
+    detected building.  Each feature includes:
+    - `source_image`  – name tag
+    - `model`         – "SegFormer-B2"
+    - `task`          – "building_segmentation"
+    - `area_m2`       – geodetic area of the polygon
+    - `geometry`      – Polygon coordinates in EPSG:4326
+
+    **Requirements**: `torch` and `transformers` must be installed and the
+    model must be present at `SEGFORMER_MODEL_PATH`.
+    """
+    # Import guard — returns 503 if torch/transformers are missing
+    try:
+        from app.ml.segformer_service import segment_geotiff
+    except ImportError as exc:
+        raise HTTPException(
+            status_code=503,
+            detail=f"ML dependencies not installed: {exc}. Run: pip install torch transformers",
+        )
+
+    # Write the uploaded file to a temporary path so rasterio can open it
+    suffix = Path(file.filename).suffix if file.filename else ".tif"
+    tmp = tempfile.NamedTemporaryFile(delete=False, suffix=suffix)
+    try:
+        shutil.copyfileobj(file.file, tmp)
+        tmp.flush()
+        tmp.close()
+
+        name = source_name or (Path(file.filename).stem if file.filename else "upload")
+
+        try:
+            geojson = segment_geotiff(
+                file_path=tmp.name,
+                source_image_name=name,
+                min_building_area_m2=min_area_m2,
+            )
+        except FileNotFoundError as exc:
+            raise HTTPException(status_code=500, detail=str(exc))
+        except Exception as exc:
+            raise HTTPException(
+                status_code=500,
+                detail=f"Segmentation failed: {exc}",
+            )
+    finally:
+        os.unlink(tmp.name)
+
+    building_count = len(geojson.get("features", []))
+    total_area = sum(
+        f["properties"].get("area_m2", 0) for f in geojson.get("features", [])
+    )
+
+    return {
+        "status": "success",
+        "building_count": building_count,
+        "total_area_m2": round(total_area, 2),
+        "model": "SegFormer-B2",
+        "output_crs": "EPSG:4326",
+        "geojson": geojson,
+    }
+
+
+@router.post("/datasets/{dataset_id}/segment")
+async def segment_dataset_buildings(
+    dataset_id: str,
+    parcel_id: Optional[str] = Query(None, description="Associate extracted buildings with this parcel ID"),
+    min_area_m2: float = Query(5.0, ge=0.0),
+):
+    """
+    Trigger building segmentation for a dataset that has already been uploaded.
+
+    In demo mode (no PostGIS) the endpoint validates that the dataset ID is
+    known and returns a structured response describing what would be saved to
+    the `buildings` table.
+
+    When PostGIS is connected, the extracted building polygons are persisted
+    as `Building` rows linked to the given `parcel_id`.
+    """
+    # Verify dataset exists in demo data
+    known_ids = {ds["id"] for ds in DEMO_DATASETS}
+    if dataset_id not in known_ids:
+        raise HTTPException(status_code=404, detail=f"Dataset {dataset_id!r} not found")
+
+    # Find the dataset record
+    dataset = next((ds for ds in DEMO_DATASETS if ds["id"] == dataset_id), None)
+
+    # Only raster datasets can be segmented
+    if dataset and dataset.get("geometry_type") not in ("Raster", None):
+        raise HTTPException(
+            status_code=422,
+            detail=(
+                f"Dataset {dataset_id!r} has geometry_type "
+                f"'{dataset.get('geometry_type')}'. "
+                "Building segmentation requires a raster (GeoTIFF) dataset."
+            ),
+        )
+
+    # Check ML availability
+    ml_available = False
+    try:
+        from app.ml.segformer_service import is_loaded, model_info
+        ml_available = True
+        loaded = is_loaded()
+        info = model_info()
+    except ImportError:
+        loaded = False
+        info = {}
+
+    return {
+        "dataset_id": dataset_id,
+        "parcel_id": parcel_id,
+        "ml_available": ml_available,
+        "model_loaded": loaded,
+        "status": "ready" if ml_available else "unavailable",
+        "message": (
+            "POST a GeoTIFF to /api/ml/segment to run inference, "
+            "then associate the returned building polygons with a parcel."
+            if not ml_available
+            else (
+                "ML engine is ready. Upload the GeoTIFF via POST /api/ml/segment "
+                "with source_name=" + dataset_id
+            )
+        ),
+        "model": info.get("architecture"),
+        "output_crs": "EPSG:4326",
+        # Simulated result for demo mode
+        "demo_result": {
+            "buildings_would_be_saved": 28,
+            "table": "buildings",
+            "linked_parcel": parcel_id,
+            "area_range_m2": {"min": 12.4, "max": 618.9},
+        },
+    }
+

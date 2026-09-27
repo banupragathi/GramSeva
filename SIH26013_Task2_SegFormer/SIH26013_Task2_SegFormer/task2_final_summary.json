@@ -1,0 +1,49 @@
+{
+  "task": "Task 2 - Automated Building Segmentation",
+  "dataset": {
+    "name": "SpaceNet 2",
+    "aoi": "AOI_3_Paris",
+    "total_images": 1148,
+    "train_images": 918,
+    "validation_images": 230,
+    "split_seed": 42,
+    "split_type": "random 80/20"
+  },
+  "model": {
+    "architecture": "SegFormer-B2",
+    "pretrained_base": "nvidia/segformer-b2-finetuned-ade-512-512",
+    "classes": {
+      "0": "background",
+      "1": "building"
+    },
+    "best_epoch": 9
+  },
+  "validation_metrics": {
+    "IoU": 0.7364,
+    "Dice": 0.8482,
+    "Precision": 0.8307,
+    "Recall": 0.8665,
+    "F1": 0.8482
+  },
+  "confusion_counts": {
+    "TP": 3911379,
+    "FP": 797094,
+    "FN": 602775,
+    "TN": 54981872
+  },
+  "vector_output": {
+    "validation_images_processed": 230,
+    "geojson_files": 122,
+    "total_predicted_polygons": 3053,
+    "invalid_geometries": 0,
+    "geometry_type": "Polygon",
+    "crs": "EPSG:4326",
+    "area_field": "area_m2"
+  },
+  "artifacts": {
+    "checkpoint": "/kaggle/working/best_segformer_b2_building.pth",
+    "exported_model": "/kaggle/working/segformer_b2_building_final",
+    "validation_metrics": "/kaggle/working/task2_validation_metrics.json",
+    "geojson_output": "/kaggle/working/segformer_validation_geojson_area"
+  }
+}

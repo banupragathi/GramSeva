@@ -1,0 +1,26 @@
+{
+  "task": "Task 2 - Building Segmentation",
+  "dataset": "SpaceNet 2 - AOI_3_Paris",
+  "split": {
+    "train_samples": 918,
+    "validation_samples": 230,
+    "random_seed": 42
+  },
+  "model": "nvidia/segformer-b2-finetuned-ade-512-512",
+  "num_classes": 2,
+  "best_epoch": 9,
+  "metrics": {
+    "IoU": 0.736433,
+    "Dice": 0.848214,
+    "Precision": 0.830711,
+    "Recall": 0.86647,
+    "F1": 0.848214
+  },
+  "confusion_counts": {
+    "TP": 3911379,
+    "FP": 797094,
+    "FN": 602775,
+    "TN": 54981872
+  },
+  "checkpoint": "/kaggle/working/best_segformer_b2_building.pth"
+}

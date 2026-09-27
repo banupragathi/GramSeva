@@ -18,11 +18,13 @@ pyproj
 fiona
 rasterio
 
-# AI/ML (optional — install as needed)
-# torch>=2.0
-# transformers>=4.40
-# sentence-transformers>=2.7
+# AI/ML — required for SegFormer-B2 building segmentation (Task 2)
+torch>=2.0
+transformers>=4.40
+Pillow>=10.0
+# Optional — for visual (Siamese ResNet-50) and attribute (SBERT) matching:
 # timm>=1.0
+# sentence-transformers>=2.7
 
 # Auth
 python-jose[cryptography]==3.3.0

@@ -170,7 +170,7 @@ export default function DataSourcesPage() {
       >
         <div>
           <h1 className="text-2xl font-bold mb-1">Data Sources</h1>
-          <p className="text-sm text-neutral-dark">{demoDatasets.length} datasets loaded</p>
+          <p className="text-sm text-neutral-dark">{demoDatasets.length} datasets loaded • SegFormer-B2 Building Segmentation Enabled</p>
         </div>
         <button
           onClick={() => setUploadOpen(true)}
@@ -179,6 +179,67 @@ export default function DataSourcesPage() {
           <Upload className="w-4 h-4" />
           Upload Dataset
         </button>
+      </motion.div>
+
+      {/* SegFormer AI Building Segmentation Live Panel */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="mb-8 p-6 rounded-2xl border border-primary/20 bg-gradient-to-r from-primary/5 via-surface-card to-surface-card shadow-lg"
+      >
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-3">
+            <div className="p-2.5 rounded-xl bg-primary/15 text-primary">
+              <Layers className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <h2 className="text-base font-bold">SegFormer-B2 Building Segmentation (Task 2)</h2>
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-success/20 text-success">
+                  Backend API Live
+                </span>
+              </div>
+              <p className="text-xs text-neutral-dark">
+                NVIDIA SegFormer-B2 finetuned on SpaceNet-2 Paris dataset • IoU 73.6% • Output CRS EPSG:4326
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+          <div className="p-4 rounded-xl border border-border bg-surface/50">
+            <span className="text-xs text-neutral-dark font-medium">Pretrained Architecture</span>
+            <div className="text-sm font-bold mt-1">SegFormer-B2 (ADE20K Base)</div>
+            <div className="text-[11px] text-neutral-dark mt-0.5">Input: 512×512 RGB Satellite Rasters</div>
+          </div>
+
+          <div className="p-4 rounded-xl border border-border bg-surface/50">
+            <span className="text-xs text-neutral-dark font-medium">Validation Metrics</span>
+            <div className="flex items-center gap-3 mt-1 text-xs font-semibold">
+              <span className="text-success">IoU: 73.6%</span>
+              <span className="text-primary">Dice/F1: 84.8%</span>
+              <span>Recall: 86.6%</span>
+            </div>
+            <div className="text-[11px] text-neutral-dark mt-0.5">Polygon Area Calculation: Geodetic WGS84</div>
+          </div>
+
+          <div className="p-4 rounded-xl border border-border bg-surface/50 flex flex-col justify-between">
+            <div>
+              <span className="text-xs text-neutral-dark font-medium">API Endpoint</span>
+              <div className="text-xs font-mono text-primary font-semibold mt-1 truncate">
+                POST /api/ml/segment
+              </div>
+            </div>
+            <a
+              href="http://localhost:8000/docs#/default/segment_buildings_api_ml_segment_post"
+              target="_blank"
+              rel="noreferrer"
+              className="mt-2 text-center text-xs font-semibold px-3 py-1.5 rounded-lg bg-primary text-white hover:opacity-90 transition-opacity"
+            >
+              Test Endpoint via Swagger UI
+            </a>
+          </div>
+        </div>
       </motion.div>
 
       {/* Dataset List */}

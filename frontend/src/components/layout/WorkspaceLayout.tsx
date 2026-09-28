@@ -158,7 +158,7 @@ export default function WorkspaceLayout({ children }: { children: React.ReactNod
             </div>
             <div className="hidden sm:flex flex-col leading-none">
               <span className="text-[13px] font-bold tracking-tight">GramSeva</span>
-              <span className="font-mono text-[9px] text-primary/70 tracking-widest">SIH26013</span>
+              <span className="font-mono text-[9px] text-primary/70 tracking-widest">WORKSPACE</span>
             </div>
           </Link>
 

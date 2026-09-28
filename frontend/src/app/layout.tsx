@@ -12,7 +12,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "GramSeva — Connecting the Land That Connects Us",
   description:
-    "Automated integration and intelligent harmonization of multi-source geospatial data for urban land record management. SIH26013.",
+    "Automated integration and intelligent harmonization of multi-source geospatial data for urban land record management.",
   keywords: [
     "GramSeva",
     "land records",
@@ -21,7 +21,6 @@ export const metadata: Metadata = {
     "cadastral",
     "GIS",
     "urban planning",
-    "SIH26013",
   ],
 };
 

@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
+import Hero3DFloatingVisual from "@/components/Hero3DFloatingVisual";
 import {
   MapPin,
   Shield,
@@ -203,8 +203,8 @@ export default function LandingPage() {
         <div className="absolute top-20 right-10 w-96 h-96 rounded-full bg-primary/5 blur-3xl pointer-events-none" />
         <div className="absolute bottom-10 left-10 w-72 h-72 rounded-full bg-secondary/40 blur-3xl pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-6 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          <div className="lg:col-span-6 xl:col-span-7 max-w-2xl">
+        <div className="max-w-7xl mx-auto px-6 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 xl:gap-8 items-center">
+          <div className="lg:col-span-5 xl:col-span-5 max-w-xl">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -268,26 +268,14 @@ export default function LandingPage() {
             </motion.div>
           </div>
 
-          {/* 3D Land Intelligence Visual — Clean borderless fit */}
+          {/* 3D Land Intelligence Visual — Grand Scale with Interactive 3D Movement */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.92, y: 20 }}
+            initial={{ opacity: 0, scale: 0.9, y: 25 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ delay: 0.35, duration: 0.8, ease: "easeOut" }}
-            className="lg:col-span-6 xl:col-span-5 flex items-center justify-center relative mt-8 lg:mt-0"
+            className="lg:col-span-7 xl:col-span-7 flex items-center justify-center lg:justify-end relative mt-10 lg:mt-0"
           >
-            <div className="relative w-full max-w-[560px] lg:max-w-none flex items-center justify-center">
-              {/* Subtle ambient lighting behind the isometric 3D block */}
-              <div className="absolute -inset-4 bg-gradient-to-tr from-primary/20 via-transparent to-primary/10 rounded-full blur-3xl opacity-70 pointer-events-none" />
-
-              <Image
-                src="/hero_img.png"
-                alt="GramSeva 3D Land Intelligence Geospatial Visualization"
-                width={1536}
-                height={1024}
-                priority
-                className="w-full h-auto object-contain drop-shadow-[0_20px_45px_rgba(0,0,0,0.35)] select-none hover:scale-[1.02] transition-transform duration-500 ease-out"
-              />
-            </div>
+            <Hero3DFloatingVisual />
           </motion.div>
         </div>
       </motion.section>

@@ -41,7 +41,7 @@ function StatCard({
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay, duration: 0.4 }}
-      className="p-5 rounded-xl border border-border bg-surface-card hover:shadow-md transition-shadow"
+      className="p-5 rounded-xl border border-purple-900/10 bg-white hover:shadow-md transition-shadow"
     >
       <div className="flex items-center justify-between mb-3">
         <div
@@ -51,14 +51,14 @@ function StatCard({
           <Icon className="w-4.5 h-4.5" style={{ color }} />
         </div>
         {change && (
-          <span className="text-xs font-medium text-success flex items-center gap-0.5">
+          <span className="text-xs font-bold text-purple-600 flex items-center gap-0.5">
             <TrendingUp className="w-3 h-3" />
             {change}
           </span>
         )}
       </div>
-      <div className="text-2xl font-bold mb-0.5">{value}</div>
-      <div className="text-xs text-neutral-dark font-medium">{label}</div>
+      <div className="text-2xl font-extrabold text-purple-950 mb-0.5">{value}</div>
+      <div className="text-xs text-purple-800 font-semibold">{label}</div>
     </motion.div>
   );
 }
@@ -87,16 +87,16 @@ function QuickAction({
     >
       <Link
         href={href}
-        className="group flex items-center gap-4 p-4 rounded-xl border border-border bg-surface-card hover:border-primary/30 hover:shadow-md transition-all"
+        className="group flex items-center gap-4 p-4 rounded-xl border border-purple-900/10 bg-white hover:border-purple-600/30 hover:shadow-md transition-all"
       >
-        <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/15 transition-colors">
-          <Icon className="w-5 h-5 text-primary" />
+        <div className="w-10 h-10 rounded-lg bg-emerald-50 flex items-center justify-center group-hover:bg-emerald-100 transition-colors">
+          <Icon className="w-5 h-5 text-purple-700" />
         </div>
         <div className="flex-1 min-w-0">
-          <div className="text-sm font-semibold">{label}</div>
-          <div className="text-xs text-neutral-dark">{description}</div>
+          <div className="text-sm font-bold text-purple-950">{label}</div>
+          <div className="text-xs text-purple-700 font-medium">{description}</div>
         </div>
-        <ArrowRight className="w-4 h-4 text-neutral group-hover:text-primary transition-colors" />
+        <ArrowRight className="w-4 h-4 text-emerald-300 group-hover:text-purple-700 transition-colors" />
       </Link>
     </motion.div>
   );
@@ -115,11 +115,11 @@ function ActivityItem({
   type: "upload" | "conflict" | "review" | "process" | "match";
 }) {
   const colors = {
-    upload: "bg-info/15 text-info",
-    conflict: "bg-error/15 text-error",
-    review: "bg-warning/15 text-warning",
-    process: "bg-primary/15 text-primary",
-    match: "bg-success/15 text-success",
+    upload: "bg-blue-50 text-blue-600",
+    conflict: "bg-rose-50 text-rose-600",
+    review: "bg-amber-50 text-amber-600",
+    process: "bg-emerald-50 text-purple-600",
+    match: "bg-emerald-100 text-purple-700",
   };
 
   const icons = {
@@ -138,8 +138,8 @@ function ActivityItem({
         <StatusIcon className="w-3.5 h-3.5" />
       </div>
       <div className="flex-1 min-w-0">
-        <div className="text-sm text-foreground/80">{description}</div>
-        <div className="text-xs text-neutral mt-0.5">{time}</div>
+        <div className="text-sm font-bold text-purple-900">{description}</div>
+        <div className="text-xs text-purple-600 font-medium mt-0.5">{time}</div>
       </div>
     </div>
   );
@@ -157,26 +157,26 @@ export default function DashboardPage() {
         animate={{ opacity: 1, y: 0 }}
         className="mb-8"
       >
-        <h1 className="text-2xl font-bold mb-1">Overview</h1>
-        <p className="text-sm text-neutral-dark">
-          GramSeva intelligence summary • <span className="text-warning text-xs font-medium">Demo Dataset</span>
+        <h1 className="text-3xl font-extrabold text-purple-950 mb-1">Overview</h1>
+        <p className="text-sm font-medium text-purple-800">
+          GramSeva intelligence summary • <span className="text-purple-600 text-xs font-bold uppercase tracking-wide bg-emerald-100 px-2 py-0.5 rounded-full ml-1">Demo Dataset</span>
         </p>
       </motion.div>
 
       {/* Stats Grid */}
       <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 mb-8">
-        <StatCard icon={Database} label="Total Sources" value="6" color="#860F61" delay={0} />
-        <StatCard icon={Layers} label="Parcels" value="1,247" color="#4a7fb5" delay={0.05} />
-        <StatCard icon={GitMerge} label="Matched Entities" value="1,089" change="+87%" color="#2d8a56" delay={0.1} />
-        <StatCard icon={Shield} label="Conflicts" value="43" color="#b84040" delay={0.15} />
-        <StatCard icon={Clock} label="Changes Detected" value="28" color="#c0862e" delay={0.2} />
-        <StatCard icon={ClipboardCheck} label="Review Required" value="15" color="#b87940" delay={0.25} />
+        <StatCard icon={Database} label="Total Sources" value="6" color="#047857" delay={0} />
+        <StatCard icon={Layers} label="Parcels" value="1,247" color="#0ea5e9" delay={0.05} />
+        <StatCard icon={GitMerge} label="Matched Entities" value="1,089" change="+87%" color="#16a34a" delay={0.1} />
+        <StatCard icon={Shield} label="Conflicts" value="43" color="#e11d48" delay={0.15} />
+        <StatCard icon={Clock} label="Changes Detected" value="28" color="#d97706" delay={0.2} />
+        <StatCard icon={ClipboardCheck} label="Review Required" value="15" color="#ea580c" delay={0.25} />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Quick Actions */}
         <div className="lg:col-span-2 space-y-3">
-          <h2 className="text-sm font-semibold text-neutral-dark uppercase tracking-wider mb-3">Quick Actions</h2>
+          <h2 className="text-sm font-bold text-purple-900 uppercase tracking-wider mb-3">Quick Actions</h2>
           <QuickAction
             icon={Map}
             label="Open Land Map"
@@ -216,8 +216,8 @@ export default function DashboardPage() {
 
         {/* Recent Activity */}
         <div>
-          <h2 className="text-sm font-semibold text-neutral-dark uppercase tracking-wider mb-3">Recent Activity</h2>
-          <div className="rounded-xl border border-border bg-surface-card p-4 divide-y divide-border">
+          <h2 className="text-sm font-bold text-purple-900 uppercase tracking-wider mb-3">Recent Activity</h2>
+          <div className="rounded-xl border border-purple-900/10 bg-white p-4 divide-y divide-purple-900/5 shadow-sm">
             <ActivityItem time="09:54" description="Reviewer resolved boundary conflict — TN-1042" type="review" />
             <ActivityItem time="09:51" description="Conflict detected — area mismatch 5.58%" type="conflict" />
             <ActivityItem time="09:49" description="Harmonization completed — batch 3" type="process" />
@@ -231,3 +231,4 @@ export default function DashboardPage() {
     </div>
   );
 }
+

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { MapPin, ArrowRight, Eye, EyeOff, Shield } from "lucide-react";
 
 const roles = [
@@ -36,9 +37,9 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex bg-[#F3F7F4] text-purple-950 selection:bg-emerald-200 selection:text-purple-950">
       {/* Left — Brand Panel */}
-      <div className="hidden lg:flex lg:w-1/2 bg-gradient-primary relative overflow-hidden flex-col justify-between p-12">
+      <div className="hidden lg:flex lg:w-1/2 green-gradient-bg relative overflow-hidden flex-col justify-between p-12">
         <div className="absolute inset-0 opacity-10">
           <svg className="w-full h-full" viewBox="0 0 800 800">
             {/* Parcel grid pattern */}
@@ -46,27 +47,30 @@ export default function LoginPage() {
               <line
                 key={`h-${i}`}
                 x1="0" y1={i * 70} x2="800" y2={i * 70 + 20}
-                stroke="white" strokeWidth="0.5" opacity="0.3"
+                stroke="white" strokeWidth="0.5" opacity="0.4"
               />
             ))}
             {Array.from({ length: 12 }).map((_, i) => (
               <line
                 key={`v-${i}`}
                 x1={i * 70} y1="0" x2={i * 70 + 15} y2="800"
-                stroke="white" strokeWidth="0.5" opacity="0.3"
+                stroke="white" strokeWidth="0.5" opacity="0.4"
               />
             ))}
           </svg>
         </div>
 
         <div className="relative z-10">
-          <div className="flex items-center gap-3 mb-2">
-            <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center backdrop-blur-sm">
-              <MapPin className="w-5 h-5 text-white" />
-            </div>
-            <span className="text-2xl font-bold text-white">GramSeva</span>
+          <div className="flex items-center gap-3 mb-4 bg-white/95 backdrop-blur-sm p-3 rounded-2xl w-fit shadow-xl">
+            <Image
+              src="/logo.png"
+              alt="GramSeva Logo"
+              width={200}
+              height={56}
+              className="object-contain"
+            />
           </div>
-          <p className="text-white/60 text-sm mt-1">SIH26013 — Geospatial Intelligence Platform</p>
+          <p className="text-emerald-100/90 text-sm mt-1 font-medium tracking-wide uppercase">SIH26013 — Geospatial Intelligence Platform</p>
         </div>
 
         <div className="relative z-10 max-w-md">
@@ -74,7 +78,7 @@ export default function LoginPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="text-4xl font-bold text-white leading-tight mb-4"
+            className="text-4xl font-display font-bold text-white leading-tight mb-4"
           >
             Connecting the Land
             <br />That Connects Us
@@ -83,7 +87,7 @@ export default function LoginPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.6 }}
-            className="text-white/70 leading-relaxed"
+            className="text-emerald-50 leading-relaxed font-medium"
           >
             Multi-source geospatial data integration, intelligent harmonization,
             and unified land record management.
@@ -91,7 +95,7 @@ export default function LoginPage() {
         </div>
 
         <div className="relative z-10">
-          <div className="flex items-center gap-3 text-white/40 text-xs">
+          <div className="flex items-center gap-3 text-emerald-100/70 text-xs font-semibold uppercase tracking-wider">
             <Shield className="w-4 h-4" />
             <span>Government-grade security • Source data preserved • Audit trail maintained</span>
           </div>
@@ -99,7 +103,7 @@ export default function LoginPage() {
       </div>
 
       {/* Right — Login Form */}
-      <div className="flex-1 flex items-center justify-center p-8 bg-background">
+      <div className="flex-1 flex items-center justify-center p-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -108,21 +112,24 @@ export default function LoginPage() {
         >
           {/* Mobile logo */}
           <div className="lg:hidden flex items-center gap-2.5 mb-8">
-            <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center">
-              <MapPin className="w-4 h-4 text-white" />
-            </div>
-            <span className="text-lg font-bold">GramSeva</span>
+            <Image
+              src="/logo.png"
+              alt="GramSeva Logo"
+              width={180}
+              height={50}
+              className="object-contain"
+            />
           </div>
 
-          <h2 className="text-2xl font-bold mb-2">Sign in to your account</h2>
-          <p className="text-neutral-dark text-sm mb-8">
+          <h2 className="text-3xl font-display font-bold text-purple-950 mb-2">Sign in to your account</h2>
+          <p className="text-purple-800/80 text-sm font-medium mb-8">
             Access the GramSeva geospatial workspace
           </p>
 
           <form onSubmit={handleLogin} className="space-y-5">
             {/* Email */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium mb-1.5">
+              <label htmlFor="email" className="block text-sm font-bold text-purple-950 mb-1.5">
                 Email
               </label>
               <input
@@ -131,13 +138,13 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="officer@gramseva.gov.in"
-                className="w-full px-4 py-2.5 rounded-lg border border-border bg-surface-card text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
+                className="w-full px-4 py-2.5 rounded-lg border border-purple-900/15 bg-white shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-purple-600/30 focus:border-purple-600 transition-all text-purple-950 font-medium"
               />
             </div>
 
             {/* Password */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium mb-1.5">
+              <label htmlFor="password" className="block text-sm font-bold text-purple-950 mb-1.5">
                 Password
               </label>
               <div className="relative">
@@ -147,12 +154,12 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full px-4 py-2.5 rounded-lg border border-border bg-surface-card text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all pr-10"
+                  className="w-full px-4 py-2.5 rounded-lg border border-purple-900/15 bg-white shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-purple-600/30 focus:border-purple-600 transition-all pr-10 text-purple-950 font-medium"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-dark hover:text-foreground transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-purple-700 hover:text-purple-900 transition-colors"
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
@@ -161,14 +168,14 @@ export default function LoginPage() {
 
             {/* Role */}
             <div>
-              <label htmlFor="role" className="block text-sm font-medium mb-1.5">
+              <label htmlFor="role" className="block text-sm font-bold text-purple-950 mb-1.5">
                 Role
               </label>
               <select
                 id="role"
                 value={role}
                 onChange={(e) => setRole(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-lg border border-border bg-surface-card text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all appearance-none"
+                className="w-full px-4 py-2.5 rounded-lg border border-purple-900/15 bg-white shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-purple-600/30 focus:border-purple-600 transition-all appearance-none text-purple-950 font-medium"
               >
                 {roles.map((r) => (
                   <option key={r.value} value={r.value}>
@@ -182,14 +189,14 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg bg-gradient-primary text-white font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-60"
+              className="w-full flex items-center justify-center gap-2 py-3 rounded-lg bg-purple-700 text-white font-bold text-sm hover:bg-purple-800 transition-all shadow-md hover:shadow-lg shadow-purple-900/20 disabled:opacity-60"
             >
               {loading ? (
                 <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
               ) : (
                 <>
                   Sign In
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4.5 h-4.5" />
                 </>
               )}
             </button>
@@ -197,21 +204,21 @@ export default function LoginPage() {
 
           {/* Divider */}
           <div className="flex items-center gap-3 my-6">
-            <div className="flex-1 h-px bg-border" />
-            <span className="text-xs text-neutral-dark font-medium">or</span>
-            <div className="flex-1 h-px bg-border" />
+            <div className="flex-1 h-px bg-purple-900/10" />
+            <span className="text-xs text-purple-700/60 font-bold uppercase tracking-wider">or</span>
+            <div className="flex-1 h-px bg-purple-900/10" />
           </div>
 
           {/* Demo Mode */}
           <button
             onClick={handleDemoMode}
             disabled={loading}
-            className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg border border-primary/30 bg-primary/5 text-primary font-semibold text-sm hover:bg-primary/10 transition-colors disabled:opacity-60"
+            className="w-full flex items-center justify-center gap-2 py-3 rounded-lg border border-emerald-300 bg-emerald-50 text-purple-800 font-bold text-sm hover:bg-emerald-100 transition-all shadow-sm hover:shadow disabled:opacity-60"
           >
             Enter Demo Mode
           </button>
 
-          <p className="text-xs text-neutral mt-4 text-center">
+          <p className="text-xs text-purple-600 font-medium mt-6 text-center">
             Demo mode provides immediate access with seeded demonstration data.
           </p>
         </motion.div>
@@ -219,3 +226,4 @@ export default function LoginPage() {
     </div>
   );
 }
+

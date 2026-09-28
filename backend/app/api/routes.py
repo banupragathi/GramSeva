@@ -6,17 +6,13 @@ When connected to PostGIS, these will query real spatial data.
 """
 
 import os
-<<<<<<< HEAD
 import nh3
-from fastapi import APIRouter, UploadFile, File, HTTPException, Query, Response, Request
-from typing import List, Optional
-=======
 import shutil
 import tempfile
 from pathlib import Path
-from fastapi import APIRouter, UploadFile, File, HTTPException, Query
+from datetime import datetime
 from typing import Any, Dict, List, Optional
->>>>>>> fb0ea31aec6de800441deefd97ae3ccb2fee954a
+from fastapi import APIRouter, UploadFile, File, HTTPException, Query, Response, Request
 from datetime import datetime
 from app.schemas.schemas import (
     LoginRequest, TokenResponse,

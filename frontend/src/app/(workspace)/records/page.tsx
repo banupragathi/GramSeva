@@ -16,19 +16,19 @@ import {
 import { demoParcels } from "@/lib/demo-data";
 
 function ConfidenceDot({ value }: { value: number }) {
-  const color = value >= 90 ? "bg-success" : value >= 80 ? "bg-warning" : value >= 70 ? "bg-[#b87940]" : "bg-error";
-  return <div className={`w-2 h-2 rounded-full ${color}`} title={`${value}% confidence`} />;
+  const color = value >= 90 ? "bg-purple-600" : value >= 80 ? "bg-amber-500" : value >= 70 ? "bg-orange-500" : "bg-rose-600";
+  return <div className={`w-2 h-2 rounded-full ${color} shadow-sm`} title={`${value}% confidence`} />;
 }
 
 function StateBadge({ state }: { state: string }) {
   const styles: Record<string, string> = {
-    MATCHED: "bg-success/15 text-success",
-    LIKELY_MATCH: "bg-warning/15 text-warning",
-    REVIEW_REQUIRED: "bg-[#b87940]/15 text-[#b87940]",
-    NOT_MATCHED: "bg-neutral-light text-neutral-dark",
+    MATCHED: "bg-emerald-100 text-purple-700",
+    LIKELY_MATCH: "bg-amber-100 text-amber-700",
+    REVIEW_REQUIRED: "bg-orange-100 text-orange-700",
+    NOT_MATCHED: "bg-slate-100 text-slate-700",
   };
   return (
-    <span className={`text-[10px] font-semibold uppercase px-2 py-0.5 rounded-full ${styles[state] || styles.MATCHED}`}>
+    <span className={`text-[10px] font-bold uppercase px-2 py-0.5 rounded-full ${styles[state] || styles.MATCHED}`}>
       {state.replace(/_/g, " ")}
     </span>
   );
@@ -40,34 +40,34 @@ export default function RecordsPage() {
   return (
     <div className="p-6 max-w-7xl mx-auto">
       <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
-        <h1 className="text-2xl font-bold mb-1">Unified Land Records</h1>
-        <p className="text-sm text-neutral-dark mb-8">{parcels.length} parcels in harmonized registry</p>
+        <h1 className="text-3xl font-extrabold text-purple-950 mb-1">Unified Land Records</h1>
+        <p className="text-sm font-medium text-purple-800 mb-8">{parcels.length} parcels in harmonized registry</p>
       </motion.div>
 
       {/* Search */}
-      <div className="relative max-w-md mb-6">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral" />
+      <div className="relative max-w-md mb-6 shadow-sm">
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-purple-600" />
         <input
           type="text"
           placeholder="Search by ID, survey number, or owner..."
-          className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-border bg-surface-card text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/40 transition-all"
+          className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-purple-900/10 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-purple-600/20 focus:border-purple-600/40 transition-all font-medium text-purple-950 placeholder:text-purple-700/50"
         />
       </div>
 
       {/* Records Table */}
-      <div className="rounded-xl border border-border bg-surface-card overflow-hidden">
+      <div className="rounded-xl border border-purple-900/10 bg-white overflow-hidden shadow-sm">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-border bg-surface/50">
-                <th className="text-left px-5 py-3 text-xs font-semibold text-neutral-dark uppercase tracking-wider">Parcel</th>
-                <th className="text-left px-5 py-3 text-xs font-semibold text-neutral-dark uppercase tracking-wider">Survey No.</th>
-                <th className="text-left px-5 py-3 text-xs font-semibold text-neutral-dark uppercase tracking-wider">Area</th>
-                <th className="text-left px-5 py-3 text-xs font-semibold text-neutral-dark uppercase tracking-wider">Land Use</th>
-                <th className="text-left px-5 py-3 text-xs font-semibold text-neutral-dark uppercase tracking-wider">Owner</th>
-                <th className="text-center px-5 py-3 text-xs font-semibold text-neutral-dark uppercase tracking-wider">Confidence</th>
-                <th className="text-left px-5 py-3 text-xs font-semibold text-neutral-dark uppercase tracking-wider">State</th>
-                <th className="text-center px-5 py-3 text-xs font-semibold text-neutral-dark uppercase tracking-wider">Sources</th>
+              <tr className="border-b border-purple-900/10 bg-emerald-50">
+                <th className="text-left px-5 py-3 text-xs font-bold text-purple-900 uppercase tracking-wider">Parcel</th>
+                <th className="text-left px-5 py-3 text-xs font-bold text-purple-900 uppercase tracking-wider">Survey No.</th>
+                <th className="text-left px-5 py-3 text-xs font-bold text-purple-900 uppercase tracking-wider">Area</th>
+                <th className="text-left px-5 py-3 text-xs font-bold text-purple-900 uppercase tracking-wider">Land Use</th>
+                <th className="text-left px-5 py-3 text-xs font-bold text-purple-900 uppercase tracking-wider">Owner</th>
+                <th className="text-center px-5 py-3 text-xs font-bold text-purple-900 uppercase tracking-wider">Confidence</th>
+                <th className="text-left px-5 py-3 text-xs font-bold text-purple-900 uppercase tracking-wider">State</th>
+                <th className="text-center px-5 py-3 text-xs font-bold text-purple-900 uppercase tracking-wider">Sources</th>
                 <th className="px-5 py-3"></th>
               </tr>
             </thead>
@@ -78,29 +78,29 @@ export default function RecordsPage() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: i * 0.03 }}
-                  className="border-b border-border last:border-0 hover:bg-surface/30 transition-colors"
+                  className="border-b border-purple-900/10 last:border-0 hover:bg-emerald-50/50 transition-colors"
                 >
-                  <td className="px-5 py-3 font-semibold">{p.id}</td>
-                  <td className="px-5 py-3 text-neutral-dark">{p.survey_number}</td>
-                  <td className="px-5 py-3">{p.area_sqm} sq.m</td>
-                  <td className="px-5 py-3 text-neutral-dark">{p.land_use}</td>
-                  <td className="px-5 py-3 text-neutral-dark">{p.owner_name}</td>
+                  <td className="px-5 py-3 font-bold text-purple-950">{p.id}</td>
+                  <td className="px-5 py-3 text-purple-800 font-medium">{p.survey_number}</td>
+                  <td className="px-5 py-3 text-purple-950 font-medium">{p.area_sqm} sq.m</td>
+                  <td className="px-5 py-3 text-purple-800 font-medium">{p.land_use}</td>
+                  <td className="px-5 py-3 text-purple-800 font-medium">{p.owner_name}</td>
                   <td className="px-5 py-3 text-center">
                     <div className="flex items-center justify-center gap-1.5">
                       <ConfidenceDot value={p.confidence} />
-                      <span className="font-semibold">{p.confidence}%</span>
+                      <span className="font-bold text-purple-950">{p.confidence}%</span>
                     </div>
                   </td>
                   <td className="px-5 py-3">
                     <StateBadge state={p.match_state} />
                   </td>
-                  <td className="px-5 py-3 text-center text-neutral-dark">{p.sources.length}</td>
+                  <td className="px-5 py-3 text-center text-purple-800 font-bold">{p.sources.length}</td>
                   <td className="px-5 py-3">
                     <Link
                       href={`/records/${p.id}`}
-                      className="p-1.5 rounded-lg hover:bg-primary/10 transition-colors inline-flex"
+                      className="p-1.5 rounded-lg hover:bg-emerald-100 transition-colors inline-flex group"
                     >
-                      <ArrowRight className="w-4 h-4 text-primary" />
+                      <ArrowRight className="w-4 h-4 text-purple-600 group-hover:text-purple-800" />
                     </Link>
                   </td>
                 </motion.tr>
@@ -112,3 +112,4 @@ export default function RecordsPage() {
     </div>
   );
 }
+

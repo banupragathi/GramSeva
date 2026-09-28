@@ -1,18 +1,14 @@
-<<<<<<< HEAD
-import os
-import secrets
-from fastapi import FastAPI, Request, Response, HTTPException
-=======
 """
 GramSeva Backend — FastAPI Application
 Automated Integration and Intelligent Harmonization of Multi-source Geospatial Data
 """
 
+import os
+import secrets
 import logging
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI
->>>>>>> fb0ea31aec6de800441deefd97ae3ccb2fee954a
+from fastapi import FastAPI, Request, Response, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from slowapi import Limiter, _rate_limit_exceeded_handler

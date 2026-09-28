@@ -1,18 +1,22 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #0A0B0D;
-  --bg-elevated: #131519;
-  --line: rgba(237, 237, 234, 0.09);
-  --line-strong: rgba(237, 237, 234, 0.16);
-  --ink: #EDEDEA;
-  --ink-muted: #8B8E94;
-  --ink-faint: #5C6067;
-  --magenta: #C41E7D;
-  --magenta-dim: #8A1657;
-  --magenta-glow: rgba(196, 30, 125, 0.16);
-  --moss: #4A6B4F;
-  --sand: #C9BFAE;
+  /* Aesthetic Light & Green Theme Palette */
+  --bg: #F3F7F4;
+  --bg-elevated: #FFFFFF;
+  --bg-subtle: #E8F0EA;
+  --line: rgba(22, 101, 52, 0.12);
+  --line-strong: rgba(22, 101, 52, 0.22);
+  --ink: #0F291E;
+  --ink-muted: #375545;
+  --ink-faint: #698B78;
+  --magenta: #15803D; /* Primary Vibrant Emerald Green */
+  --magenta-dim: #166534; /* Deep Forest Green */
+  --magenta-glow: rgba(21, 128, 61, 0.18);
+  --moss: #0D9488; /* Teal Accent */
+  --sand: #DCFCE7; /* Light Mint Accent */
+  --emerald-accent: #16A34A;
+  --card-shadow: 0 4px 20px -2px rgba(15, 41, 30, 0.05), 0 2px 6px -1px rgba(15, 41, 30, 0.03);
 
   /* Font variables */
   --font-display: 'Space Grotesk', system-ui, -apple-system, sans-serif;
@@ -22,7 +26,7 @@
 * {
   box-sizing: border-box;
   scrollbar-width: thin;
-  scrollbar-color: var(--ink-faint) transparent;
+  scrollbar-color: #A3C2B0 transparent;
 }
 
 *:focus-visible {
@@ -46,6 +50,46 @@ body {
   overflow-x: hidden;
   margin: 0;
   padding: 0;
+}
+
+/* Glassmorphism & Card Utilities for Light Green Theme */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(22, 101, 52, 0.12);
+  box-shadow: var(--card-shadow);
+}
+
+.green-card {
+  background-color: #FFFFFF;
+  border: 1px solid rgba(22, 101, 52, 0.12);
+  border-radius: 12px;
+  box-shadow: var(--card-shadow);
+  transition: all 0.2s ease-in-out;
+}
+
+.green-card:hover {
+  border-color: rgba(22, 101, 52, 0.25);
+  box-shadow: 0 8px 30px -4px rgba(21, 128, 61, 0.12);
+}
+
+.green-gradient-bg {
+  background: linear-gradient(135deg, #0F291E 0%, #166534 50%, #15803D 100%);
+}
+
+.light-green-gradient {
+  background: linear-gradient(135deg, #F3F7F4 0%, #E6F4EA 100%);
+}
+
+.green-badge {
+  background-color: #DCFCE7;
+  color: #166534;
+  border: 1px solid #BBF7D0;
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: 9999px;
+  font-size: 0.75rem;
 }
 
 /* Heading font styling */
@@ -72,6 +116,9 @@ h1, h2, h3, h4, h5, h6, .font-display {
   background: transparent;
 }
 *::-webkit-scrollbar-thumb {
-  background: var(--ink-faint);
+  background: #A3C2B0;
   border-radius: 3px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: #15803D;
 }

@@ -22,8 +22,8 @@ import {
   ArrowRight,
   LucideIcon,
 } from "lucide-react";
-import { EarthGlobe } from "@/components/landing/EarthGlobe";
 import { useReveal } from "@/lib/useReveal";
+import Image from "next/image";
 
 /* ------------------------------------------------------------------ */
 /*  COUNT-UP ANIMATED STAT                                            */
@@ -65,7 +65,7 @@ function StatNumber({
   }, [shouldAnimate, target]);
 
   return (
-    <span className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-[#EDEDEA]">
+    <span className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-purple-950">
       {shouldAnimate && value === target ? formattedTarget : value.toLocaleString()}
     </span>
   );
@@ -136,14 +136,14 @@ export default function LandingPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0A0B0D] text-[#EDEDEA] flex flex-col font-sans selection:bg-[#C41E7D]/30 selection:text-[#EDEDEA]">
+    <div className="min-h-screen bg-[#F3F7F4] text-purple-950 flex flex-col font-sans selection:bg-emerald-200 selection:text-purple-950">
       {/* ------------------------------------------------------------------ */}
       {/* 1. NAVBAR                                                          */}
       {/* ------------------------------------------------------------------ */}
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "bg-[#0A0B0D]/82 backdrop-blur-md border-b border-[var(--line)] py-3.5"
+            ? "bg-white/90 backdrop-blur-md border-b border-purple-900/10 shadow-sm py-3.5"
             : "bg-transparent py-5 border-b border-transparent"
         }`}
       >
@@ -151,39 +151,40 @@ export default function LandingPage() {
           {/* Logo Mark + Wordmark */}
           <Link
             href="/"
-            className="flex items-center gap-3 text-lg font-semibold tracking-tight text-[#EDEDEA] hover:opacity-90 transition-opacity focus-visible:outline-none"
+            className="flex items-center hover:opacity-90 transition-opacity focus-visible:outline-none"
           >
-            <div className="w-8 h-8 rounded-[8px] bg-[#C41E7D] flex items-center justify-center text-white text-sm font-bold font-display shadow-sm">
-              GS
-            </div>
-            <span className="font-display font-bold text-xl tracking-tight text-[#EDEDEA]">
-              GramSeva
-            </span>
+            <Image
+              src="/logo.png"
+              alt="GramSeva Logo"
+              width={160}
+              height={45}
+              className="object-contain"
+            />
           </Link>
 
           {/* Desktop Nav Links */}
-          <div className="hidden min-[860px]:flex items-center gap-8 text-sm font-medium text-[#8B8E94]">
+          <div className="hidden min-[860px]:flex items-center gap-8 text-sm font-semibold text-purple-800/80">
             <a
               href="#how-it-works"
-              className="hover:text-[#EDEDEA] transition-colors focus-visible:outline-none"
+              className="hover:text-purple-950 transition-colors focus-visible:outline-none"
             >
               How it works
             </a>
             <a
               href="#features"
-              className="hover:text-[#EDEDEA] transition-colors focus-visible:outline-none"
+              className="hover:text-purple-950 transition-colors focus-visible:outline-none"
             >
               Features
             </a>
             <a
               href="#technology"
-              className="hover:text-[#EDEDEA] transition-colors focus-visible:outline-none"
+              className="hover:text-purple-950 transition-colors focus-visible:outline-none"
             >
               Technology
             </a>
             <a
               href="#datasets"
-              className="hover:text-[#EDEDEA] transition-colors focus-visible:outline-none"
+              className="hover:text-purple-950 transition-colors focus-visible:outline-none"
             >
               Datasets
             </a>
@@ -193,13 +194,13 @@ export default function LandingPage() {
           <div className="hidden min-[860px]:flex items-center gap-4">
             <Link
               href="/login"
-              className="text-sm font-medium text-[#8B8E94] hover:text-[#EDEDEA] transition-colors focus-visible:outline-none"
+              className="text-sm font-semibold text-purple-800/80 hover:text-purple-950 transition-colors focus-visible:outline-none"
             >
               Sign in
             </Link>
             <Link
               href="/dashboard"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-[8px] bg-[#C41E7D] hover:bg-[#8A1657] text-white text-sm font-medium transition-colors focus-visible:outline-none"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-purple-700 hover:bg-purple-800 text-white text-sm font-semibold transition-all shadow-md shadow-purple-900/15 focus-visible:outline-none"
             >
               <span>Explore platform</span>
               <span className="text-base leading-none">→</span>
@@ -209,7 +210,7 @@ export default function LandingPage() {
           {/* Mobile menu trigger */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="min-[860px]:hidden p-2 text-[#8B8E94] hover:text-[#EDEDEA] focus-visible:outline-none"
+            className="min-[860px]:hidden p-2 text-purple-800 hover:text-purple-950 focus-visible:outline-none"
             aria-label="Toggle navigation menu"
           >
             <svg
@@ -239,47 +240,47 @@ export default function LandingPage() {
 
         {/* Mobile menu dropdown */}
         {mobileMenuOpen && (
-          <div className="min-[860px]:hidden px-6 pt-4 pb-6 bg-[#0A0B0D]/95 backdrop-blur-lg border-b border-[var(--line)] flex flex-col gap-4">
+          <div className="min-[860px]:hidden px-6 pt-4 pb-6 bg-white/95 backdrop-blur-lg border-b border-purple-900/10 flex flex-col gap-4">
             <a
               href="#how-it-works"
               onClick={() => setMobileMenuOpen(false)}
-              className="text-sm text-[#8B8E94] hover:text-[#EDEDEA]"
+              className="text-sm font-semibold text-purple-800 hover:text-purple-950"
             >
               How it works
             </a>
             <a
               href="#features"
               onClick={() => setMobileMenuOpen(false)}
-              className="text-sm text-[#8B8E94] hover:text-[#EDEDEA]"
+              className="text-sm font-semibold text-purple-800 hover:text-purple-950"
             >
               Features
             </a>
             <a
               href="#technology"
               onClick={() => setMobileMenuOpen(false)}
-              className="text-sm text-[#8B8E94] hover:text-[#EDEDEA]"
+              className="text-sm font-semibold text-purple-800 hover:text-purple-950"
             >
               Technology
             </a>
             <a
               href="#datasets"
               onClick={() => setMobileMenuOpen(false)}
-              className="text-sm text-[#8B8E94] hover:text-[#EDEDEA]"
+              className="text-sm font-semibold text-purple-800 hover:text-purple-950"
             >
               Datasets
             </a>
-            <div className="pt-2 border-t border-[var(--line)] flex flex-col gap-3">
+            <div className="pt-2 border-t border-purple-900/10 flex flex-col gap-3">
               <Link
                 href="/login"
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-sm text-[#8B8E94] hover:text-[#EDEDEA]"
+                className="text-sm font-semibold text-purple-800 hover:text-purple-950"
               >
                 Sign in
               </Link>
               <Link
                 href="/dashboard"
                 onClick={() => setMobileMenuOpen(false)}
-                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-[8px] bg-[#C41E7D] text-white text-sm font-medium"
+                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-purple-700 text-white text-sm font-semibold"
               >
                 <span>Explore platform</span>
                 <span>→</span>
@@ -297,16 +298,16 @@ export default function LandingPage() {
           <div className="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 min-[860px]:grid-cols-12 gap-8 min-[860px]:gap-12 items-center">
             {/* Left Copy Column */}
             <div className="min-[860px]:col-span-6 flex flex-col items-start text-left">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[6px] bg-[#131519] border border-[var(--line)] text-xs text-[#C41E7D] font-medium mb-6">
-                <Sparkles className="w-3.5 h-3.5 text-[#C41E7D]" />
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-100 border border-emerald-300 text-xs text-purple-800 font-semibold mb-6">
+                <Sparkles className="w-3.5 h-3.5 text-purple-700" />
                 <span>SIH26013 — GEOSPATIAL INTELLIGENCE</span>
               </div>
 
-              <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[#EDEDEA] leading-[1.12] mb-6">
+              <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-purple-950 leading-[1.12] mb-6">
                 Every department maps the same land differently.
               </h1>
 
-              <p className="text-base sm:text-lg text-[#8B8E94] leading-relaxed mb-8 max-w-xl">
+              <p className="text-base sm:text-lg text-purple-900/75 leading-relaxed mb-8 max-w-xl font-medium">
                 GramSeva unifies drone imagery, cadastral maps, municipal GIS,
                 and revenue records into one confidence-scored view of every
                 land parcel.
@@ -316,7 +317,7 @@ export default function LandingPage() {
               <div className="flex flex-wrap items-center gap-4 mb-8">
                 <Link
                   href="/dashboard"
-                  className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-[8px] bg-[#C41E7D] hover:bg-[#8A1657] text-white font-medium text-sm transition-colors focus-visible:outline-none shadow-sm"
+                  className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-lg bg-purple-700 hover:bg-purple-800 text-white font-semibold text-sm transition-all shadow-md shadow-purple-900/15 focus-visible:outline-none"
                 >
                   <span>Explore platform</span>
                   <span className="text-base leading-none">→</span>
@@ -324,14 +325,14 @@ export default function LandingPage() {
 
                 <a
                   href="#how-it-works"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-[8px] border border-[var(--line-strong)] hover:border-[#C41E7D] text-[#EDEDEA] font-medium text-sm transition-colors focus-visible:outline-none"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg border border-purple-900/20 hover:border-purple-700 bg-white/70 hover:bg-white text-purple-950 font-semibold text-sm transition-all shadow-sm focus-visible:outline-none"
                 >
                   See how it works
                 </a>
               </div>
 
               {/* Muted Caption */}
-              <p className="text-xs text-[#5C6067] leading-normal">
+              <p className="text-xs text-purple-800/60 leading-normal">
                 Prototype built for Smart India Hackathon 2026, problem
                 statement SIH26013.
               </p>
@@ -339,17 +340,14 @@ export default function LandingPage() {
 
             {/* Right Globe Panel */}
             <div className="min-[860px]:col-span-6 w-full flex justify-center min-[860px]:justify-end">
-              <div className="w-full max-w-[500px] h-[440px] sm:h-[480px] rounded-[10px] border border-[var(--line)] bg-[#0A0B0D] relative overflow-hidden flex flex-col justify-between">
-                {/* Three.js Earth globe */}
-                <EarthGlobe progressRef={heroProgressRef} />
-
-                {/* Bottom-left pinned caption strip */}
-                <div className="absolute bottom-3 left-3 right-3 z-10 pointer-events-none">
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-[6px] bg-[#0A0B0D]/85 border border-[var(--line)] backdrop-blur-sm text-[11px] text-[#8B8E94]">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#C41E7D] animate-pulse" />
-                    <span>Scroll to zoom into India</span>
-                  </div>
-                </div>
+              <div className="w-full max-w-[500px] h-[440px] sm:h-[480px] rounded-2xl border border-purple-900/15 bg-white relative overflow-hidden flex flex-col justify-between shadow-xl shadow-purple-950/5">
+                <Image 
+                  src="/hero-image.jpg" 
+                  alt="Team analyzing drone imagery" 
+                  fill
+                  className="object-cover" 
+                  priority
+                />
               </div>
             </div>
           </div>
@@ -361,17 +359,17 @@ export default function LandingPage() {
       {/* ------------------------------------------------------------------ */}
       <section
         ref={statsRef}
-        className="w-full border-y border-[var(--line)] bg-[#0A0B0D] py-10"
+        className="w-full border-y border-purple-900/10 bg-white py-10 shadow-sm"
       >
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-2 min-[720px]:grid-cols-4 divide-y min-[720px]:divide-y-0 divide-x-0 min-[720px]:divide-x divide-[var(--line)]">
+          <div className="grid grid-cols-2 min-[720px]:grid-cols-4 divide-y min-[720px]:divide-y-0 divide-x-0 min-[720px]:divide-x divide-purple-900/10">
             <div className="p-4 sm:p-6 flex flex-col items-start min-[720px]:items-center text-left min-[720px]:text-center">
               <StatNumber
                 target={6}
                 formattedTarget="6"
                 shouldAnimate={statsRevealed}
               />
-              <span className="mt-2 text-xs sm:text-sm font-medium text-[#8B8E94]">
+              <span className="mt-2 text-xs sm:text-sm font-semibold text-purple-800/80">
                 Sources integrated
               </span>
             </div>
@@ -382,7 +380,7 @@ export default function LandingPage() {
                 formattedTarget="1,247"
                 shouldAnimate={statsRevealed}
               />
-              <span className="mt-2 text-xs sm:text-sm font-medium text-[#8B8E94]">
+              <span className="mt-2 text-xs sm:text-sm font-semibold text-purple-800/80">
                 Parcels processed
               </span>
             </div>
@@ -393,7 +391,7 @@ export default function LandingPage() {
                 formattedTarget="1,089"
                 shouldAnimate={statsRevealed}
               />
-              <span className="mt-2 text-xs sm:text-sm font-medium text-[#8B8E94]">
+              <span className="mt-2 text-xs sm:text-sm font-semibold text-purple-800/80">
                 Entities matched
               </span>
             </div>
@@ -404,7 +402,7 @@ export default function LandingPage() {
                 formattedTarget="43"
                 shouldAnimate={statsRevealed}
               />
-              <span className="mt-2 text-xs sm:text-sm font-medium text-[#8B8E94]">
+              <span className="mt-2 text-xs sm:text-sm font-semibold text-purple-800/80">
                 Conflicts detected
               </span>
             </div>
@@ -415,7 +413,7 @@ export default function LandingPage() {
       {/* ------------------------------------------------------------------ */}
       {/* 4. WHY GRAMSEVA                                                    */}
       {/* ------------------------------------------------------------------ */}
-      <section className="w-full py-24 border-b border-[var(--line)]">
+      <section className="w-full py-24 border-b border-purple-900/10">
         <div
           ref={whyRef}
           className={`max-w-6xl mx-auto px-6 transition-all duration-700 ${
@@ -426,10 +424,10 @@ export default function LandingPage() {
         >
           {/* Heading + Intro */}
           <div className="max-w-3xl mb-12 text-left">
-            <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-[#EDEDEA] mb-4">
+            <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-purple-950 mb-4">
               Why GramSeva
             </h2>
-            <p className="text-base sm:text-lg text-[#8B8E94] leading-relaxed">
+            <p className="text-base sm:text-lg text-purple-900/75 leading-relaxed font-medium">
               Urban land administration relies on fragmented datasets managed across
               disparate departments. GramSeva continuously ingests, normalizes, and
               matches multi-modal geospatial layers into one harmonized record.
@@ -450,7 +448,7 @@ export default function LandingPage() {
             ].map((source) => (
               <span
                 key={source}
-                className="px-3.5 py-1.5 rounded-[20px] bg-[#131519] border border-[var(--line)] text-xs font-medium text-[#8B8E94]"
+                className="px-3.5 py-1.5 rounded-full bg-white border border-purple-900/15 text-xs font-semibold text-purple-800 shadow-sm"
               >
                 {source}
               </span>
@@ -460,30 +458,30 @@ export default function LandingPage() {
           {/* Two-Panel Comparison */}
           <div className="flex flex-col md:flex-row items-stretch justify-center gap-6 relative">
             {/* Left Panel: Fragmented Sources */}
-            <div className="flex-1 p-6 sm:p-8 rounded-[10px] border border-[var(--line)] bg-[#131519]/60 flex flex-col justify-between">
+            <div className="flex-1 p-6 sm:p-8 rounded-2xl border border-purple-900/15 bg-white flex flex-col justify-between shadow-sm">
               <div>
-                <h3 className="font-display text-xl font-bold text-[#EDEDEA] mb-2">
+                <h3 className="font-display text-xl font-bold text-purple-950 mb-2">
                   Fragmented sources
                 </h3>
-                <p className="text-xs text-[#5C6067] mb-6">
+                <p className="text-xs text-purple-700 font-medium mb-6">
                   Raw un-harmonized departmental silos
                 </p>
 
-                <ul className="space-y-3 text-sm text-[#8B8E94]">
+                <ul className="space-y-3 text-sm text-purple-900/80 font-medium">
                   <li className="flex items-center gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#5C6067]" />
+                    <span className="w-2 h-2 rounded-full bg-emerald-400" />
                     <span>Different formats (GeoJSON, SHP, CAD, TIFF)</span>
                   </li>
                   <li className="flex items-center gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#5C6067]" />
+                    <span className="w-2 h-2 rounded-full bg-emerald-400" />
                     <span>Mismatched coordinate reference systems (CRS)</span>
                   </li>
                   <li className="flex items-center gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#5C6067]" />
+                    <span className="w-2 h-2 rounded-full bg-emerald-400" />
                     <span>Inconsistent naming and attribute schemas</span>
                   </li>
                   <li className="flex items-center gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#5C6067]" />
+                    <span className="w-2 h-2 rounded-full bg-emerald-400" />
                     <span>Conflicting temporal survey versions</span>
                   </li>
                 </ul>
@@ -492,36 +490,36 @@ export default function LandingPage() {
 
             {/* Central Transition Indicator */}
             <div className="flex items-center justify-center py-2 md:py-0">
-              <div className="w-10 h-10 rounded-full border border-[var(--line-strong)] bg-[#131519] flex items-center justify-center text-[#C41E7D] text-lg font-bold">
+              <div className="w-10 h-10 rounded-full border border-emerald-300 bg-white flex items-center justify-center text-purple-700 text-lg font-bold shadow-md">
                 →
               </div>
             </div>
 
             {/* Right Panel: One Understanding */}
-            <div className="flex-1 p-6 sm:p-8 rounded-[10px] border border-[#C41E7D] bg-[var(--magenta-glow)] flex flex-col justify-between">
+            <div className="flex-1 p-6 sm:p-8 rounded-2xl border border-purple-600 bg-emerald-50/80 flex flex-col justify-between shadow-sm">
               <div>
-                <h3 className="font-display text-xl font-bold text-[#EDEDEA] mb-2">
+                <h3 className="font-display text-xl font-bold text-purple-950 mb-2">
                   One understanding
                 </h3>
-                <p className="text-xs text-[#C41E7D] mb-6">
+                <p className="text-xs text-purple-700 font-bold mb-6">
                   GramSeva unified geospatial truth
                 </p>
 
-                <ul className="space-y-3 text-sm text-[#EDEDEA]">
+                <ul className="space-y-3 text-sm text-purple-950 font-semibold">
                   <li className="flex items-center gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#C41E7D]" />
+                    <span className="w-2 h-2 rounded-full bg-purple-600" />
                     <span>Harmonized geometry & validated topology</span>
                   </li>
                   <li className="flex items-center gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#C41E7D]" />
+                    <span className="w-2 h-2 rounded-full bg-purple-600" />
                     <span>Unified attribute dictionary & taxonomy</span>
                   </li>
                   <li className="flex items-center gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#C41E7D]" />
+                    <span className="w-2 h-2 rounded-full bg-purple-600" />
                     <span>Confidence scored entity matching</span>
                   </li>
                   <li className="flex items-center gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#C41E7D]" />
+                    <span className="w-2 h-2 rounded-full bg-purple-600" />
                     <span>Explainable AI evidence & human-in-the-loop review</span>
                   </li>
                 </ul>
@@ -536,7 +534,7 @@ export default function LandingPage() {
       {/* ------------------------------------------------------------------ */}
       <section
         id="how-it-works"
-        className="w-full py-24 border-b border-[var(--line)] bg-[#0A0B0D]"
+        className="w-full py-24 border-b border-purple-900/10 bg-white shadow-sm"
       >
         <div
           ref={pipelineRef}
@@ -547,26 +545,26 @@ export default function LandingPage() {
           }`}
         >
           <div className="text-left mb-16 max-w-3xl">
-            <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-[#EDEDEA] mb-4">
+            <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-purple-950 mb-4">
               How GramSeva Works
             </h2>
-            <p className="text-base sm:text-lg text-[#8B8E94]">
+            <p className="text-base sm:text-lg text-purple-900/75 font-medium">
               A continuous pipeline from raw data to unified, confidence-scored land records.
             </p>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 min-[900px]:grid-cols-9 gap-3">
-            {pipelineSteps.map((step, index) => {
+            {pipelineSteps.map((step) => {
               const Icon = step.icon;
               return (
                 <div
                   key={step.label}
-                  className="p-4 rounded-[10px] border border-[var(--line)] bg-[#131519] flex flex-col items-center justify-center text-center gap-3 group hover:border-[#C41E7D] transition-colors"
+                  className="p-4 rounded-xl border border-purple-900/12 bg-[#F8FAFL] flex flex-col items-center justify-center text-center gap-3 group hover:border-purple-600 hover:bg-white transition-all shadow-sm"
                 >
-                  <div className="w-10 h-10 rounded-[8px] bg-[var(--magenta-glow)] border border-[#C41E7D]/30 flex items-center justify-center text-[#C41E7D] group-hover:scale-105 transition-transform">
+                  <div className="w-10 h-10 rounded-lg bg-emerald-100 border border-emerald-300 flex items-center justify-center text-purple-800 group-hover:scale-105 transition-transform">
                     <Icon className="w-5 h-5" />
                   </div>
-                  <span className="text-xs font-semibold text-[#EDEDEA]">
+                  <span className="text-xs font-bold text-purple-950">
                     {step.label}
                   </span>
                 </div>
@@ -579,7 +577,7 @@ export default function LandingPage() {
       {/* ------------------------------------------------------------------ */}
       {/* 6. PLATFORM FEATURES                                              */}
       {/* ------------------------------------------------------------------ */}
-      <section id="features" className="w-full py-24 border-b border-[var(--line)]">
+      <section id="features" className="w-full py-24 border-b border-purple-900/10">
         <div
           ref={featuresRef}
           className={`max-w-6xl mx-auto px-6 transition-all duration-700 ${
@@ -589,10 +587,10 @@ export default function LandingPage() {
           }`}
         >
           <div className="text-left mb-16 max-w-3xl">
-            <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-[#EDEDEA] mb-4">
+            <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-purple-950 mb-4">
               Platform Features
             </h2>
-            <p className="text-base sm:text-lg text-[#8B8E94]">
+            <p className="text-base sm:text-lg text-purple-900/75 font-medium">
               Every capability designed for real geospatial intelligence workflows.
             </p>
           </div>
@@ -652,16 +650,16 @@ export default function LandingPage() {
               return (
                 <div
                   key={feat.title}
-                  className="p-6 rounded-[10px] border border-[var(--line)] bg-[#131519] hover:border-[var(--line-strong)] transition-all flex flex-col justify-between"
+                  className="p-6 rounded-2xl border border-purple-900/12 bg-white hover:border-purple-600 transition-all flex flex-col justify-between shadow-sm hover:shadow-md"
                 >
                   <div>
-                    <div className="w-9 h-9 rounded-[8px] bg-[var(--magenta-glow)] border border-[#C41E7D]/30 flex items-center justify-center text-[#C41E7D] mb-4">
-                      <Icon className="w-4 h-4" />
+                    <div className="w-10 h-10 rounded-lg bg-emerald-100 border border-emerald-200 flex items-center justify-center text-purple-800 mb-4">
+                      <Icon className="w-5 h-5" />
                     </div>
-                    <h3 className="font-display text-base font-bold text-[#EDEDEA] mb-2">
+                    <h3 className="font-display text-base font-bold text-purple-950 mb-2">
                       {feat.title}
                     </h3>
-                    <p className="text-xs text-[#8B8E94] leading-relaxed">
+                    <p className="text-xs text-purple-800/80 leading-relaxed font-medium">
                       {feat.description}
                     </p>
                   </div>
@@ -675,7 +673,7 @@ export default function LandingPage() {
       {/* ------------------------------------------------------------------ */}
       {/* 7. AI + GIS ARCHITECTURE                                           */}
       {/* ------------------------------------------------------------------ */}
-      <section id="technology" className="w-full py-24 border-b border-[var(--line)] bg-[#0A0B0D]">
+      <section id="technology" className="w-full py-24 border-b border-purple-900/10 bg-white shadow-sm">
         <div
           ref={techRef}
           className={`max-w-6xl mx-auto px-6 transition-all duration-700 ${
@@ -685,22 +683,22 @@ export default function LandingPage() {
           }`}
         >
           <div className="text-left mb-16 max-w-3xl">
-            <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-[#EDEDEA] mb-4">
+            <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-purple-950 mb-4">
               AI + GIS Architecture
             </h2>
-            <p className="text-base sm:text-lg text-[#8B8E94]">
+            <p className="text-base sm:text-lg text-purple-900/75 font-medium">
               AI understands images, entities, and changes. GIS performs precise spatial operations.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* AI Column */}
-            <div className="p-6 sm:p-8 rounded-[10px] border border-[#C41E7D]/40 bg-[var(--magenta-glow)]/40">
+            <div className="p-6 sm:p-8 rounded-2xl border border-emerald-300 bg-emerald-50/60 shadow-sm">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-8 h-8 rounded-[6px] bg-[#C41E7D] flex items-center justify-center text-white">
-                  <Cpu className="w-4 h-4" />
+                <div className="w-9 h-9 rounded-lg bg-purple-700 flex items-center justify-center text-white shadow-sm">
+                  <Cpu className="w-5 h-5" />
                 </div>
-                <h3 className="font-display text-lg font-bold text-[#EDEDEA]">
+                <h3 className="font-display text-lg font-bold text-purple-950">
                   AI Engine
                 </h3>
               </div>
@@ -713,24 +711,24 @@ export default function LandingPage() {
                 ].map((m) => (
                   <div
                     key={m.name}
-                    className="flex items-center justify-between p-3.5 rounded-[8px] bg-[#131519] border border-[var(--line)]"
+                    className="flex items-center justify-between p-3.5 rounded-xl bg-white border border-purple-900/12 shadow-sm"
                   >
-                    <span className="text-sm font-semibold text-[#EDEDEA]">
+                    <span className="text-sm font-bold text-purple-950">
                       {m.name}
                     </span>
-                    <span className="text-xs text-[#8B8E94]">{m.desc}</span>
+                    <span className="text-xs text-purple-800 font-medium">{m.desc}</span>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* GIS Column */}
-            <div className="p-6 sm:p-8 rounded-[10px] border border-[var(--line)] bg-[#131519]">
+            <div className="p-6 sm:p-8 rounded-2xl border border-purple-900/12 bg-[#F8FAFL] shadow-sm">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-8 h-8 rounded-[6px] bg-[#131519] border border-[var(--line-strong)] flex items-center justify-center text-[#EDEDEA]">
-                  <Globe className="w-4 h-4" />
+                <div className="w-9 h-9 rounded-lg bg-emerald-100 border border-emerald-300 flex items-center justify-center text-purple-800">
+                  <Globe className="w-5 h-5" />
                 </div>
-                <h3 className="font-display text-lg font-bold text-[#EDEDEA]">
+                <h3 className="font-display text-lg font-bold text-purple-950">
                   GIS Engine
                 </h3>
               </div>
@@ -743,12 +741,12 @@ export default function LandingPage() {
                 ].map((m) => (
                   <div
                     key={m.name}
-                    className="flex items-center justify-between p-3.5 rounded-[8px] bg-[#0A0B0D] border border-[var(--line)]"
+                    className="flex items-center justify-between p-3.5 rounded-xl bg-white border border-purple-900/12 shadow-sm"
                   >
-                    <span className="text-sm font-semibold text-[#EDEDEA]">
+                    <span className="text-sm font-bold text-purple-950">
                       {m.name}
                     </span>
-                    <span className="text-xs text-[#8B8E94]">{m.desc}</span>
+                    <span className="text-xs text-purple-800 font-medium">{m.desc}</span>
                   </div>
                 ))}
               </div>
@@ -760,7 +758,7 @@ export default function LandingPage() {
       {/* ------------------------------------------------------------------ */}
       {/* 8. DATASETS & ECOSYSTEM                                            */}
       {/* ------------------------------------------------------------------ */}
-      <section id="datasets" className="w-full py-24 border-b border-[var(--line)]">
+      <section id="datasets" className="w-full py-24 border-b border-purple-900/10">
         <div
           ref={datasetsRef}
           className={`max-w-6xl mx-auto px-6 transition-all duration-700 ${
@@ -770,10 +768,10 @@ export default function LandingPage() {
           }`}
         >
           <div className="text-left mb-16 max-w-3xl">
-            <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-[#EDEDEA] mb-4">
+            <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-purple-950 mb-4">
               Datasets & Ecosystem
             </h2>
-            <p className="text-base sm:text-lg text-[#8B8E94]">
+            <p className="text-base sm:text-lg text-purple-900/75 font-medium">
               Designed around the SIH26013 land-record harmonization problem and its NAKSHA ecosystem.
             </p>
           </div>
@@ -808,18 +806,18 @@ export default function LandingPage() {
             ].map((ds) => (
               <div
                 key={ds.name}
-                className="p-6 rounded-[10px] border border-[var(--line)] bg-[#131519] flex flex-col justify-between"
+                className="p-6 rounded-2xl border border-purple-900/12 bg-white flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow"
               >
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <h3 className="font-display text-base font-bold text-[#EDEDEA]">
+                    <h3 className="font-display text-base font-bold text-purple-950">
                       {ds.name}
                     </h3>
-                    <span className="text-[10px] font-semibold text-[#C41E7D] px-2 py-0.5 rounded-[4px] bg-[var(--magenta-glow)] border border-[#C41E7D]/30">
+                    <span className="text-[10px] font-bold text-purple-800 px-2.5 py-1 rounded-full bg-emerald-100 border border-emerald-300">
                       {ds.tag}
                     </span>
                   </div>
-                  <p className="text-xs text-[#8B8E94] leading-relaxed">
+                  <p className="text-xs text-purple-800/80 leading-relaxed font-medium">
                     {ds.desc}
                   </p>
                 </div>
@@ -832,7 +830,7 @@ export default function LandingPage() {
       {/* ------------------------------------------------------------------ */}
       {/* 9. FINAL CTA SECTION                                               */}
       {/* ------------------------------------------------------------------ */}
-      <section className="w-full py-28 border-b border-[var(--line)] bg-[#131519]/40">
+      <section className="w-full py-28 border-b border-purple-900/10 bg-purple-900/5">
         <div
           ref={ctaRef}
           className={`max-w-4xl mx-auto px-6 text-center transition-all duration-700 ${
@@ -841,17 +839,17 @@ export default function LandingPage() {
               : "opacity-0 translate-y-8"
           }`}
         >
-          <h2 className="font-display text-3xl sm:text-5xl font-bold tracking-tight text-[#EDEDEA] mb-6 leading-tight">
+          <h2 className="font-display text-3xl sm:text-5xl font-bold tracking-tight text-purple-950 mb-6 leading-tight">
             From fragmented land data <br />
             to one trusted view.
           </h2>
-          <p className="text-lg text-[#8B8E94] mb-10">
+          <p className="text-lg text-purple-900/80 font-medium mb-10">
             One Map. One Truth. Smarter Land Records.
           </p>
           <div>
             <Link
               href="/dashboard"
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-[8px] bg-[#C41E7D] hover:bg-[#8A1657] text-white text-base font-medium transition-colors focus-visible:outline-none shadow-md"
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-purple-700 hover:bg-purple-800 text-white text-base font-semibold transition-all shadow-lg shadow-purple-900/20 focus-visible:outline-none"
             >
               <span>Open GramSeva Workspace</span>
               <ArrowRight className="w-5 h-5" />
@@ -863,10 +861,10 @@ export default function LandingPage() {
       {/* ------------------------------------------------------------------ */}
       {/* 10. FOOTER                                                         */}
       {/* ------------------------------------------------------------------ */}
-      <footer className="w-full border-t border-[var(--line)] py-8 bg-[#0A0B0D]">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#8B8E94]">
+      <footer className="w-full border-t border-purple-900/10 py-8 bg-white">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-medium text-purple-800">
           <div className="flex items-center gap-2">
-            <span className="font-display font-bold text-sm text-[#EDEDEA]">
+            <span className="font-display font-bold text-sm text-purple-950">
               GramSeva
             </span>
           </div>
@@ -877,3 +875,4 @@ export default function LandingPage() {
     </div>
   );
 }
+

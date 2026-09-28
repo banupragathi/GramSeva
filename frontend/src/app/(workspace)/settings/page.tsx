@@ -5,10 +5,10 @@ import { Settings, User, Globe, Database, Cpu, Bell, Shield, Download } from "lu
 
 function SettingSection({ title, icon: Icon, children }: { title: string; icon: React.ElementType; children: React.ReactNode }) {
   return (
-    <div className="rounded-xl border border-border bg-surface-card p-5">
+    <div className="rounded-xl border border-purple-900/10 bg-white p-5 shadow-sm">
       <div className="flex items-center gap-2 mb-4">
-        <Icon className="w-4 h-4 text-primary" />
-        <h3 className="text-sm font-semibold">{title}</h3>
+        <Icon className="w-4 h-4 text-purple-600" />
+        <h3 className="text-sm font-bold text-purple-950">{title}</h3>
       </div>
       {children}
     </div>
@@ -19,8 +19,8 @@ export default function SettingsPage() {
   return (
     <div className="p-6 max-w-4xl mx-auto">
       <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
-        <h1 className="text-2xl font-bold mb-1">Settings</h1>
-        <p className="text-sm text-neutral-dark mb-8">Platform and workspace configuration</p>
+        <h1 className="text-3xl font-extrabold text-purple-950 mb-1">Settings</h1>
+        <p className="text-sm font-medium text-purple-800 mb-8">Platform and workspace configuration</p>
       </motion.div>
 
       <div className="space-y-5">
@@ -34,15 +34,15 @@ export default function SettingsPage() {
               { label: "Context Weight", value: "10%", key: "ctx" },
             ].map((w) => (
               <div key={w.key} className="flex items-center justify-between">
-                <span className="text-sm text-neutral-dark">{w.label}</span>
+                <span className="text-sm font-medium text-purple-800">{w.label}</span>
                 <input
                   type="text"
                   defaultValue={w.value}
-                  className="w-20 px-3 py-1.5 rounded-lg border border-border bg-surface text-sm text-right focus:outline-none focus:ring-2 focus:ring-primary/20"
+                  className="w-20 px-3 py-1.5 rounded-lg border border-purple-900/10 bg-[#F8FAFC] text-sm text-right focus:outline-none focus:ring-2 focus:ring-purple-600/30 text-purple-950 font-bold"
                 />
               </div>
             ))}
-            <p className="text-xs text-neutral italic">
+            <p className="text-xs text-purple-600 font-medium italic">
               Prototype weights — not scientifically validated. Configurable for experimentation.
             </p>
           </div>
@@ -57,11 +57,11 @@ export default function SettingsPage() {
               { label: "Not Matched (<)", value: "60%" },
             ].map((t) => (
               <div key={t.label} className="flex items-center justify-between">
-                <span className="text-sm text-neutral-dark">{t.label}</span>
+                <span className="text-sm font-medium text-purple-800">{t.label}</span>
                 <input
                   type="text"
                   defaultValue={t.value}
-                  className="w-20 px-3 py-1.5 rounded-lg border border-border bg-surface text-sm text-right focus:outline-none focus:ring-2 focus:ring-primary/20"
+                  className="w-20 px-3 py-1.5 rounded-lg border border-purple-900/10 bg-[#F8FAFC] text-sm text-right focus:outline-none focus:ring-2 focus:ring-purple-600/30 text-purple-950 font-bold"
                 />
               </div>
             ))}
@@ -71,12 +71,12 @@ export default function SettingsPage() {
         <SettingSection title="Map Settings" icon={Globe}>
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-neutral-dark">Default CRS</span>
-              <span className="text-sm font-medium">EPSG:4326 (WGS84)</span>
+              <span className="text-sm font-medium text-purple-800">Default CRS</span>
+              <span className="text-sm font-bold text-purple-950">EPSG:4326 (WGS84)</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-sm text-neutral-dark">Map Style</span>
-              <select className="px-3 py-1.5 rounded-lg border border-border bg-surface text-sm focus:outline-none focus:ring-2 focus:ring-primary/20">
+              <span className="text-sm font-medium text-purple-800">Map Style</span>
+              <select className="px-3 py-1.5 rounded-lg border border-purple-900/10 bg-[#F8FAFC] text-sm focus:outline-none focus:ring-2 focus:ring-purple-600/30 text-purple-950 font-bold">
                 <option>OpenStreetMap</option>
                 <option>Satellite</option>
                 <option>Dark</option>
@@ -88,16 +88,16 @@ export default function SettingsPage() {
         <SettingSection title="Export" icon={Download}>
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-neutral-dark">Default Export Format</span>
-              <select className="px-3 py-1.5 rounded-lg border border-border bg-surface text-sm focus:outline-none focus:ring-2 focus:ring-primary/20">
+              <span className="text-sm font-medium text-purple-800">Default Export Format</span>
+              <select className="px-3 py-1.5 rounded-lg border border-purple-900/10 bg-[#F8FAFC] text-sm focus:outline-none focus:ring-2 focus:ring-purple-600/30 text-purple-950 font-bold">
                 <option>GeoJSON</option>
                 <option>CSV</option>
                 <option>JSON</option>
               </select>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-sm text-neutral-dark">Include Provenance</span>
-              <input type="checkbox" defaultChecked className="w-4 h-4 accent-primary" />
+              <span className="text-sm font-medium text-purple-800">Include Provenance</span>
+              <input type="checkbox" defaultChecked className="w-4 h-4 accent-purple-600 rounded" />
             </div>
           </div>
         </SettingSection>
@@ -105,3 +105,4 @@ export default function SettingsPage() {
     </div>
   );
 }
+

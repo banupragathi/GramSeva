@@ -1,0 +1,130 @@
+eval_index,query,expected,label,matched,similarity,status,method,correct
+0,Transportation,Residential,DIFFERENT,,1.0,HUMAN_REVIEW,EXACT_AMBIGUOUS,False
+1,Pond area,Residential,DIFFERENT,Water,0.8420010805130005,MATCH,SBERT,True
+3,Business property,Commercial,SAME,Commercial,0.7424187064170837,MATCH,SBERT,True
+5,Manufacturing plot,Industrial,SAME,Industrial,0.7807427644729614,MATCH,SBERT,True
+6,Utility site,Residential,DIFFERENT,Public Utilities,1.0,MATCH,EXACT,True
+7,Factory site,Commercial,DIFFERENT,Industrial,0.7647786140441895,MATCH,SBERT,True
+8,Community open area,Open Space & Recreational,SAME,Open Space & Recreational,1.0,MATCH,EXACT,True
+9,Public park,Commercial,DIFFERENT,Open Space & Recreational,0.79933762550354,MATCH,SBERT,True
+10,Residential premises,Residential,SAME,Residential,1.0,MATCH,EXACT,True
+12,Industrial estate,Residential,DIFFERENT,Industrial,0.8109172582626343,MATCH,SBERT,True
+13,Road corridor land,Transport & Communication,SAME,Transport & Communication,0.898202657699585,MATCH,SBERT,True
+14,Drainage utility area,Public Utilities,SAME,Public Utilities,0.9043002128601074,MATCH,SBERT,True
+15,Residential plot,Industrial,DIFFERENT,Residential,1.0,MATCH,EXACT,True
+16,Rural land,Residential,DIFFERENT,Non-Urban,1.0,MATCH,EXACT,True
+17,Government institutional site,Institutional,SAME,Institutional,0.7355644702911377,MATCH,SBERT,True
+18,Industrial estate plot,Industrial,SAME,Industrial,0.77354496717453,MATCH,SBERT,True
+19,Green belt,Industrial,DIFFERENT,Green Belt & Water Body,1.0,MATCH,EXACT,True
+20,Production unit land,Industrial,SAME,Industrial,1.0,MATCH,EXACT,True
+21,Nonurban parcel,Non-Urban,SAME,Non-Urban,1.0,MATCH,EXACT,True
+22,Utility area,Commercial,DIFFERENT,Utility,1.0,MATCH,EXACT,True
+23,Public service institution,Institutional,SAME,Institutional,0.7454906702041626,MATCH,SBERT,True
+24,Canal-side water area,Water,SAME,Water,0.6937074065208435,MATCH,SBERT,True
+25,Open recreational site,Open Space & Recreational,SAME,Open Space & Recreational,0.6744935512542725,MATCH,SBERT,True
+26,School-use property,Educational,SAME,Educational,0.8966780304908752,MATCH,SBERT,True
+27,Cultivable farm parcel,Agricultural,SAME,Agricultural,0.6260538101196289,MATCH,SBERT,True
+28,Abadi Deh,Commercial,DIFFERENT,Village Abadi,1.0,MATCH,EXACT,True
+29,Recreation ground,Open Space & Recreational,SAME,Open Space & Recreational,0.7426728010177612,MATCH,SBERT,True
+30,Public institution land,Institutional,SAME,Institutional,0.8210867643356323,MATCH,SBERT,True
+31,Government-use area,Government,SAME,Government,0.8462993502616882,MATCH,SBERT,True
+32,Abadi Deh,Village Abadi,SAME,Village Abadi,1.0,MATCH,EXACT,True
+34,Transport corridor,Transport & Communication,SAME,Transport & Communication,0.8041781187057495,MATCH,SBERT,True
+35,Public park area,Open Space & Recreational,SAME,Open Space & Recreational,0.7380440831184387,MATCH,SBERT,True
+36,Barani land,Industrial,DIFFERENT,Rain-fed Agriculture,1.0,MATCH,EXACT,True
+37,Sewerage facility,Commercial,DIFFERENT,Public Utilities,0.8287997245788574,MATCH,SBERT,True
+38,Home-use plot,Residential,SAME,Residential,0.7263898849487305,MATCH,SBERT,True
+39,Civic utility land,Public Utilities,SAME,Public Utilities,0.7529813051223755,MATCH,SBERT,True
+40,Nehri land,Residential,DIFFERENT,Canal-Irrigated Agriculture,1.0,MATCH,EXACT,True
+41,Sewerage service land,Public Utilities,SAME,Public Utilities,0.7348037958145142,MATCH,SBERT,True
+42,Office property,Commercial,SAME,Commercial,0.726283609867096,MATCH,SBERT,True
+43,Nehri land,Canal-Irrigated Agriculture,SAME,Canal-Irrigated Agriculture,1.0,MATCH,EXACT,True
+44,Transport and road land,Transport & Communication,SAME,Transport & Communication,1.0,MATCH,EXACT,True
+45,School campus,Commercial,DIFFERENT,Educational,0.7669447660446167,MATCH,SBERT,True
+46,Utility service site,Public Utilities,SAME,Public Utilities,0.8886964321136475,MATCH,SBERT,True
+47,Shamlat Deh,Residential,DIFFERENT,Common / Community Land,1.0,MATCH,EXACT,True
+48,Chahi land,Commercial,DIFFERENT,Well/Tubewell-Irrigated Agriculture,1.0,MATCH,EXACT,True
+49,Urbanisable land,Agricultural,DIFFERENT,Urbanisable,0.769110918045044,MATCH,SBERT,True
+50,Chahi land,Well/Tubewell-Irrigated Agriculture,SAME,Well/Tubewell-Irrigated Agriculture,1.0,MATCH,EXACT,True
+51,Rural land,Non-Urban,SAME,Non-Urban,1.0,MATCH,EXACT,True
+52,Hospital premises,Institutional,SAME,Institutional,0.8172268271446228,MATCH,SBERT,True
+53,Future urban development area,Urbanisable,SAME,Urbanisable,1.0,MATCH,EXACT,True
+54,College campus land,Educational,SAME,Educational,0.8955535292625427,MATCH,SBERT,True
+55,Education campus,Educational,SAME,Educational,0.769004225730896,MATCH,SBERT,True
+56,Dwelling property,Residential,SAME,Residential,0.8674527406692505,MATCH,SBERT,True
+57,Educational facility site,Educational,SAME,Educational,0.6906418800354004,MATCH,SBERT,True
+58,Shop premises,Residential,DIFFERENT,Commercial,0.7975549101829529,MATCH,SBERT,True
+59,Water body and green belt,Green Belt & Water Body,SAME,Green Belt & Water Body,0.9907581806182861,MATCH,SBERT,True
+60,Factory premises,Industrial,SAME,Industrial,1.0,MATCH,EXACT,True
+61,Teaching institution property,Educational,SAME,Educational,1.0,MATCH,EXACT,True
+62,Commercial office,Residential,DIFFERENT,Commercial,0.6949102878570557,MATCH,SBERT,True
+63,Transport and circulation land,Transportation,SAME,Transportation,1.0,MATCH,EXACT,True
+64,Unbuilt site,Vacant,SAME,Vacant,0.5772565603256226,MATCH,SBERT,True
+65,Vacant plot,Agricultural,DIFFERENT,Vacant,1.0,MATCH,EXACT,True
+66,Community common land,Common / Community Land,SAME,Common / Community Land,0.8662801384925842,MATCH,SBERT,True
+67,Aabi land,Other-Irrigated Agriculture,SAME,Other-Irrigated Agriculture,1.0,MATCH,EXACT,True
+68,Farm parcel,Commercial,DIFFERENT,Agricultural,0.6912934184074402,MATCH,SBERT,True
+69,Barani land,Rain-fed Agriculture,SAME,Rain-fed Agriculture,1.0,MATCH,EXACT,True
+70,Utility area,Utility,SAME,Utility,1.0,MATCH,EXACT,True
+71,Reservoir land,Water,SAME,Water,0.8039935827255249,MATCH,SBERT,True
+72,Gair Mumkin land,Non-cultivable / Gair Mumkin Land,SAME,Non-cultivable / Gair Mumkin Land,1.0,MATCH,EXACT,True
+73,Banjar Qadim,Fallow Land,SAME,Fallow Land,1.0,MATCH,EXACT,True
+74,Government-use area,Residential,DIFFERENT,Government,0.8462993502616882,MATCH,SBERT,True
+75,Hospital land,Residential,DIFFERENT,Institutional,1.0,MATCH,EXACT,True
+77,Farming plot,Agricultural,SAME,Agricultural,0.8111550211906433,MATCH,SBERT,True
+78,Waterbody area,Water,SAME,Water,0.8194353580474854,MATCH,SBERT,True
+79,Undeveloped property,Vacant,SAME,Vacant,0.7967750430107117,MATCH,SBERT,True
+80,Residential abadi in village,Village Abadi,SAME,Village Abadi,0.6239880323410034,MATCH,SBERT,True
+81,Shamlat Deh,Common / Community Land,SAME,Common / Community Land,1.0,MATCH,EXACT,True
+82,School premises,Educational,SAME,Educational,0.8136134147644043,MATCH,SBERT,True
+84,Commercial premises,Commercial,SAME,Commercial,1.0,MATCH,EXACT,True
+85,Residential building,Commercial,DIFFERENT,Residential,1.0,MATCH,EXACT,True
+86,Shop-use property,Commercial,SAME,Commercial,0.8813366889953613,MATCH,SBERT,True
+87,Village-area land,Non-Urban,SAME,Non-Urban,0.7415377497673035,MATCH,SBERT,True
+88,Road-use parcel,Transport & Communication,SAME,Transport & Communication,0.6854696273803711,MATCH,SBERT,True
+89,Domestic residential plot,Residential,SAME,Residential,0.9478754997253418,MATCH,SBERT,True
+90,Civic institution property,Institutional,SAME,Institutional,0.7726506590843201,MATCH,SBERT,True
+91,Gair Mumkin land,Agricultural,DIFFERENT,Non-cultivable / Gair Mumkin Land,1.0,MATCH,EXACT,True
+92,Unoccupied land parcel,Vacant,SAME,Vacant,0.5909567475318909,MATCH,SBERT,True
+93,Empty development site,Vacant,SAME,Vacant,1.0,MATCH,EXACT,True
+94,Retail-use plot,Commercial,SAME,Commercial,0.7915191650390625,MATCH,SBERT,True
+95,Land awaiting development,Vacant,SAME,Vacant,1.0,MATCH,EXACT,True
+96,Trade establishment,Commercial,SAME,Commercial,0.589921236038208,MATCH,SBERT,True
+97,Market premises,Commercial,SAME,Commercial,0.8301087021827698,MATCH,SBERT,True
+98,Empty site,Industrial,DIFFERENT,Vacant,0.779427707195282,MATCH,SBERT,True
+100,Public and semi-public facility,Agricultural,DIFFERENT,Public & Semi-Public,0.9511464834213257,MATCH,SBERT,True
+101,Manufacturing property,Industrial,SAME,Industrial,0.8367154598236084,MATCH,SBERT,True
+102,Transport land,Agricultural,DIFFERENT,Transport & Communication,0.9062439203262329,MATCH,SBERT,True
+103,Unused plot,Vacant,SAME,Vacant,0.7770458459854126,MATCH,SBERT,True
+104,Garden and open space,Open Space & Recreational,SAME,Open Space & Recreational,0.7369594573974609,MATCH,SBERT,True
+105,Reservoir land,Industrial,DIFFERENT,Water,0.8039935827255249,MATCH,SBERT,True
+106,Factory-use land,Industrial,SAME,Industrial,0.7327752113342285,MATCH,SBERT,True
+107,Road corridor,Residential,DIFFERENT,Transport & Communication,1.0,MATCH,EXACT,True
+108,House property,Agricultural,DIFFERENT,Residential,1.0,MATCH,EXACT,True
+109,House site,Residential,SAME,Residential,0.8150393962860107,MATCH,SBERT,True
+110,Crop field,Industrial,DIFFERENT,Agricultural,0.6835339069366455,MATCH,SBERT,True
+112,Pond area,Water,SAME,Water,0.8420010805130005,MATCH,SBERT,True
+115,Sports and recreation ground,Open Space & Recreational,SAME,Open Space & Recreational,0.8524236679077148,MATCH,SBERT,True
+116,Rural-use property,Non-Urban,SAME,Non-Urban,0.8333947658538818,MATCH,SBERT,True
+117,Public and semi-public facility,Public & Semi-Public,SAME,Public & Semi-Public,0.9511464834213257,MATCH,SBERT,True
+118,Banjar Jadid,Fallow Land,SAME,Fallow Land,1.0,MATCH,EXACT,True
+119,Green belt area,Green Belt & Water Body,SAME,Green Belt & Water Body,0.7922347784042358,MATCH,SBERT,True
+120,Cultivation property,Agricultural,SAME,Agricultural,0.8212717771530151,MATCH,SBERT,True
+121,Land earmarked for urbanisation,Urbanisable,SAME,Urbanisable,0.5168527364730835,MATCH,SBERT,True
+122,Housing site,Residential,SAME,Residential,1.0,MATCH,EXACT,True
+123,Lake area,Water,SAME,Water,0.8455109596252441,MATCH,SBERT,True
+124,Electric utility site,Public Utilities,SAME,Public Utilities,0.8092690706253052,MATCH,SBERT,True
+125,Field used for crops,Agricultural,SAME,Agricultural,0.7121531963348389,MATCH,SBERT,True
+126,Arable land,Agricultural,SAME,Agricultural,0.7038286328315735,MATCH,SBERT,True
+127,Crop cultivation land,Agricultural,SAME,Agricultural,0.8995842933654785,MATCH,SBERT,True
+128,Residential dwelling,Residential,SAME,Residential,0.901547908782959,MATCH,SBERT,True
+129,Retail shop premises,Commercial,SAME,Commercial,0.7383943796157837,MATCH,SBERT,True
+130,Open recreational area,Industrial,DIFFERENT,Recreational,0.8450223207473755,MATCH,SBERT,True
+131,Industrial-use site,Industrial,SAME,Industrial,0.883628249168396,MATCH,SBERT,True
+132,Farm-use land,Agricultural,SAME,Agricultural,0.8956860303878784,MATCH,SBERT,True
+133,Healthcare institution land,Institutional,SAME,Institutional,0.843504786491394,MATCH,SBERT,True
+134,Circulation area,Transport & Communication,SAME,Transportation,0.8438050150871277,MATCH,SBERT,False
+135,Water-supply utility,Public Utilities,SAME,Public Utilities,1.0,MATCH,NORMALIZED,True
+136,Urbanizable parcel,Urbanisable,SAME,Urbanisable,0.7211692929267883,MATCH,SBERT,True
+137,Resi. plot,Residential,SAME,Residential,1.0,MATCH,NORMALIZED,True
+138,Agriculture plot,Agricultural,SAME,Agricultural,0.9630797505378723,MATCH,SBERT,True

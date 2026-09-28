@@ -1,0 +1,273 @@
+canonical_label,variant,variant_normalized
+Agricultural,Agricultural,agricultural
+Agricultural,Agricultural Area,agricultural area
+Agricultural,Agricultural Land,agricultural land
+Agricultural,Agricultural Plot,agricultural plot
+Agricultural,Agricultural Property,agricultural property
+Agricultural,Agricultural Use,agricultural use
+Agricultural,Agricultural Wet,agricultural wet
+Agricultural,Agricultural Zone,agricultural zone
+Agricultural,Agriculture,agriculture
+Agricultural,Agriculture Land,agriculture land
+Agricultural,Agriculture Use,agriculture use
+Agricultural,Crop Land,crop land
+Agricultural,Cultivable Land,cultivable land
+Agricultural,Cultivation,cultivation
+Agricultural,Cultivation Land,cultivation land
+Agricultural,Dry Agricultural Land,dry agricultural land
+Agricultural,Farm Land,farm land
+Agricultural,Farming,farming
+Agricultural,Farmland,farmland
+Agricultural,Wet Agricultural Land,wet agricultural land
+Canal-Irrigated Agriculture,Nehri,nehri
+Canal-Irrigated Agriculture,Nehri land,nehri land
+Commercial,Business Premises,business premises
+Commercial,Business Use,business use
+Commercial,Comm.,commercial
+Commercial,Commercial,commercial
+Commercial,Commercial Area,commercial area
+Commercial,Commercial Building,commercial building
+Commercial,Commercial Land,commercial land
+Commercial,Commercial Plot,commercial plot
+Commercial,Commercial Premises,commercial premises
+Commercial,Commercial Property,commercial property
+Commercial,Commercial Site,commercial site
+Commercial,Commercial Use,commercial use
+Commercial,Commercial Zone,commercial zone
+Commercial,Market,market
+Commercial,Market Area,market area
+Commercial,Office Premises,office premises
+Commercial,Office Use,office use
+Commercial,Retail,retail
+Commercial,Retail Property,retail property
+Commercial,Shop Plot,shop plot
+Commercial,Shop Property,shop property
+Common / Community Land,Common land,common land
+Common / Community Land,Sham Lat Deh,sham lat deh
+Common / Community Land,Shamlat,shamlat
+Common / Community Land,Shamlat Deh,shamlat deh
+Educational,College,college
+Educational,College Land,college land
+Educational,Education Premises,education premises
+Educational,Educational,educational
+Educational,Educational Institution,educational institution
+Educational,Educational Institutions,educational institutions
+Educational,Educational Use,educational use
+Educational,Educational Zone,educational zone
+Educational,School,school
+Educational,School Land,school land
+Educational,School Property,school property
+Educational,Training Centre,training centre
+Educational,Training Institution,training institution
+Educational,University,university
+Educational,University Land,university land
+Fallow Land,Banjar,banjar
+Fallow Land,Banjar Jadid,banjar jadid
+Fallow Land,Banjar Jadid land,banjar jadid land
+Fallow Land,Banjar Kadim,banjar kadim
+Fallow Land,Banjar Qadim,banjar qadim
+Government,Government,government
+Government,Government Area,government area
+Green Belt & Water Body,Green Belt,green belt
+Green Belt & Water Body,Green Belt / Water Body,green belt / water body
+Green Belt & Water Body,Green Belt and Water Body,green belt and water body
+Green Belt & Water Body,Water Body,water body
+Industrial,Controlled Industrial Use,controlled industrial use
+Industrial,Controlled Industries,controlled industries
+Industrial,Factory,factory
+Industrial,Factory Area,factory area
+Industrial,Factory Premises,factory premises
+Industrial,General Industrial,general industrial
+Industrial,General Industrial Use,general industrial use
+Industrial,Industrial,industrial
+Industrial,Industrial Area,industrial area
+Industrial,Industrial Building,industrial building
+Industrial,Industrial Land,industrial land
+Industrial,Industrial Plot,industrial plot
+Industrial,Industrial Premises,industrial premises
+Industrial,Industrial Property,industrial property
+Industrial,Industrial Site,industrial site
+Industrial,Industrial Use,industrial use
+Industrial,Industrial Zone,industrial zone
+Industrial,Light Industrial,light industrial
+Industrial,Light Industrial Use,light industrial use
+Industrial,Manufacturing,manufacturing
+Industrial,Manufacturing Unit,manufacturing unit
+Industrial,Special and Hazardous Industrial Use,special and hazardous industrial use
+Industrial,Special Industrial Use,special industrial use
+Industry & Warehouse,Industrial and Warehouse,industrial and warehouse
+Industry & Warehouse,Industry and Warehouse,industry and warehouse
+Institutional,Government Building,government building
+Institutional,Government Institution,government institution
+Institutional,Government Office,government office
+Institutional,Healthcare Institution,healthcare institution
+Institutional,Hospital,hospital
+Institutional,Hospital Land,hospital land
+Institutional,Institutional,institutional
+Institutional,Institutional Building,institutional building
+Institutional,Institutional Land,institutional land
+Institutional,Institutional Property,institutional property
+Institutional,Institutional Use,institutional use
+Institutional,Institutional Zone,institutional zone
+Institutional,Medical Institution,medical institution
+Institutional,Public and Semi Public,public and semi public
+Institutional,Public and Semi Public Use,public and semi public use
+Institutional,Public and Semi Public Zone,public and semi public zone
+Institutional,Public and Semi-public,public and semi public
+Institutional,Public and Semi-public Use,public and semi public use
+Institutional,Public and Semi-public Zone,public and semi public zone
+Institutional,Public Building,public building
+Mixed Use,Commercial Mixed Landuse,commercial mixed landuse
+Mixed Use,Mixed Landuse,mixed landuse
+Mixed Use,Mixed Use,mixed use
+Non-cultivable / Gair Mumkin Land,Gair Mumkin,gair mumkin
+Non-cultivable / Gair Mumkin Land,Gair mumkin land,gair mumkin land
+Non-cultivable / Gair Mumkin Land,Ghair Mumkin,ghair mumkin
+Non-Urban,Non Urban,non urban
+Non-Urban,Non Urban Use,non urban use
+Non-Urban,Non Urban Zone,non urban zone
+Non-Urban,Non-Urban,non urban
+Non-Urban,Non-Urban Use,non urban use
+Non-Urban,Non-Urban Zone,non urban zone
+Non-Urban,Rural Area,rural area
+Non-Urban,Rural Land,rural land
+Non-Urban,Rural Use,rural use
+Open Space,Open Space,open space
+Open Space & Recreational,Botanical Garden,botanical garden
+Open Space & Recreational,Garden,garden
+Open Space & Recreational,Open Space,open space
+Open Space & Recreational,Open Space and Recreational,open space and recreational
+Open Space & Recreational,Open Space and Recreational Use,open space and recreational use
+Open Space & Recreational,Open Space Recreational,open space recreational
+Open Space & Recreational,Open Space Use,open space use
+Open Space & Recreational,Open Space Zone,open space zone
+Open Space & Recreational,Park,park
+Open Space & Recreational,Parks,parks
+Open Space & Recreational,Play Ground,play ground
+Open Space & Recreational,Play Space,play space
+Open Space & Recreational,Playground,playground
+Open Space & Recreational,Recreational,recreational
+Open Space & Recreational,Recreational Complex,recreational complex
+Open Space & Recreational,Recreational Use,recreational use
+Open Space & Recreational,Recreational Zone,recreational zone
+Open Space & Recreational,Sports Ground,sports ground
+Open Space & Recreational,Sports Stadia,sports stadia
+Open Space & Recreational,Waterfront Development,waterfront development
+Open Space & Recreational,Zoological Garden,zoological garden
+Other-Irrigated Agriculture,Aabi,aabi
+Other-Irrigated Agriculture,Aabi land,aabi land
+Public & Semi-Public,Public & Semi Public Facilities,public & semi public facilities
+Public & Semi-Public,Public / Semi-Public,public / semi public
+Public & Semi-Public,Public and Semi Public,public and semi public
+Public & Semi-Public,Public and Semi Public Facilities,public and semi public facilities
+Public & Semi-Public,Public and Semi-Public,public and semi public
+Public Utilities,Civic Utility,civic utility
+Public Utilities,Drainage Utility,drainage utility
+Public Utilities,Electricity Utility,electricity utility
+Public Utilities,Power Utility,power utility
+Public Utilities,Public Utilities,public utilities
+Public Utilities,Public Utility,public utility
+Public Utilities,Public Utility Use,public utility use
+Public Utilities,Public Utility Zone,public utility zone
+Public Utilities,Sewerage Utility,sewerage utility
+Public Utilities,Utility,utility
+Public Utilities,Utility Land,utility land
+Public Utilities,Utility Site,utility site
+Public Utilities,Water Supply Utility,water supply utility
+Rain-fed Agriculture,Barani,barani
+Rain-fed Agriculture,Barani land,barani land
+Recreational,Recreational,recreational
+Recreational,Recreational Area,recreational area
+Residential,Domestic Use,domestic use
+Residential,Dwelling,dwelling
+Residential,Dwelling Unit,dwelling unit
+Residential,Home Site,home site
+Residential,House Plot,house plot
+Residential,House Property,house property
+Residential,Housing,housing
+Residential,Housing Plot,housing plot
+Residential,Housing Site,housing site
+Residential,Mixed Residential,mixed residential
+Residential,Mixed Residential Use,mixed residential use
+Residential,Mixed Residential Zone,mixed residential zone
+Residential,Primary Residential,primary residential
+Residential,Primary Residential Use,primary residential use
+Residential,Primary Residential Zone,primary residential zone
+Residential,Res Property,res property
+Residential,Res.,residential
+Residential,Residential,residential
+Residential,Residential Area,residential area
+Residential,Residential Building,residential building
+Residential,Residential Land,residential land
+Residential,Residential Plot,residential plot
+Residential,Residential Premises,residential premises
+Residential,Residential Property,residential property
+Residential,Residential Site,residential site
+Residential,Residential Use,residential use
+Residential,Residential Zone,residential zone
+Transport & Communication,Communication,communication
+Transport & Communication,Road,road
+Transport & Communication,Road Area,road area
+Transport & Communication,Road Corridor,road corridor
+Transport & Communication,Road Use,road use
+Transport & Communication,Transport,transport
+Transport & Communication,Transport and Communication,transport and communication
+Transport & Communication,Transport Use,transport use
+Transport & Communication,Transportation,transportation
+Transport & Communication,Transportation and Communication,transportation and communication
+Transport & Communication,Transportation and Communication Use,transportation and communication use
+Transport & Communication,Transportation Use,transportation use
+Transport & Communication,Transportation Zone,transportation zone
+Transportation,Circulation,circulation
+Transportation,Transportation,transportation
+Urbanisable,Urbanisable,urbanisable
+Urbanisable,Urbanisable Use,urbanisable use
+Urbanisable,Urbanisable Zone,urbanisable zone
+Urbanisable,Urbanizable,urbanizable
+Urbanisable,Urbanizable Use,urbanizable use
+Urbanisable,Urbanizable Zone,urbanizable zone
+Utility,Utility,utility
+Utility,Utility Area,utility area
+Vacant,Empty Land,empty land
+Vacant,Empty Plot,empty plot
+Vacant,Open Vacant Plot,open vacant plot
+Vacant,Unbuilt Land,unbuilt land
+Vacant,Unbuilt Plot,unbuilt plot
+Vacant,Undeveloped Land,undeveloped land
+Vacant,Undeveloped Plot,undeveloped plot
+Vacant,Vacant,vacant
+Vacant,Vacant Area,vacant area
+Vacant,Vacant Development,vacant development
+Vacant,Vacant Development Area,vacant development area
+Vacant,Vacant Land,vacant land
+Vacant,Vacant Plot,vacant plot
+Vacant,Vacant Property,vacant property
+Vacant,Vacant Site,vacant site
+Vacant,Vacant Use,vacant use
+Village Abadi,Abadi,abadi
+Village Abadi,Abadi Deh,abadi deh
+Village Abadi,Abadi Deh land,abadi deh land
+Water,Canal,canal
+Water,Lake,lake
+Water,Land under Water,land under water
+Water,Pond,pond
+Water,Reservoir,reservoir
+Water,River,river
+Water,Tank,tank
+Water,Water,water
+Water,Water Area,water area
+Water,Water Bodies,water bodies
+Water,Water Body,water body
+Water,Waterbody,waterbody
+Water,Waterbody Land,waterbody land
+Well/Tubewell-Irrigated Agriculture,Chahi,chahi
+Well/Tubewell-Irrigated Agriculture,Chahi land,chahi land
+Vacant,Land awaiting development,land awaiting development
+Vacant,Empty development site,empty development site
+Open Space & Recreational,Community open area,community open area
+Non-Urban,Nonurban parcel,nonurban parcel
+Urbanisable,Future urban development area,future urban development area
+Transportation,Transport and circulation land,transport and circulation land
+Industrial,Production unit land,production unit land
+Educational,Teaching institution property,teaching institution property
+Transport & Communication,Transport and road land,transport and road land

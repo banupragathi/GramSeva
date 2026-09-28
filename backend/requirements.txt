@@ -24,7 +24,7 @@ transformers>=4.40
 Pillow>=10.0
 # Optional — for visual (Siamese ResNet-50) and attribute (SBERT) matching:
 # timm>=1.0
-# sentence-transformers>=2.7
+sentence-transformers>=2.7
 
 # Auth
 python-jose[cryptography]==3.3.0

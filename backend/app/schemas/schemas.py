@@ -243,3 +243,32 @@ class HarmonizationRunResponse(BaseModel):
     parcels_matched: int
     conflicts_detected: int
     changes_detected: int
+
+
+# ────────────────────────────────────────────
+# LAND-USE SEMANTIC MATCHING (Task 1 SBERT)
+# ────────────────────────────────────────────
+class LandUseMatchRequest(BaseModel):
+    land_use: str
+
+
+class LandUseMatchResponse(BaseModel):
+    source_value: str
+    canonical_land_use: Optional[str] = None
+    semantic_similarity: float
+    match_status: str  # MATCH or HUMAN_REVIEW
+    matching_method: str  # EXACT, NORMALIZED, SBERT, EXACT_AMBIGUOUS, NORMALIZED_AMBIGUOUS
+    matched_variant: Optional[str] = None
+    candidate_labels: Optional[List[str]] = None
+
+
+class LandUseBatchMatchRequest(BaseModel):
+    land_uses: List[str]
+
+
+class LandUseBatchMatchResponse(BaseModel):
+    results: List[LandUseMatchResponse]
+    total: int
+    matched_count: int
+    human_review_count: int
+

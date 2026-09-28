@@ -23,6 +23,8 @@ from app.schemas.schemas import (
     AnalyticsResponse,
     SearchRequest, SearchResponse,
     HarmonizationRunRequest, HarmonizationRunResponse,
+    LandUseMatchRequest, LandUseMatchResponse,
+    LandUseBatchMatchRequest, LandUseBatchMatchResponse,
 )
 
 router = APIRouter()
@@ -547,4 +549,75 @@ async def segment_dataset_buildings(
             "area_range_m2": {"min": 12.4, "max": 618.9},
         },
     }
+
+
+# ──────────────────────────────────────────────────────────
+# ML — LAND-USE SEMANTIC MATCHING (Task 1 SBERT)
+# ──────────────────────────────────────────────────────────
+
+@router.get("/ml/land-use-info")
+async def land_use_model_info():
+    """Return metadata about the SBERT land-use semantic matching service."""
+    try:
+        from app.ml.sbert_service import model_info
+        return model_info()
+    except ImportError:
+        return {
+            "model_name": "sentence-transformers/all-MiniLM-L6-v2",
+            "status": "unavailable",
+            "reason": "sentence-transformers dependencies not installed.",
+            "install": "pip install sentence-transformers",
+        }
+
+
+@router.post("/ml/match-land-use", response_model=LandUseMatchResponse)
+async def match_land_use_endpoint(request: LandUseMatchRequest):
+    """
+    Match a raw land-use string against canonical categories using SBERT.
+    Pipeline: Exact -> Normalized -> SBERT -> Human Review.
+    """
+    try:
+        from app.ml.sbert_service import match_land_use
+    except ImportError as exc:
+        raise HTTPException(
+            status_code=503,
+            detail=f"SBERT dependencies not installed: {exc}. Run: pip install sentence-transformers",
+        )
+
+    try:
+        result = match_land_use(request.land_use)
+        return LandUseMatchResponse(**result)
+    except FileNotFoundError as exc:
+        raise HTTPException(status_code=500, detail=str(exc))
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=f"Land-use matching failed: {exc}")
+
+
+@router.post("/ml/match-land-use/batch", response_model=LandUseBatchMatchResponse)
+async def match_land_use_batch_endpoint(request: LandUseBatchMatchRequest):
+    """Match a batch of raw land-use terms against canonical categories."""
+    try:
+        from app.ml.sbert_service import match_land_use_batch
+    except ImportError as exc:
+        raise HTTPException(
+            status_code=503,
+            detail=f"SBERT dependencies not installed: {exc}. Run: pip install sentence-transformers",
+        )
+
+    try:
+        raw_results = match_land_use_batch(request.land_uses)
+        results = [LandUseMatchResponse(**r) for r in raw_results]
+        matched = sum(1 for r in results if r.match_status == "MATCH")
+        review = sum(1 for r in results if r.match_status == "HUMAN_REVIEW")
+        return LandUseBatchMatchResponse(
+            results=results,
+            total=len(results),
+            matched_count=matched,
+            human_review_count=review,
+        )
+    except FileNotFoundError as exc:
+        raise HTTPException(status_code=500, detail=str(exc))
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=f"Batch land-use matching failed: {exc}")
+
 

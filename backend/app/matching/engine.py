@@ -158,14 +158,26 @@ class SpatialEntityMatcher:
                 # Check for fuzzy match
                 reasons.append("Survey number mismatch — semantic check needed")
 
-        # Land use comparison
+        # Land use comparison (SBERT Task 1 semantic matching)
         if "land_use" in attrs_a and "land_use" in attrs_b:
             total += 1
-            if attrs_a["land_use"].lower() == attrs_b["land_use"].lower():
-                matches += 1
-                reasons.append("Consistent land use classification")
-            else:
-                reasons.append(f"Land use mismatch: {attrs_a['land_use']} vs {attrs_b['land_use']}")
+            lu_a = str(attrs_a["land_use"])
+            lu_b = str(attrs_b["land_use"])
+            try:
+                from app.ml.sbert_service import compare_land_use
+                is_match, sim_score, reason = compare_land_use(lu_a, lu_b)
+                if is_match:
+                    matches += sim_score
+                    reasons.append(reason)
+                else:
+                    reasons.append(reason)
+            except Exception:
+                # Graceful fallback if SBERT service is unavailable
+                if lu_a.strip().lower() == lu_b.strip().lower():
+                    matches += 1
+                    reasons.append("Consistent land use classification")
+                else:
+                    reasons.append(f"Land use mismatch: {lu_a} vs {lu_b}")
 
         # Owner name (would use SBERT in full implementation)
         if "owner_name" in attrs_a and "owner_name" in attrs_b:

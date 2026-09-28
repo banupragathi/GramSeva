@@ -15,10 +15,11 @@ logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Application lifespan: pre-warm the SegFormer-B2 model at startup."""
+    """Application lifespan: pre-warm SegFormer-B2 and SBERT models at startup."""
+    # 1. Pre-warm SegFormer-B2 building segmentation (Task 2)
     try:
-        from app.ml.segformer_service import _load_model
-        _load_model()
+        from app.ml.segformer_service import _load_model as _load_segformer
+        _load_segformer()
         logger.info("SegFormer-B2 model pre-warmed successfully.")
     except FileNotFoundError as exc:
         logger.warning("SegFormer model path not found at startup: %s", exc)
@@ -29,8 +30,24 @@ async def lifespan(app: FastAPI):
         )
     except Exception as exc:
         logger.error("Unexpected error loading SegFormer at startup: %s", exc)
+
+    # 2. Pre-warm SBERT Land-Use Semantic Matcher & Cache Vocabulary Embeddings (Task 1)
+    try:
+        from app.ml.sbert_service import _load_model as _load_sbert
+        _load_sbert()
+        logger.info("SBERT Land-Use semantic matcher pre-warmed successfully.")
+    except FileNotFoundError as exc:
+        logger.warning("SBERT model or vocabulary path not found at startup: %s", exc)
+    except ImportError as exc:
+        logger.warning(
+            "sentence-transformers dependencies not installed. "
+            "Land-use matching endpoints will return 503. Details: %s", exc
+        )
+    except Exception as exc:
+        logger.error("Unexpected error loading SBERT at startup: %s", exc)
+
     yield
-    # Shutdown — nothing to clean up for the model
+    # Shutdown — nothing to clean up for models
 
 
 app = FastAPI(

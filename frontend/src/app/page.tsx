@@ -76,7 +76,17 @@ function AnimatedCounter({ end, suffix = "", label, delay = 0 }: { end: number; 
 /* ------------------------------------------------------------------ */
 /*  PIPELINE STEP                                                       */
 /* ------------------------------------------------------------------ */
-function PipelineStep({ icon: Icon, label, index, total }: { icon: LucideIcon; label: string; index: number; total: number }) {
+function PipelineStep({
+  icon: Icon,
+  label,
+  index,
+  total,
+}: {
+  icon: LucideIcon;
+  label: string;
+  index: number;
+  total: number;
+}) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -85,19 +95,22 @@ function PipelineStep({ icon: Icon, label, index, total }: { icon: LucideIcon; l
       transition={{ delay: index * 0.08, duration: 0.5 }}
       className="flex flex-col items-center gap-2 relative"
     >
-      <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-        <Icon className="w-5 h-5 text-primary" />
+      <div className="w-12 h-12 rounded-xl border border-[#8FBC8F] bg-transparent flex items-center justify-center transition-colors hover:bg-white/10">
+        <Icon className="w-5 h-5 text-[#B7E4B7]" />
       </div>
-      <span className="text-xs font-semibold text-foreground/80 tracking-wide uppercase">{label}</span>
+
+      <span className="text-xs font-semibold text-white tracking-wide uppercase">
+        {label}
+      </span>
+
       {index < total - 1 && (
         <div className="hidden md:block absolute -right-6 top-5">
-          <ArrowRight className="w-4 h-4 text-neutral" />
+          <ArrowRight className="w-4 h-4 text-[#8FBC8F]" />
         </div>
       )}
     </motion.div>
   );
 }
-
 /* ------------------------------------------------------------------ */
 /*  FEATURE CARD                                                        */
 /* ------------------------------------------------------------------ */
@@ -449,12 +462,13 @@ export default function LandingPage() {
       {/* ========== NAVIGATION ========== */}
       <nav className="fixed top-0 w-full z-50 glass-card border-b border-border/50">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center">
-              <MapPin className="w-4 h-4 text-white" />
-            </div>
-            <span className="text-lg font-bold tracking-tight">GramSeva</span>
-          </Link>
+          <Link href="/" className="flex items-center">
+  <img
+    src="/gramseva-logo.png"
+    alt="GramSeva"
+    className="h-10 w-auto object-contain"
+  />
+</Link>
 
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-neutral-dark">
             <a href="#pipeline" className="hover:text-primary transition-colors">How It Works</a>

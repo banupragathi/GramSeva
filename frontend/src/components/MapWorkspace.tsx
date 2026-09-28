@@ -1,29 +1,19 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import * as maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import {
   X,
   Layers,
-  ChevronRight,
-  Eye,
-  EyeOff,
   MapPin,
   Building2,
-  TreePine,
   Shield,
-  Clock,
   BarChart3,
-  ExternalLink,
-  Maximize2,
-  Minus,
-  Plus,
   Compass,
   CheckCircle2,
   AlertTriangle,
-  Info,
 } from "lucide-react";
 import {
   demoParcels,
@@ -32,7 +22,6 @@ import {
   demoMatchEvidence,
   demoConflicts,
   type ParcelProperties,
-  type MatchEvidence,
 } from "@/lib/demo-data";
 
 /* ------------------------------------------------------------------ */
@@ -117,6 +106,7 @@ export default function MapWorkspace() {
       // Add parcels source
       m.addSource("parcels", {
         type: "geojson",
+        /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
         data: demoParcels as any,
       });
 
@@ -194,6 +184,7 @@ export default function MapWorkspace() {
       // Buildings source
       m.addSource("buildings", {
         type: "geojson",
+        /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
         data: demoBuildings as any,
       });
 
@@ -221,6 +212,7 @@ export default function MapWorkspace() {
       // Roads source
       m.addSource("roads", {
         type: "geojson",
+        /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
         data: demoRoads as any,
       });
 
@@ -244,20 +236,36 @@ export default function MapWorkspace() {
       // Click handler for parcels
       m.on("click", "parcels-fill", (e) => {
         if (e.features && e.features.length > 0) {
-          const props = e.features[0].properties as any;
+          const props = e.features[0].properties as Record<string, unknown>;
           // Parse sources arrays from JSON strings
           const parsed: ParcelProperties = {
-            ...props,
-            sources: typeof props.sources === "string" ? JSON.parse(props.sources) : props.sources,
-            conflict_types: typeof props.conflict_types === "string" ? JSON.parse(props.conflict_types) : props.conflict_types,
-            change_types: typeof props.change_types === "string" ? JSON.parse(props.change_types) : props.change_types,
+            id: String(props.id || ""),
+            survey_number: String(props.survey_number || ""),
+            area_sqm: Number(props.area_sqm || 0),
+            land_use: String(props.land_use || ""),
+            building_count: Number(props.building_count || 0),
+            building_area_sqm: Number(props.building_area_sqm || 0),
+            road_access: Boolean(props.road_access),
+            confidence: Number(props.confidence || 0),
+            match_state: (props.match_state as ParcelProperties["match_state"]) || "NOT_MATCHED",
+            sources: (typeof props.sources === "string" ? JSON.parse(props.sources) : props.sources) as string[] || [],
+            has_conflict: Boolean(props.has_conflict),
+            conflict_types: (typeof props.conflict_types === "string" ? JSON.parse(props.conflict_types) : props.conflict_types) as string[] || [],
+            has_change: Boolean(props.has_change),
+            change_types: (typeof props.change_types === "string" ? JSON.parse(props.change_types) : props.change_types) as string[] || [],
+            review_state: (props.review_state as ParcelProperties["review_state"]) || null,
+            owner_name: String(props.owner_name || "—"),
+            last_updated: String(props.last_updated || ""),
           };
           setSelectedParcel(parsed);
 
           // Fly to parcel
-          const coords = (e.features[0].geometry as any).coordinates[0];
+          /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+          const geom = e.features[0].geometry as any;
+          const coords = geom.coordinates[0];
           const bounds = coords.reduce(
-            (b: any, c: number[]) => b.extend(c),
+            /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+            (b: any, c: any) => b.extend(c),
             new maplibregl.LngLatBounds(coords[0], coords[0])
           );
           m.fitBounds(bounds, { padding: 100, duration: 1200, maxZoom: 17 });
@@ -345,7 +353,7 @@ export default function MapWorkspace() {
         <div className="absolute top-4 left-4 z-10 flex flex-col gap-2">
           <button
             onClick={() => setLayerPanel(!layerPanel)}
-            className="p-2.5 rounded-lg bg-surface-card border border-border shadow-md hover:shadow-lg transition-shadow"
+            className="p-2.5 rounded-lg bg-surface-card/90 backdrop-blur-sm border border-border shadow-md hover:shadow-lg hover:border-primary/20 transition-all"
             title="Layer Manager"
           >
             <Layers className="w-4 h-4 text-foreground/70" />
@@ -360,11 +368,14 @@ export default function MapWorkspace() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -10 }}
               transition={{ duration: 0.2 }}
-              className="absolute top-4 left-14 z-10 w-56 rounded-xl bg-surface-card border border-border shadow-lg p-4"
+              className="absolute top-4 left-14 z-10 w-56 rounded-xl bg-surface-card/95 backdrop-blur-md border border-border shadow-xl p-4"
             >
               <div className="flex items-center justify-between mb-3">
-                <h3 className="text-sm font-semibold">Layers</h3>
-                <button onClick={() => setLayerPanel(false)}>
+                <div className="flex items-center gap-1.5">
+                  <Layers className="w-3.5 h-3.5 text-primary" />
+                  <span className="font-mono text-[11px] font-semibold tracking-wider text-foreground">LAYERS</span>
+                </div>
+                <button onClick={() => setLayerPanel(false)} className="p-0.5 rounded hover:bg-surface transition-colors">
                   <X className="w-3.5 h-3.5 text-neutral" />
                 </button>
               </div>
@@ -395,12 +406,17 @@ export default function MapWorkspace() {
           )}
         </AnimatePresence>
 
-        {/* Map loading skeleton */}
+        {/* Map loading skeleton — HUD style */}
         {!mapLoaded && (
-          <div className="absolute inset-0 bg-surface flex items-center justify-center pointer-events-none">
-            <div className="text-center">
-              <div className="w-8 h-8 border-2 border-primary/30 border-t-primary rounded-full animate-spin mb-3 mx-auto" />
-              <span className="text-sm text-neutral-dark font-medium">Loading geospatial mapping engine...</span>
+          <div className="absolute inset-0 bg-surface/95 flex flex-col items-center justify-center pointer-events-none gap-4">
+            <div className="relative w-12 h-12">
+              <div className="absolute inset-0 rounded-full border-2 border-primary/20" />
+              <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-primary animate-spin" />
+              <div className="absolute inset-1 rounded-full border border-primary/10 border-t-primary/40 animate-spin" style={{ animationDirection: 'reverse', animationDuration: '1.5s' }} />
+            </div>
+            <div className="text-center space-y-1">
+              <div className="font-mono text-[11px] text-primary tracking-[0.2em] uppercase">GIS Engine Booting</div>
+              <div className="font-mono text-[10px] text-neutral tracking-widest">MapLibre GL · OpenStreetMap · PostGIS</div>
             </div>
           </div>
         )}
@@ -417,11 +433,15 @@ export default function MapWorkspace() {
             className="border-l border-border bg-surface-card overflow-y-auto flex-shrink-0"
           >
             <div className="p-5">
-              {/* Header */}
-              <div className="flex items-center justify-between mb-5">
+              {/* Header — HUD style */}
+              <div className="flex items-center justify-between mb-4 pb-3 border-b border-border">
                 <div>
-                  <h2 className="text-lg font-bold">PARCEL {selectedParcel.id}</h2>
-                  <p className="text-xs text-neutral-dark mt-0.5">{selectedParcel.survey_number}</p>
+                  <div className="flex items-center gap-1.5 mb-0.5">
+                    <span className="radar-dot" />
+                    <span className="font-mono text-[9px] text-primary/70 tracking-widest uppercase">Parcel Intelligence</span>
+                  </div>
+                  <h2 className="text-base font-bold tracking-tight">{selectedParcel.id}</h2>
+                  <p className="font-mono text-[10px] text-neutral-dark mt-0.5">{selectedParcel.survey_number}</p>
                 </div>
                 <button
                   onClick={() => setSelectedParcel(null)}
@@ -448,14 +468,25 @@ export default function MapWorkspace() {
                 ))}
               </div>
 
-              {/* Confidence */}
-              <div className="p-4 rounded-xl bg-primary/5 border border-primary/15 mb-5">
-                <div className="flex items-center justify-between mb-1">
-                  <span className="text-xs font-semibold text-primary uppercase tracking-wide">Confidence</span>
-                  <span className="text-2xl font-bold text-primary">{selectedParcel.confidence}%</span>
+              {/* Confidence — HUD gauge */}
+              <div className="p-3 rounded-xl bg-primary/5 border border-primary/15 mb-4">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="font-mono text-[10px] font-semibold text-primary uppercase tracking-widest">Confidence</span>
+                  <span className="text-2xl font-bold text-primary tabular-nums">{selectedParcel.confidence}%</span>
                 </div>
-                <div className="text-xs text-neutral-dark">
-                  {selectedParcel.match_state.replace("_", " ")}
+                <div className="w-full h-1 bg-border rounded-full overflow-hidden">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: `${selectedParcel.confidence}%` }}
+                    transition={{ duration: 0.8, ease: 'easeOut' }}
+                    className={`h-full rounded-full ${
+                      selectedParcel.confidence >= 90 ? 'bg-success' :
+                      selectedParcel.confidence >= 80 ? 'bg-warning' : 'bg-error'
+                    }`}
+                  />
+                </div>
+                <div className="font-mono text-[10px] text-neutral-dark mt-1.5 tracking-wider">
+                  {selectedParcel.match_state.replace(/_/g, ' ')}
                 </div>
               </div>
 

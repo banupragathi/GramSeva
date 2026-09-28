@@ -1,11 +1,10 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import {
   MapPin,
-  Layers,
   Shield,
   Eye,
   GitMerge,
@@ -142,7 +141,6 @@ export default function LandingPage() {
   const { scrollYProgress } = useScroll();
   const heroOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
   const heroScale = useTransform(scrollYProgress, [0, 0.15], [1, 0.98]);
-  const [menuOpen, setMenuOpen] = useState(false);
 
   const pipelineSteps: { icon: LucideIcon; label: string }[] = [
     { icon: Database, label: "Ingest" },

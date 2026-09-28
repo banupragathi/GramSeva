@@ -50,14 +50,14 @@ interface NavItem {
 
 const mainNav: NavItem[] = [
   { icon: LayoutDashboard, label: "Overview", href: "/dashboard" },
-  { icon: Database, label: "Data Sources", href: "/data-sources" },
+  { icon: Database, label: "Data Sources & AI", href: "/data-sources" },
   { icon: Map, label: "Land Map", href: "/map" },
   { icon: Shield, label: "Conflicts", href: "/conflicts" },
   { icon: Clock, label: "Changes", href: "/changes" },
   { icon: ClipboardCheck, label: "Review Queue", href: "/review" },
   { icon: FileText, label: "Unified Records", href: "/records" },
   { icon: BarChart3, label: "Analytics", href: "/analytics" },
-  { icon: FlaskConical, label: "Evaluation", href: "/evaluation" },
+  { icon: FlaskConical, label: "Model Evaluation", href: "/evaluation" },
   { icon: Settings, label: "Settings", href: "/settings" },
 ];
 

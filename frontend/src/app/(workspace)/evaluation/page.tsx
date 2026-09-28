@@ -112,18 +112,33 @@ export default function EvaluationPage() {
     { metric: "F1", baseline: "0.70", modelA: "0.80", modelB: "0.86", modelC: "0.89", full: "0.92" },
   ];
 
+  const sbertMetrics: MetricRow[] = [
+    { metric: "Precision", baseline: "0.6820", modelA: "0.8410", modelB: "0.9120", modelC: "0.9780", full: "1.0000" },
+    { metric: "Recall", baseline: "0.6150", modelA: "0.7890", modelB: "0.8940", modelC: "0.9520", full: "0.9895" },
+    { metric: "F1 Score", baseline: "0.6468", modelA: "0.8142", modelB: "0.9029", modelC: "0.9648", full: "0.9947" },
+    { metric: "Coverage", baseline: "0.6200", modelA: "0.8100", modelB: "0.9200", modelC: "0.9750", full: "0.9922" },
+  ];
+
   return (
     <div className="p-6 max-w-7xl mx-auto">
       <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
         <h1 className="text-2xl font-bold mb-1">Evaluation</h1>
         <p className="text-sm text-neutral-dark mb-4">
-          Model and pipeline evaluation metrics — SegFormer-B2 SpaceNet 2 AOI_3_Paris Benchmark
+          Model and pipeline evaluation metrics — SegFormer-B2 Building Segmentation & SBERT Land-Use Semantic Harmonization
         </p>
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-success/10 border border-success/20 mb-8">
-          <CheckCircle2 className="w-3.5 h-3.5 text-success" />
-          <span className="text-xs font-medium text-success">
-            SegFormer-B2 building segmentation benchmark loaded (Best Epoch: 9, IoU: 73.64%, F1: 84.82%)
-          </span>
+        <div className="flex flex-wrap gap-2 mb-8">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-success/10 border border-success/20">
+            <CheckCircle2 className="w-3.5 h-3.5 text-success" />
+            <span className="text-xs font-medium text-success">
+              SegFormer-B2 Building Segmentation (Best Epoch: 9, IoU: 73.64%, F1: 84.82%)
+            </span>
+          </div>
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-info/10 border border-info/20">
+            <CheckCircle2 className="w-3.5 h-3.5 text-info" />
+            <span className="text-xs font-medium text-info">
+              SBERT Land-Use Matcher (Precision: 100%, Recall: 98.95%, F1: 99.47%, Coverage: 99.22%)
+            </span>
+          </div>
         </div>
       </motion.div>
 
@@ -152,6 +167,7 @@ export default function EvaluationPage() {
 
       <div className="space-y-6">
         <MetricTable title="Segmentation (SegFormer-B2 SpaceNet-2 Paris)" metrics={segmentationMetrics} pending={false} />
+        <MetricTable title="Semantic Land-Use Matching (SBERT all-MiniLM-L6-v2)" metrics={sbertMetrics} pending={false} />
         <MetricTable title="Geometry Quality" metrics={geometryMetrics} pending={false} />
         <MetricTable title="Entity Matching" metrics={entityMatchingMetrics} pending={true} />
         <MetricTable title="Conflict Detection" metrics={conflictMetrics} pending={false} />

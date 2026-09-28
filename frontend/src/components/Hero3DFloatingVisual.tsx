@@ -12,14 +12,14 @@ export default function Hero3DFloatingVisual() {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  // Smooth spring physics for reactive cursor tilt
-  const springConfig = { stiffness: 150, damping: 20, mass: 0.5 };
+  // Weighty, dampened spring physics (firm, premium feel — no jelly bounce)
+  const springConfig = { stiffness: 80, damping: 25, mass: 1 };
   const smoothX = useSpring(mouseX, springConfig);
   const smoothY = useSpring(mouseY, springConfig);
 
-  // Map to 3D rotation angles (up to 14 deg tilt)
-  const rotateX = useTransform(smoothY, [-0.5, 0.5], [14, -14]);
-  const rotateY = useTransform(smoothX, [-0.5, 0.5], [-16, 16]);
+  // Subtle, realistic 3D perspective tilt (5-6 degrees max)
+  const rotateX = useTransform(smoothY, [-0.5, 0.5], [5, -5]);
+  const rotateY = useTransform(smoothX, [-0.5, 0.5], [-6, 6]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (prefersReducedMotion || !containerRef.current) return;
@@ -40,33 +40,32 @@ export default function Hero3DFloatingVisual() {
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative w-full max-w-[640px] lg:max-w-[780px] xl:max-w-[880px] flex items-center justify-center cursor-pointer select-none"
-      style={{ perspective: 1200 }}
+      className="relative w-full max-w-[640px] lg:max-w-[780px] xl:max-w-[880px] flex items-center justify-center cursor-default select-none group"
+      style={{ perspective: 1400 }}
     >
       {/* Ambient background volumetric glow */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-primary/25 via-transparent to-primary/15 rounded-full blur-3xl opacity-75 pointer-events-none scale-110" />
+      <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-primary/10 rounded-full blur-3xl opacity-65 pointer-events-none scale-105" />
 
-      {/* 3D Reactive Tilt Container */}
+      {/* 3D Reactive Tilt Container (controlled, subtle angular deflection) */}
       <motion.div
         style={{
           rotateX: prefersReducedMotion ? 0 : rotateX,
           rotateY: prefersReducedMotion ? 0 : rotateY,
           transformStyle: "preserve-3d",
         }}
-        className="relative w-full flex items-center justify-center"
+        className="relative w-full flex items-center justify-center transition-transform duration-300 ease-out"
       >
-        {/* Continuous Levitation Float Wrapper */}
+        {/* Calm, Weighted Levitation Float (no rotational wobble) */}
         <motion.div
           animate={
             prefersReducedMotion
               ? {}
               : {
-                  y: [0, -18, 0],
-                  rotateZ: [0, 0.8, -0.6, 0],
+                  y: [0, -8, 0],
                 }
           }
           transition={{
-            duration: 6,
+            duration: 7,
             repeat: Infinity,
             ease: "easeInOut",
           }}
@@ -80,33 +79,32 @@ export default function Hero3DFloatingVisual() {
             height={1024}
             priority
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 60vw, 850px"
-            className="w-full h-auto object-contain filter drop-shadow-[0_30px_60px_rgba(0,0,0,0.45)] hover:brightness-105 transition-all duration-300"
+            className="w-full h-auto object-contain filter drop-shadow-[0_25px_45px_rgba(0,0,0,0.38)] group-hover:drop-shadow-[0_30px_55px_rgba(0,0,0,0.48)] transition-all duration-500 ease-out"
           />
 
-          {/* Elevated Floating Highlight Flare */}
+          {/* Elevated Floating Subtle Accent Flare */}
           <div
-            className="absolute top-1/4 left-1/3 w-32 h-32 bg-primary/20 rounded-full blur-2xl pointer-events-none animate-pulse"
-            style={{ animationDuration: "4s" }}
+            className="absolute top-1/4 left-1/3 w-28 h-28 bg-primary/15 rounded-full blur-2xl pointer-events-none opacity-60"
           />
         </motion.div>
       </motion.div>
 
-      {/* Dynamic 3D Ground Shadow that breathes with the levitation */}
+      {/* Ground Shadow (stable, calm altitude tracking) */}
       <motion.div
         animate={
           prefersReducedMotion
             ? {}
             : {
-                scale: [1, 0.85, 1],
-                opacity: [0.65, 0.38, 0.65],
+                scale: [1, 0.94, 1],
+                opacity: [0.5, 0.38, 0.5],
               }
         }
         transition={{
-          duration: 6,
+          duration: 7,
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-[72%] h-10 bg-black/60 rounded-full blur-2xl pointer-events-none"
+        className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-[68%] h-8 bg-black/55 rounded-full blur-2xl pointer-events-none"
       />
     </div>
   );

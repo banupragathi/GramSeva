@@ -31,10 +31,10 @@ function MetricTable({
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      className="rounded-xl border border-purple-900/10 bg-white overflow-hidden shadow-sm"
+      className="rounded-xl border border--[#860F61]/10 bg-white overflow-hidden shadow-sm"
     >
-      <div className="px-5 py-4 border-b border-purple-900/10 flex items-center justify-between">
-        <h3 className="text-sm font-bold text-purple-950">{title}</h3>
+      <div className="px-5 py-4 border-b border--[#860F61]/10 flex items-center justify-between">
+        <h3 className="text-sm font-bold text--[#860F61]">{title}</h3>
         {pending && (
           <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-amber-100 text-amber-700">
             Evaluation Pending
@@ -44,32 +44,32 @@ function MetricTable({
 
       {pending ? (
         <div className="p-8 text-center bg-[#F8FAFC]">
-          <AlertCircle className="w-6 h-6 text-purple-600 mx-auto mb-2" />
-          <p className="text-sm font-bold text-purple-800">Evaluation pending — no results computed yet</p>
-          <p className="text-xs font-medium text-purple-600 mt-1">Run evaluation pipeline to generate metrics</p>
+          <AlertCircle className="w-6 h-6 text--[#21700F] mx-auto mb-2" />
+          <p className="text-sm font-bold text--[#5E0A44]">Evaluation pending — no results computed yet</p>
+          <p className="text-xs font-medium text--[#21700F] mt-1">Run evaluation pipeline to generate metrics</p>
         </div>
       ) : (
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-emerald-50">
-                <th className="text-left px-5 py-2.5 text-xs font-bold text-purple-900 uppercase tracking-wider">Metric</th>
-                <th className="text-center px-4 py-2.5 text-xs font-bold text-purple-900 uppercase tracking-wider">Baseline</th>
-                <th className="text-center px-4 py-2.5 text-xs font-bold text-purple-900 uppercase tracking-wider">Model A</th>
-                <th className="text-center px-4 py-2.5 text-xs font-bold text-purple-900 uppercase tracking-wider">Model B</th>
-                <th className="text-center px-4 py-2.5 text-xs font-bold text-purple-900 uppercase tracking-wider">Model C</th>
-                <th className="text-center px-4 py-2.5 text-xs font-bold text-purple-900 uppercase tracking-wider bg-emerald-100">Full</th>
+              <tr className="bg--[#FBF6EE]">
+                <th className="text-left px-5 py-2.5 text-xs font-bold text--[#860F61] uppercase tracking-wider">Metric</th>
+                <th className="text-center px-4 py-2.5 text-xs font-bold text--[#860F61] uppercase tracking-wider">Baseline</th>
+                <th className="text-center px-4 py-2.5 text-xs font-bold text--[#860F61] uppercase tracking-wider">Model A</th>
+                <th className="text-center px-4 py-2.5 text-xs font-bold text--[#860F61] uppercase tracking-wider">Model B</th>
+                <th className="text-center px-4 py-2.5 text-xs font-bold text--[#860F61] uppercase tracking-wider">Model C</th>
+                <th className="text-center px-4 py-2.5 text-xs font-bold text--[#860F61] uppercase tracking-wider bg--[#F3E3EC]">Full</th>
               </tr>
             </thead>
             <tbody>
               {metrics.map((row) => (
-                <tr key={row.metric} className="border-t border-purple-900/10">
-                  <td className="px-5 py-2.5 font-bold text-xs text-purple-950">{row.metric}</td>
-                  <td className="px-4 py-2.5 text-center text-xs font-medium text-purple-800">{row.baseline || "—"}</td>
-                  <td className="px-4 py-2.5 text-center text-xs font-medium text-purple-800">{row.modelA || "—"}</td>
-                  <td className="px-4 py-2.5 text-center text-xs font-medium text-purple-800">{row.modelB || "—"}</td>
-                  <td className="px-4 py-2.5 text-center text-xs font-medium text-purple-800">{row.modelC || "—"}</td>
-                  <td className="px-4 py-2.5 text-center text-xs font-bold bg-emerald-50/50 text-purple-950">{row.full || "—"}</td>
+                <tr key={row.metric} className="border-t border--[#860F61]/10">
+                  <td className="px-5 py-2.5 font-bold text-xs text--[#860F61]">{row.metric}</td>
+                  <td className="px-4 py-2.5 text-center text-xs font-medium text--[#5E0A44]">{row.baseline || "—"}</td>
+                  <td className="px-4 py-2.5 text-center text-xs font-medium text--[#5E0A44]">{row.modelA || "—"}</td>
+                  <td className="px-4 py-2.5 text-center text-xs font-medium text--[#5E0A44]">{row.modelB || "—"}</td>
+                  <td className="px-4 py-2.5 text-center text-xs font-medium text--[#5E0A44]">{row.modelC || "—"}</td>
+                  <td className="px-4 py-2.5 text-center text-xs font-bold bg--[#FBF6EE]/50 text--[#860F61]">{row.full || "—"}</td>
                 </tr>
               ))}
             </tbody>
@@ -115,13 +115,13 @@ export default function EvaluationPage() {
   return (
     <div className="p-6 max-w-7xl mx-auto">
       <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
-        <h1 className="text-3xl font-extrabold text-purple-950 mb-1">Evaluation</h1>
-        <p className="text-sm font-medium text-purple-800 mb-4">
+        <h1 className="text-3xl font-extrabold text--[#860F61] mb-1">Evaluation</h1>
+        <p className="text-sm font-medium text--[#5E0A44] mb-4">
           Model and pipeline evaluation metrics — SegFormer-B2 SpaceNet 2 AOI_3_Paris Benchmark
         </p>
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-50 border border-emerald-200 mb-8 shadow-sm">
-          <CheckCircle2 className="w-3.5 h-3.5 text-purple-700" />
-          <span className="text-xs font-bold text-purple-800">
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg--[#FBF6EE] border border--[#F3E3EC] mb-8 shadow-sm">
+          <CheckCircle2 className="w-3.5 h-3.5 text--[#21700F]" />
+          <span className="text-xs font-bold text--[#5E0A44]">
             SegFormer-B2 building segmentation benchmark loaded (Best Epoch: 9, IoU: 73.64%, F1: 84.82%)
           </span>
         </div>
@@ -141,11 +141,11 @@ export default function EvaluationPage() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.05 }}
-            className="p-3 rounded-xl border border-purple-900/10 bg-white shadow-sm text-center"
+            className="p-3 rounded-xl border border--[#860F61]/10 bg-white shadow-sm text-center"
           >
             <div className="w-3 h-3 rounded-full mx-auto mb-2 shadow-sm" style={{ backgroundColor: cfg.color }} />
-            <div className="text-xs font-bold text-purple-950">{cfg.name}</div>
-            <div className="text-[10px] font-medium text-purple-800">{cfg.desc}</div>
+            <div className="text-xs font-bold text--[#860F61]">{cfg.name}</div>
+            <div className="text-[10px] font-medium text--[#5E0A44]">{cfg.desc}</div>
           </motion.div>
         ))}
       </div>

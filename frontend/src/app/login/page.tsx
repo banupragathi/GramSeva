@@ -37,7 +37,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex bg-[#F3F7F4] text-purple-950 selection:bg-emerald-200 selection:text-purple-950">
+    <div className="min-h-screen flex bg-[#F4E9D8] text--[#860F61] selection:bg--[#F3E3EC] selection:text--[#860F61]">
       {/* Left — Brand Panel */}
       <div className="hidden lg:flex lg:w-1/2 green-gradient-bg relative overflow-hidden flex-col justify-between p-12">
         <div className="absolute inset-0 opacity-10">
@@ -70,7 +70,7 @@ export default function LoginPage() {
               className="object-contain"
             />
           </div>
-          <p className="text-emerald-100/90 text-sm mt-1 font-medium tracking-wide uppercase">SIH26013 — Geospatial Intelligence Platform</p>
+          <p className="text--[#F3E3EC]/90 text-sm mt-1 font-medium tracking-wide uppercase">SIH26013 — Geospatial Intelligence Platform</p>
         </div>
 
         <div className="relative z-10 max-w-md">
@@ -87,7 +87,7 @@ export default function LoginPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.6 }}
-            className="text-emerald-50 leading-relaxed font-medium"
+            className="text--[#FBF6EE] leading-relaxed font-medium"
           >
             Multi-source geospatial data integration, intelligent harmonization,
             and unified land record management.
@@ -95,7 +95,7 @@ export default function LoginPage() {
         </div>
 
         <div className="relative z-10">
-          <div className="flex items-center gap-3 text-emerald-100/70 text-xs font-semibold uppercase tracking-wider">
+          <div className="flex items-center gap-3 text--[#F3E3EC]/70 text-xs font-semibold uppercase tracking-wider">
             <Shield className="w-4 h-4" />
             <span>Government-grade security • Source data preserved • Audit trail maintained</span>
           </div>
@@ -121,15 +121,15 @@ export default function LoginPage() {
             />
           </div>
 
-          <h2 className="text-3xl font-display font-bold text-purple-950 mb-2">Sign in to your account</h2>
-          <p className="text-purple-800/80 text-sm font-medium mb-8">
+          <h2 className="text-3xl font-display font-bold text--[#860F61] mb-2">Sign in to your account</h2>
+          <p className="text--[#5E0A44]/80 text-sm font-medium mb-8">
             Access the GramSeva geospatial workspace
           </p>
 
           <form onSubmit={handleLogin} className="space-y-5">
             {/* Email */}
             <div>
-              <label htmlFor="email" className="block text-sm font-bold text-purple-950 mb-1.5">
+              <label htmlFor="email" className="block text-sm font-bold text--[#860F61] mb-1.5">
                 Email
               </label>
               <input
@@ -138,13 +138,13 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="officer@gramseva.gov.in"
-                className="w-full px-4 py-2.5 rounded-lg border border-purple-900/15 bg-white shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-purple-600/30 focus:border-purple-600 transition-all text-purple-950 font-medium"
+                className="w-full px-4 py-2.5 rounded-lg border border--[#860F61]/15 bg-white shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring--[#21700F]/30 focus:border--[#21700F] transition-all text--[#860F61] font-medium"
               />
             </div>
 
             {/* Password */}
             <div>
-              <label htmlFor="password" className="block text-sm font-bold text-purple-950 mb-1.5">
+              <label htmlFor="password" className="block text-sm font-bold text--[#860F61] mb-1.5">
                 Password
               </label>
               <div className="relative">
@@ -154,12 +154,12 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full px-4 py-2.5 rounded-lg border border-purple-900/15 bg-white shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-purple-600/30 focus:border-purple-600 transition-all pr-10 text-purple-950 font-medium"
+                  className="w-full px-4 py-2.5 rounded-lg border border--[#860F61]/15 bg-white shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring--[#21700F]/30 focus:border--[#21700F] transition-all pr-10 text--[#860F61] font-medium"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-purple-700 hover:text-purple-900 transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text--[#21700F] hover:text--[#860F61] transition-colors"
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
@@ -168,14 +168,14 @@ export default function LoginPage() {
 
             {/* Role */}
             <div>
-              <label htmlFor="role" className="block text-sm font-bold text-purple-950 mb-1.5">
+              <label htmlFor="role" className="block text-sm font-bold text--[#860F61] mb-1.5">
                 Role
               </label>
               <select
                 id="role"
                 value={role}
                 onChange={(e) => setRole(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-lg border border-purple-900/15 bg-white shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-purple-600/30 focus:border-purple-600 transition-all appearance-none text-purple-950 font-medium"
+                className="w-full px-4 py-2.5 rounded-lg border border--[#860F61]/15 bg-white shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring--[#21700F]/30 focus:border--[#21700F] transition-all appearance-none text--[#860F61] font-medium"
               >
                 {roles.map((r) => (
                   <option key={r.value} value={r.value}>
@@ -189,7 +189,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full flex items-center justify-center gap-2 py-3 rounded-lg bg-purple-700 text-white font-bold text-sm hover:bg-purple-800 transition-all shadow-md hover:shadow-lg shadow-purple-900/20 disabled:opacity-60"
+              className="w-full flex items-center justify-center gap-2 py-3 rounded-lg bg--[#21700F] text-white font-bold text-sm hover:bg--[#5E0A44] transition-all shadow-md hover:shadow-lg shadow--[#860F61]/20 disabled:opacity-60"
             >
               {loading ? (
                 <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -204,21 +204,21 @@ export default function LoginPage() {
 
           {/* Divider */}
           <div className="flex items-center gap-3 my-6">
-            <div className="flex-1 h-px bg-purple-900/10" />
-            <span className="text-xs text-purple-700/60 font-bold uppercase tracking-wider">or</span>
-            <div className="flex-1 h-px bg-purple-900/10" />
+            <div className="flex-1 h-px bg--[#860F61]/10" />
+            <span className="text-xs text--[#21700F]/60 font-bold uppercase tracking-wider">or</span>
+            <div className="flex-1 h-px bg--[#860F61]/10" />
           </div>
 
           {/* Demo Mode */}
           <button
             onClick={handleDemoMode}
             disabled={loading}
-            className="w-full flex items-center justify-center gap-2 py-3 rounded-lg border border-emerald-300 bg-emerald-50 text-purple-800 font-bold text-sm hover:bg-emerald-100 transition-all shadow-sm hover:shadow disabled:opacity-60"
+            className="w-full flex items-center justify-center gap-2 py-3 rounded-lg border border--[#F3E3EC] bg--[#FBF6EE] text--[#5E0A44] font-bold text-sm hover:bg--[#F3E3EC] transition-all shadow-sm hover:shadow disabled:opacity-60"
           >
             Enter Demo Mode
           </button>
 
-          <p className="text-xs text-purple-600 font-medium mt-6 text-center">
+          <p className="text-xs text--[#21700F] font-medium mt-6 text-center">
             Demo mode provides immediate access with seeded demonstration data.
           </p>
         </motion.div>

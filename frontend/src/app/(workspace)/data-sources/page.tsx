@@ -59,12 +59,12 @@ function UploadModal({ open, onClose }: { open: boolean; onClose: () => void }) 
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
-        className="w-full max-w-lg bg-white rounded-2xl border border-purple-900/10 shadow-2xl p-6"
+        className="w-full max-w-lg bg-white rounded-2xl border border--[#860F61]/10 shadow-2xl p-6"
       >
         <div className="flex items-center justify-between mb-5">
-          <h2 className="text-lg font-bold text-purple-950">Upload Dataset</h2>
-          <button onClick={onClose} className="p-1.5 rounded-lg hover:bg-emerald-50 transition-colors">
-            <X className="w-4 h-4 text-purple-800" />
+          <h2 className="text-lg font-bold text--[#860F61]">Upload Dataset</h2>
+          <button onClick={onClose} className="p-1.5 rounded-lg hover:bg--[#FBF6EE] transition-colors">
+            <X className="w-4 h-4 text--[#5E0A44]" />
           </button>
         </div>
 
@@ -75,25 +75,25 @@ function UploadModal({ open, onClose }: { open: boolean; onClose: () => void }) 
               onDragLeave={() => setDragOver(false)}
               onDrop={(e) => { e.preventDefault(); setDragOver(false); handleUpload(); }}
               className={`border-2 border-dashed rounded-xl p-10 text-center transition-colors ${
-                dragOver ? "border-purple-600 bg-emerald-50" : "border-purple-900/10"
+                dragOver ? "border--[#21700F] bg--[#FBF6EE]" : "border--[#860F61]/10"
               }`}
             >
-              <FileUp className="w-10 h-10 text-purple-600 mx-auto mb-3" />
-              <p className="text-sm font-bold text-purple-950 mb-1">Drag and drop your dataset here</p>
-              <p className="text-xs text-purple-800 font-medium mb-4">or click to browse files</p>
+              <FileUp className="w-10 h-10 text--[#21700F] mx-auto mb-3" />
+              <p className="text-sm font-bold text--[#860F61] mb-1">Drag and drop your dataset here</p>
+              <p className="text-xs text--[#5E0A44] font-medium mb-4">or click to browse files</p>
               <button
                 onClick={handleUpload}
-                className="px-4 py-2 rounded-lg bg-purple-700 text-white text-sm font-bold hover:bg-purple-800 transition-colors shadow-md"
+                className="px-4 py-2 rounded-lg bg--[#21700F] text-white text-sm font-bold hover:bg--[#5E0A44] transition-colors shadow-md"
               >
                 Browse Files
               </button>
             </div>
 
             <div className="mt-4">
-              <p className="text-xs text-purple-800 mb-2 font-bold uppercase tracking-wide">Supported formats:</p>
+              <p className="text-xs text--[#5E0A44] mb-2 font-bold uppercase tracking-wide">Supported formats:</p>
               <div className="flex flex-wrap gap-1.5">
                 {["GeoJSON", "Shapefile", "GeoPackage", "GeoTIFF", "CSV", "JSON", "KML"].map((f) => (
-                  <span key={f} className="px-2 py-0.5 rounded bg-emerald-100 text-xs font-bold text-purple-900">
+                  <span key={f} className="px-2 py-0.5 rounded bg--[#F3E3EC] text-xs font-bold text--[#860F61]">
                     {f}
                   </span>
                 ))}
@@ -102,23 +102,23 @@ function UploadModal({ open, onClose }: { open: boolean; onClose: () => void }) 
           </>
         ) : (
           <div className="space-y-3">
-            <h3 className="text-sm font-bold text-purple-950 mb-4">Processing Dataset</h3>
+            <h3 className="text-sm font-bold text--[#860F61] mb-4">Processing Dataset</h3>
             {stages.map((stage, i) => (
               <div key={stage} className="flex items-center gap-3">
                 {i < uploadStage ? (
-                  <CheckCircle2 className="w-4 h-4 text-purple-600 flex-shrink-0" />
+                  <CheckCircle2 className="w-4 h-4 text--[#21700F] flex-shrink-0" />
                 ) : i === uploadStage ? (
-                  <div className="w-4 h-4 border-2 border-emerald-300 border-t-purple-600 rounded-full animate-spin flex-shrink-0" />
+                  <div className="w-4 h-4 border-2 border--[#F3E3EC] border-t--[#21700F] rounded-full animate-spin flex-shrink-0" />
                 ) : (
-                  <div className="w-4 h-4 rounded-full border border-purple-900/10 flex-shrink-0" />
+                  <div className="w-4 h-4 rounded-full border border--[#860F61]/10 flex-shrink-0" />
                 )}
-                <span className={`text-sm font-medium ${i <= uploadStage ? "text-purple-950 font-bold" : "text-purple-600"}`}>{stage}</span>
+                <span className={`text-sm font-medium ${i <= uploadStage ? "text--[#860F61] font-bold" : "text--[#21700F]"}`}>{stage}</span>
               </div>
             ))}
             {uploadStage >= stages.length - 1 && (
               <button
                 onClick={onClose}
-                className="w-full mt-4 py-2.5 rounded-lg bg-purple-700 text-white text-sm font-bold hover:bg-purple-800 transition-colors shadow-md"
+                className="w-full mt-4 py-2.5 rounded-lg bg--[#21700F] text-white text-sm font-bold hover:bg--[#5E0A44] transition-colors shadow-md"
               >
                 Done
               </button>
@@ -135,7 +135,7 @@ function UploadModal({ open, onClose }: { open: boolean; onClose: () => void }) 
 /* ------------------------------------------------------------------ */
 function StatusBadge({ status }: { status: DemoDataset["status"] }) {
   const styles = {
-    ready: "bg-emerald-100 text-purple-700",
+    ready: "bg--[#F3E3EC] text--[#21700F]",
     processing: "bg-blue-100 text-blue-700",
     validating: "bg-amber-100 text-amber-700",
     error: "bg-rose-100 text-rose-700",
@@ -169,12 +169,12 @@ export default function DataSourcesPage() {
         className="flex items-center justify-between mb-8"
       >
         <div>
-          <h1 className="text-3xl font-extrabold text-purple-950 mb-1">Data Sources</h1>
-          <p className="text-sm text-purple-800 font-medium">{demoDatasets.length} datasets loaded • SegFormer-B2 Building Segmentation Enabled</p>
+          <h1 className="text-3xl font-extrabold text--[#860F61] mb-1">Data Sources</h1>
+          <p className="text-sm text--[#5E0A44] font-medium">{demoDatasets.length} datasets loaded • SegFormer-B2 Building Segmentation Enabled</p>
         </div>
         <button
           onClick={() => setUploadOpen(true)}
-          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-purple-700 text-white text-sm font-bold hover:bg-purple-800 transition-colors shadow-md"
+          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg--[#21700F] text-white text-sm font-bold hover:bg--[#5E0A44] transition-colors shadow-md"
         >
           <Upload className="w-4 h-4" />
           Upload Dataset
@@ -185,21 +185,21 @@ export default function DataSourcesPage() {
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mb-8 p-6 rounded-2xl border border-emerald-200 bg-gradient-to-r from-emerald-50 via-white to-white shadow-lg"
+        className="mb-8 p-6 rounded-2xl border border--[#F3E3EC] bg-gradient-to-r from--[#FBF6EE] via-white to-white shadow-lg"
       >
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-emerald-100 text-purple-700">
+            <div className="p-2.5 rounded-xl bg--[#F3E3EC] text--[#21700F]">
               <Layers className="w-5 h-5" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h2 className="text-base font-bold text-purple-950">SegFormer-B2 Building Segmentation (Task 2)</h2>
-                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-purple-700">
+                <h2 className="text-base font-bold text--[#860F61]">SegFormer-B2 Building Segmentation (Task 2)</h2>
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg--[#F3E3EC] text--[#21700F]">
                   Backend API Live
                 </span>
               </div>
-              <p className="text-xs text-purple-800 font-medium mt-0.5">
+              <p className="text-xs text--[#5E0A44] font-medium mt-0.5">
                 NVIDIA SegFormer-B2 finetuned on SpaceNet-2 Paris dataset • IoU 73.6% • Output CRS EPSG:4326
               </p>
             </div>
@@ -207,26 +207,26 @@ export default function DataSourcesPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
-          <div className="p-4 rounded-xl border border-purple-900/10 bg-[#F8FAFC]">
-            <span className="text-xs text-purple-800 font-bold uppercase tracking-wide">Pretrained Architecture</span>
-            <div className="text-sm font-bold text-purple-950 mt-1">SegFormer-B2 (ADE20K Base)</div>
-            <div className="text-[11px] text-purple-700 font-medium mt-0.5">Input: 512×512 RGB Satellite Rasters</div>
+          <div className="p-4 rounded-xl border border--[#860F61]/10 bg-[#F8FAFC]">
+            <span className="text-xs text--[#5E0A44] font-bold uppercase tracking-wide">Pretrained Architecture</span>
+            <div className="text-sm font-bold text--[#860F61] mt-1">SegFormer-B2 (ADE20K Base)</div>
+            <div className="text-[11px] text--[#21700F] font-medium mt-0.5">Input: 512×512 RGB Satellite Rasters</div>
           </div>
 
-          <div className="p-4 rounded-xl border border-purple-900/10 bg-[#F8FAFC]">
-            <span className="text-xs text-purple-800 font-bold uppercase tracking-wide">Validation Metrics</span>
+          <div className="p-4 rounded-xl border border--[#860F61]/10 bg-[#F8FAFC]">
+            <span className="text-xs text--[#5E0A44] font-bold uppercase tracking-wide">Validation Metrics</span>
             <div className="flex items-center gap-3 mt-1 text-xs font-bold">
-              <span className="text-purple-700">IoU: 73.6%</span>
+              <span className="text--[#21700F]">IoU: 73.6%</span>
               <span className="text-blue-700">Dice/F1: 84.8%</span>
-              <span className="text-purple-950">Recall: 86.6%</span>
+              <span className="text--[#860F61]">Recall: 86.6%</span>
             </div>
-            <div className="text-[11px] text-purple-700 font-medium mt-0.5">Polygon Area Calculation: Geodetic WGS84</div>
+            <div className="text-[11px] text--[#21700F] font-medium mt-0.5">Polygon Area Calculation: Geodetic WGS84</div>
           </div>
 
-          <div className="p-4 rounded-xl border border-purple-900/10 bg-[#F8FAFC] flex flex-col justify-between">
+          <div className="p-4 rounded-xl border border--[#860F61]/10 bg-[#F8FAFC] flex flex-col justify-between">
             <div>
-              <span className="text-xs text-purple-800 font-bold uppercase tracking-wide">API Endpoint</span>
-              <div className="text-xs font-mono text-purple-700 font-bold mt-1 truncate">
+              <span className="text-xs text--[#5E0A44] font-bold uppercase tracking-wide">API Endpoint</span>
+              <div className="text-xs font-mono text--[#21700F] font-bold mt-1 truncate">
                 POST /api/ml/segment
               </div>
             </div>
@@ -234,7 +234,7 @@ export default function DataSourcesPage() {
               href="http://localhost:8000/docs#/default/segment_buildings_api_ml_segment_post"
               target="_blank"
               rel="noreferrer"
-              className="mt-2 text-center text-xs font-bold px-3 py-1.5 rounded-lg bg-purple-600 text-white hover:bg-purple-700 transition-colors shadow-sm"
+              className="mt-2 text-center text-xs font-bold px-3 py-1.5 rounded-lg bg--[#21700F] text-white hover:bg--[#21700F] transition-colors shadow-sm"
             >
               Test Endpoint via Swagger UI
             </a>
@@ -250,26 +250,26 @@ export default function DataSourcesPage() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.05 }}
-            className="rounded-xl border border-purple-900/10 bg-white overflow-hidden shadow-sm"
+            className="rounded-xl border border--[#860F61]/10 bg-white overflow-hidden shadow-sm"
           >
             {/* Summary row */}
             <button
               onClick={() => setExpanded(expanded === ds.id ? null : ds.id)}
-              className="w-full px-5 py-4 flex items-center gap-4 hover:bg-emerald-50 transition-colors text-left"
+              className="w-full px-5 py-4 flex items-center gap-4 hover:bg--[#FBF6EE] transition-colors text-left"
             >
-              <div className="w-9 h-9 rounded-lg bg-emerald-100 flex items-center justify-center flex-shrink-0">
-                <Database className="w-4 h-4 text-purple-700" />
+              <div className="w-9 h-9 rounded-lg bg--[#F3E3EC] flex items-center justify-center flex-shrink-0">
+                <Database className="w-4 h-4 text--[#21700F]" />
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-0.5">
-                  <span className="text-sm font-bold text-purple-950 truncate">{ds.name}</span>
+                  <span className="text-sm font-bold text--[#860F61] truncate">{ds.name}</span>
                   <StatusBadge status={ds.status} />
                 </div>
-                <div className="text-xs font-medium text-purple-800">
+                <div className="text-xs font-medium text--[#5E0A44]">
                   {ds.source_type} • {ds.format} • {ds.record_count.toLocaleString("en-US")} records • {ds.file_size}
                 </div>
               </div>
-              <ChevronDown className={`w-4 h-4 text-purple-600 transition-transform ${expanded === ds.id ? "rotate-180" : ""}`} />
+              <ChevronDown className={`w-4 h-4 text--[#21700F] transition-transform ${expanded === ds.id ? "rotate-180" : ""}`} />
             </button>
 
             {/* Expanded metadata */}
@@ -282,7 +282,7 @@ export default function DataSourcesPage() {
                   transition={{ duration: 0.2 }}
                   className="overflow-hidden"
                 >
-                  <div className="px-5 pb-4 pt-0 border-t border-purple-900/10">
+                  <div className="px-5 pb-4 pt-0 border-t border--[#860F61]/10">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
                       {[
                         { label: "Source Type", value: ds.source_type },
@@ -299,17 +299,17 @@ export default function DataSourcesPage() {
                         { label: "Uploaded", value: new Date(ds.uploaded_at).toISOString().split('T')[0] },
                       ].map((item) => (
                         <div key={item.label}>
-                          <span className="text-[10px] font-bold text-purple-800 uppercase tracking-wider">{item.label}</span>
-                          <div className="text-sm font-bold text-purple-950 mt-0.5">{item.value}</div>
+                          <span className="text-[10px] font-bold text--[#5E0A44] uppercase tracking-wider">{item.label}</span>
+                          <div className="text-sm font-bold text--[#860F61] mt-0.5">{item.value}</div>
                         </div>
                       ))}
                     </div>
 
                     {/* CRS Transformation info */}
                     {ds.original_crs !== ds.normalized_crs && ds.original_crs !== "N/A" && (
-                      <div className="mt-4 p-3 rounded-lg bg-emerald-50 border border-emerald-200 shadow-sm">
-                        <div className="text-xs font-bold text-purple-900 mb-1">CRS Transformation Applied</div>
-                        <div className="text-xs font-medium text-purple-800">
+                      <div className="mt-4 p-3 rounded-lg bg--[#FBF6EE] border border--[#F3E3EC] shadow-sm">
+                        <div className="text-xs font-bold text--[#860F61] mb-1">CRS Transformation Applied</div>
+                        <div className="text-xs font-medium text--[#5E0A44]">
                           {ds.original_crs} → {ds.normalized_crs} (e.g., UTM Zone 44N → WGS84)
                         </div>
                       </div>

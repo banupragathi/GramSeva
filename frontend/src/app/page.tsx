@@ -61,10 +61,10 @@ function AnimatedCounter({ end, suffix = "", label, delay = 0 }: { end: number; 
 
   return (
     <div ref={ref} className="text-center">
-      <div className="text-4xl sm:text-5xl font-bold font-mono tracking-tight mb-2">
+      <div className="text-4xl sm:text-5xl font-bold font-mono tracking-tight mb-2 text-white">
         {count.toLocaleString("en-US")}{suffix}
       </div>
-      <div className="text-sm text-neutral-dark mt-1 font-medium">{label}</div>
+      <div className="text-sm text-white/80 mt-1 font-medium">{label}</div>
     </div>
   );
 }
@@ -72,7 +72,17 @@ function AnimatedCounter({ end, suffix = "", label, delay = 0 }: { end: number; 
 /* ------------------------------------------------------------------ */
 /*  PIPELINE STEP                                                       */
 /* ------------------------------------------------------------------ */
-function PipelineStep({ icon: Icon, label, index, total }: { icon: LucideIcon; label: string; index: number; total: number }) {
+function PipelineStep({
+  icon: Icon,
+  label,
+  index,
+  total,
+}: {
+  icon: LucideIcon;
+  label: string;
+  index: number;
+  total: number;
+}) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -81,19 +91,22 @@ function PipelineStep({ icon: Icon, label, index, total }: { icon: LucideIcon; l
       transition={{ delay: index * 0.08, duration: 0.5 }}
       className="flex flex-col items-center gap-2 relative"
     >
-      <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-        <Icon className="w-5 h-5 text-primary" />
+      <div className="w-12 h-12 rounded-xl border border-[#8FBC8F] bg-transparent flex items-center justify-center transition-colors hover:bg-white/10">
+        <Icon className="w-5 h-5 text-[#B7E4B7]" />
       </div>
-      <span className="text-xs font-semibold text-foreground/80 tracking-wide uppercase">{label}</span>
+
+      <span className="text-xs font-semibold text-white tracking-wide uppercase">
+        {label}
+      </span>
+
       {index < total - 1 && (
         <div className="hidden md:block absolute -right-6 top-5">
-          <ArrowRight className="w-4 h-4 text-neutral" />
+          <ArrowRight className="w-4 h-4 text-[#8FBC8F]" />
         </div>
       )}
     </motion.div>
   );
 }
-
 /* ------------------------------------------------------------------ */
 /*  FEATURE CARD                                                        */
 /* ------------------------------------------------------------------ */
@@ -157,12 +170,13 @@ export default function LandingPage() {
       {/* ========== NAVIGATION ========== */}
       <nav className="fixed top-0 w-full z-50 glass-card border-b border-border/50">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center">
-              <MapPin className="w-4 h-4 text-white" />
-            </div>
-            <span className="text-lg font-bold tracking-tight">GramSeva</span>
-          </Link>
+          <Link href="/" className="flex items-center">
+  <img
+    src="/gramseva-logo.png"
+    alt="GramSeva"
+    className="h-10 w-auto object-contain"
+  />
+</Link>
 
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-neutral-dark">
             <a href="#pipeline" className="hover:text-primary transition-colors">How It Works</a>
@@ -171,7 +185,7 @@ export default function LandingPage() {
             <a href="#datasets" className="hover:text-primary transition-colors">Datasets</a>
             <Link href="/data-sources" className="text-primary font-semibold hover:opacity-80 transition-opacity flex items-center gap-1">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>AI Models (SBERT & SegFormer)</span>
+              <span>AI Models</span>
             </Link>
           </div>
 
@@ -210,10 +224,6 @@ export default function LandingPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/8 border border-primary/15 mb-6">
-                <Sparkles className="w-3.5 h-3.5 text-primary" />
-                <span className="text-xs font-semibold text-primary tracking-wide">SIH26013 — GEOSPATIAL INTELLIGENCE</span>
-              </div>
             </motion.div>
 
             <motion.h1
@@ -239,7 +249,7 @@ export default function LandingPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.6 }}
-              className="text-base md:text-lg text-neutral-dark leading-relaxed max-w-xl mb-10"
+              className="text-base md:text-lg text-black leading-relaxed max-w-xl mb-10"
             >
               Bringing fragmented land records, maps and geospatial data together
               into one intelligent, explainable view.
@@ -281,11 +291,11 @@ export default function LandingPage() {
       </motion.section>
 
       {/* ========== QUICK STATS ========== */}
-      <section className="py-12 border-y border-border bg-surface-card/50">
+      <section className="py-12 border-y border-[#860F61] bg-[#860F61]">
         <div className="max-w-5xl mx-auto px-6">
           <div className="flex items-center justify-center gap-2 mb-8">
             <div className="w-1.5 h-1.5 rounded-full bg-warning" />
-            <span className="text-xs font-semibold text-neutral-dark uppercase tracking-wider">Demo Dataset</span>
+            <span className="text-xs font-semibold text-white/80 uppercase tracking-wider">Demo Dataset</span>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <AnimatedCounter end={6} label="Sources Integrated" delay={0} />
@@ -297,94 +307,185 @@ export default function LandingPage() {
       </section>
 
       {/* ========== WHY GRAMSEVA ========== */}
-      <section className="py-20 md:py-28">
-        <div className="max-w-6xl mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Why GramSeva?</h2>
-            <p className="text-neutral-dark max-w-2xl mx-auto leading-relaxed">
-              Land information is scattered across departments — different formats, coordinates,
-              attributes, and versions. GramSeva brings them together.
-            </p>
-          </motion.div>
+<section className="py-20 md:py-28">
+  <div className="max-w-6xl mx-auto px-6">
 
-          {/* Source chips */}
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
-            {["Drone Imagery", "Cadastral Maps", "Municipal GIS", "Revenue Records", "Satellite", "GNSS/CORS", "DSM/DTM", "Building Footprints"].map(
-              (s, i) => <SourceChip key={s} label={s} delay={i * 0.06} />
-            )}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+      className="text-center mb-16"
+    >
+      <h2 className="text-3xl md:text-4xl font-bold mb-4">
+        Why GramSeva?
+      </h2>
+
+      <p className="text-neutral-dark max-w-2xl mx-auto leading-relaxed">
+        Land information is scattered across departments — different formats,
+        coordinates, attributes, and versions. GramSeva brings them together.
+      </p>
+    </motion.div>
+
+    {/* Source chips */}
+    <div className="flex flex-wrap justify-center gap-3 mb-12">
+      {[
+        "Drone Imagery",
+        "Cadastral Maps",
+        "Municipal GIS",
+        "Revenue Records",
+        "Satellite",
+        "GNSS/CORS",
+        "DSM/DTM",
+        "Building Footprints",
+      ].map((s, i) => (
+        <SourceChip
+          key={s}
+          label={s}
+          delay={i * 0.06}
+        />
+      ))}
+    </div>
+
+    {/* Problem visualization */}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      className="w-full"
+    >
+      <div className="grid grid-cols-1 md:grid-cols-[1fr_1.15fr_auto_1.15fr_1fr] gap-5 lg:gap-7 items-center">
+
+        {/* LEFT IMAGE */}
+        <motion.div
+          initial={{ opacity: 0, x: -25 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="flex justify-center"
+        >
+          <div className="w-full max-w-[260px] aspect-[4/3] overflow-hidden rounded-xl border border-border bg-surface-card shadow-sm">
+            <img
+              src="/Different-sources.png"
+              alt="Different sources of land information"
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </motion.div>
+
+        {/* DIFFERENT SOURCES */}
+        <motion.div
+          initial={{ opacity: 0, x: -15 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1, duration: 0.5 }}
+          className="p-6 rounded-xl border border-border bg-surface-card text-center"
+        >
+          <div className="text-sm font-semibold text-foreground/60 mb-4 uppercase tracking-wide">
+            Different Sources
           </div>
 
-          {/* Problem visualization */}
+          <div className="space-y-2 text-xs text-neutral-dark">
+            <div>Different formats</div>
+            <div>Different coordinates</div>
+            <div>Different attributes</div>
+            <div>Different versions</div>
+          </div>
+        </motion.div>
+
+        {/* CENTER */}
+        <div className="flex justify-center">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ scale: 0.8, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
             viewport={{ once: true }}
-            className="max-w-3xl mx-auto"
+            transition={{ delay: 0.2, duration: 0.5 }}
+            className="w-16 h-16 rounded-2xl bg-gradient-primary flex items-center justify-center shadow-lg shadow-primary/25"
           >
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
-              <div className="p-5 rounded-xl border border-border bg-surface-card text-center">
-                <div className="text-sm font-semibold text-foreground/60 mb-3 uppercase tracking-wide">Different Sources</div>
-                <div className="space-y-1.5 text-xs text-neutral-dark">
-                  <div>Different formats</div>
-                  <div>Different coordinates</div>
-                  <div>Different attributes</div>
-                  <div>Different versions</div>
-                </div>
-              </div>
-
-              <div className="flex justify-center">
-                <motion.div
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  whileInView={{ scale: 1, opacity: 1 }}
-                  viewport={{ once: true }}
-                  className="w-16 h-16 rounded-2xl bg-gradient-primary flex items-center justify-center shadow-lg shadow-primary/25"
-                >
-                  <GitMerge className="w-7 h-7 text-white" />
-                </motion.div>
-              </div>
-
-              <div className="p-5 rounded-xl border border-primary/20 bg-primary/5 text-center">
-                <div className="text-sm font-semibold text-primary mb-3 uppercase tracking-wide">One Understanding</div>
-                <div className="space-y-1.5 text-xs text-primary/70">
-                  <div>Harmonized geometry</div>
-                  <div>Unified attributes</div>
-                  <div>Confidence scored</div>
-                  <div>Explainable evidence</div>
-                </div>
-              </div>
-            </div>
+            <GitMerge className="w-7 h-7 text-white" />
           </motion.div>
         </div>
-      </section>
+
+        {/* ONE UNDERSTANDING */}
+        <motion.div
+          initial={{ opacity: 0, x: 15 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1, duration: 0.5 }}
+          className="p-6 rounded-xl border border-primary/20 bg-primary/5 text-center"
+        >
+          <div className="text-sm font-semibold text-primary mb-4 uppercase tracking-wide">
+            One Understanding
+          </div>
+
+          <div className="space-y-2 text-xs text-primary/70">
+            <div>Harmonized geometry</div>
+            <div>Unified attributes</div>
+            <div>Confidence scored</div>
+            <div>Explainable evidence</div>
+          </div>
+        </motion.div>
+
+        {/* RIGHT IMAGE */}
+        <motion.div
+          initial={{ opacity: 0, x: 25 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="flex justify-center"
+        >
+          <div className="w-full max-w-[260px] aspect-[4/3] overflow-hidden rounded-xl border border-primary/15 bg-primary/5 shadow-sm">
+            <img
+              src="/oneunderstanding.png"
+              alt="Unified geospatial land record"
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </motion.div>
+
+      </div>
+    </motion.div>
+
+  </div>
+</section>
 
       {/* ========== HOW IT WORKS — PIPELINE ========== */}
-      <section id="pipeline" className="py-20 md:py-28 bg-surface-card/50 border-y border-border">
-        <div className="max-w-6xl mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">How GramSeva Works</h2>
-            <p className="text-neutral-dark max-w-xl mx-auto">
-              A continuous pipeline from raw data to unified, confidence-scored land records.
-            </p>
-          </motion.div>
+<section
+  id="pipeline"
+  className="py-20 md:py-28 bg-[#004b00] border-y border-[#006400]"
+>
+  <div className="max-w-6xl mx-auto px-6">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="text-center mb-16"
+    >
+      <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
+        How GramSeva Works
+      </h2>
 
-          <div className="flex flex-wrap justify-center gap-x-12 gap-y-6">
-            {pipelineSteps.map((step, i) => (
-              <PipelineStep key={step.label} icon={step.icon} label={step.label} index={i} total={pipelineSteps.length} />
-            ))}
-          </div>
-        </div>
-      </section>
+      <p className="text-white/80 max-w-xl mx-auto">
+        A continuous pipeline from raw data to unified, confidence-scored land records.
+      </p>
+    </motion.div>
+
+    <div className="flex flex-wrap justify-center gap-x-12 gap-y-6">
+      {pipelineSteps.map((step, i) => (
+        <PipelineStep
+          key={step.label}
+          icon={step.icon}
+          label={step.label}
+          index={i}
+          total={pipelineSteps.length}
+        />
+      ))}
+    </div>
+  </div>
+</section>
+
+
 
       {/* ========== FEATURES ========== */}
       <section id="features" className="py-20 md:py-28">
@@ -536,7 +637,7 @@ export default function LandingPage() {
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Datasets & Ecosystem</h2>
             <p className="text-neutral-dark max-w-xl mx-auto">
-              Designed around the SIH26013 land-record harmonization problem and its NAKSHA ecosystem.
+              Designed around multi-source land-record harmonization and the NAKSHA ecosystem.
             </p>
           </motion.div>
 
@@ -596,7 +697,7 @@ export default function LandingPage() {
           >
             <Link
               href="/dashboard"
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-gradient-primary text-white text-lg font-semibold hover:opacity-90 transition-opacity shadow-xl shadow-primary/25"
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-[#006400] text-white text-lg font-semibold hover:opacity-90 transition-opacity shadow-xl shadow-primary/25"
             >
               Open GramSeva Workspace
               <ArrowRight className="w-5 h-5" />
@@ -608,16 +709,15 @@ export default function LandingPage() {
       {/* ========== FOOTER ========== */}
       <footer className="py-8 border-t border-border">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2.5">
-            <div className="w-6 h-6 rounded-md bg-gradient-primary flex items-center justify-center">
-              <MapPin className="w-3 h-3 text-white" />
-            </div>
-            <span className="text-sm font-semibold">GramSeva</span>
-            <span className="text-xs text-neutral">•</span>
-            <span className="text-xs text-neutral-dark">SIH26013</span>
-          </div>
+          <div className="flex items-center">
+  <img
+    src="/gramseva-logo.png"
+    alt="GramSeva"
+    className="h-8 w-auto object-contain"
+  />
+</div>
           <div className="text-xs text-neutral-dark">
-            Built for Smart India Hackathon 2026 • Decision-support platform • Source records preserved
+            Connecting the Land That Connects Us. © 2026 GramSeva. All rights reserved.
           </div>
         </div>
       </footer>

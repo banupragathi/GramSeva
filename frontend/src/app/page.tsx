@@ -1394,7 +1394,7 @@ export default function LandingPage() {
           >
             <Link
               href="/login"
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-gradient-primary text-white text-[15px] font-bold hover:opacity-90 transition-opacity shadow-[0_4px_24px_rgba(134,15,97,0.25)]"
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-[#013220] text-white text-[15px] font-bold hover:opacity-90 transition-opacity shadow-[0_4px_24px_rgba(1,50,32,0.3)]"
             >
               Open GramSeva Workspace
               <ArrowRight className="w-5 h-5" />
@@ -1406,12 +1406,11 @@ export default function LandingPage() {
       {/* ========== FOOTER ========== */}
       <footer className="py-8 border-t border-border">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2.5">
-            <div className="w-6 h-6 rounded-md bg-gradient-primary flex items-center justify-center">
-              <MapPin className="w-3 h-3 text-white" />
-            </div>
-            <span className="text-sm font-semibold">GramSeva</span>
-          </div>
+          <img
+            src="/gramseva-logo.png"
+            alt="GramSeva"
+            className="h-9 w-auto object-contain"
+          />
           <div className="text-xs text-neutral-dark">
             Decision-support platform • Source records preserved
           </div>

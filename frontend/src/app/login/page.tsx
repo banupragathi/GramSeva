@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { MapPin, ArrowRight, Eye, EyeOff, Shield } from "lucide-react";
+import { ArrowRight, Eye, EyeOff, Shield } from "lucide-react";
+import { useAuth, type RoleValue } from "@/lib/auth";
 
 const roles = [
   { value: "admin", label: "Admin" },
@@ -17,11 +18,21 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const { signIn } = useAuth();
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
     // Prototype login
+    const userEmail = email.trim() || "officer@gramseva.gov.in";
+    const localPart = userEmail.split("@")[0].replace(/[._-]+/g, " ");
+    signIn({
+      name: localPart.replace(/\b\w/g, (c) => c.toUpperCase()),
+      email: userEmail,
+      role: role as RoleValue,
+    });
+
     setTimeout(() => {
       window.location.href = "/dashboard";
     }, 800);
@@ -29,6 +40,11 @@ export default function LoginPage() {
 
   const handleDemoMode = () => {
     setLoading(true);
+    signIn({
+      name: "Demo User",
+      email: "demo@gramseva.gov.in",
+      role: "demo",
+    });
 
     setTimeout(() => {
       window.location.href = "/dashboard";
@@ -67,22 +83,6 @@ export default function LoginPage() {
             TOP HEADER
         ===================================================== */}
         <div className="relative z-10">
-
-          <div className="flex items-center gap-3 mb-1">
-
-            <div className="w-10 h-10 rounded-xl bg-[#860F61] flex items-center justify-center shadow-lg shadow-[#860F61]/30 border border-white/20">
-              <MapPin className="w-5 h-5 text-white" />
-            </div>
-
-            <span className="text-2xl font-bold text-white tracking-tight">
-              GramSeva
-            </span>
-
-          </div>
-
-          <p className="text-white/60 text-xs font-medium tracking-wide uppercase">
-            Geospatial Intelligence Platform
-          </p>
 
         </div>
 
@@ -592,7 +592,14 @@ export default function LoginPage() {
       {/* =========================================================
           RIGHT — LOGIN FORM
       ========================================================= */}
-      <div className="flex-1 flex items-center justify-center p-8 bg-background">
+      <div className="flex-1 relative flex items-center justify-center p-8 bg-background">
+
+        {/* Logo — top right */}
+        <img
+          src="/gramseva-logo.png"
+          alt="GramSeva"
+          className="absolute top-6 right-6 lg:top-8 lg:right-8 h-12 w-auto object-contain"
+        />
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -600,22 +607,6 @@ export default function LoginPage() {
           transition={{ duration: 0.5 }}
           className="w-full max-w-md"
         >
-
-          {/* Mobile Logo */}
-          <div className="lg:hidden flex items-center gap-2.5 mb-8">
-
-            <img
-              src="/gramseva-logo.png"
-              alt="GramSeva"
-              className="w-9 h-9 object-contain"
-            />
-
-            <span className="text-lg font-bold">
-              GramSeva
-            </span>
-
-          </div>
-
 
           <h2 className="text-2xl font-bold mb-2">
             Sign in to your account

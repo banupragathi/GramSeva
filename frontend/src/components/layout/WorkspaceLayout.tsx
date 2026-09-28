@@ -1,11 +1,13 @@
 "use client";
 
-import { useState, createContext, useContext } from "react";
+import { useState, useRef, useEffect, createContext, useContext } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import { useAuth, ROLES, initials } from "@/lib/auth";
 import {
-  MapPin,
+  Check,
+  LogOut,
   LayoutDashboard,
   Database,
   Map,
@@ -137,9 +139,32 @@ export default function WorkspaceLayout({ children }: { children: React.ReactNod
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [viewMode3D, setViewMode3D] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
+  const profileRef = useRef<HTMLDivElement>(null);
   const collapsed = sidebarCollapsed;
   const setCollapsed = setSidebarCollapsed;
   const pathname = usePathname();
+  const router = useRouter();
+  const { user, setRole, signOut } = useAuth();
+  const currentRole = user ? ROLES[user.role] : null;
+
+  // Close profile menu on outside click
+  useEffect(() => {
+    if (!profileOpen) return;
+    const onClick = (e: MouseEvent) => {
+      if (profileRef.current && !profileRef.current.contains(e.target as Node)) {
+        setProfileOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", onClick);
+    return () => document.removeEventListener("mousedown", onClick);
+  }, [profileOpen]);
+
+  const handleLogout = () => {
+    setProfileOpen(false);
+    signOut();
+    router.push("/login");
+  };
 
   return (
     <SidebarContext.Provider value={{ collapsed, setCollapsed }}>
@@ -151,15 +176,13 @@ export default function WorkspaceLayout({ children }: { children: React.ReactNod
           {/* Logo */}
           <Link
             href="/dashboard"
-            className="flex items-center gap-2 mr-2 flex-shrink-0 group"
+            className="flex items-center mr-2 flex-shrink-0"
           >
-            <div className="w-6.5 h-6.5 rounded-lg bg-gradient-primary flex items-center justify-center shadow-sm group-hover:shadow-primary/25 transition-shadow">
-              <MapPin className="w-3 h-3 text-white" />
-            </div>
-            <div className="hidden sm:flex flex-col leading-none">
-              <span className="text-[13px] font-bold tracking-tight">GramSeva</span>
-              <span className="font-mono text-[9px] text-primary/70 tracking-widest">WORKSPACE</span>
-            </div>
+            <img
+              src="/gramseva-logo.png"
+              alt="GramSeva"
+              className="h-8 w-auto object-contain"
+            />
           </Link>
 
           {/* Vertical divider */}
@@ -192,7 +215,10 @@ export default function WorkspaceLayout({ children }: { children: React.ReactNod
             {/* Notifications */}
             <div className="relative">
               <button
-                onClick={() => setNotificationsOpen(!notificationsOpen)}
+                onClick={() => {
+                  setNotificationsOpen(!notificationsOpen);
+                  setProfileOpen(false);
+                }}
                 className="p-1.5 rounded-lg hover:bg-surface transition-colors relative"
                 title="Notifications"
               >
@@ -254,9 +280,98 @@ export default function WorkspaceLayout({ children }: { children: React.ReactNod
               <Layers className="w-4 h-4" />
             </button>
 
-            {/* User avatar */}
-            <div className="w-6.5 h-6.5 rounded-full bg-primary/10 flex items-center justify-center cursor-pointer hover:bg-primary/20 transition-colors border border-primary/15">
-              <User className="w-3 h-3 text-primary" />
+            {/* User avatar + profile menu */}
+            <div className="relative" ref={profileRef}>
+              <button
+                onClick={() => {
+                  setProfileOpen(!profileOpen);
+                  setNotificationsOpen(false);
+                }}
+                title="Profile"
+                className="w-6.5 h-6.5 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary/20 transition-colors border border-primary/15 text-[10px] font-bold text-primary"
+              >
+                {user ? initials(user.name) : <User className="w-3 h-3 text-primary" />}
+              </button>
+
+              <AnimatePresence>
+                {profileOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8, scale: 0.97 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 8, scale: 0.97 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute right-0 top-full mt-2 w-72 bg-surface-card border border-border rounded-xl shadow-xl z-50 overflow-hidden"
+                  >
+                    {/* Profile details */}
+                    <div className="px-4 py-3.5 border-b border-border flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-gradient-primary flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
+                        {user ? initials(user.name) : <User className="w-4 h-4" />}
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-sm font-semibold truncate">{user?.name ?? "Guest"}</p>
+                        <p className="text-[11px] text-neutral-dark truncate">{user?.email ?? "Not signed in"}</p>
+                        {currentRole && (
+                          <span className={`inline-block mt-1 text-[10px] font-semibold px-1.5 py-0.5 rounded-md border ${currentRole.badgeClass}`}>
+                            {currentRole.label}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Role switching */}
+                    {user && (
+                      <div className="py-1.5 border-b border-border">
+                        <p className="px-4 pt-1 pb-1.5 font-mono text-[9px] font-semibold text-neutral uppercase tracking-widest">
+                          Switch Role
+                        </p>
+                        {Object.values(ROLES).map((r) => {
+                          const active = user.role === r.value;
+                          return (
+                            <button
+                              key={r.value}
+                              onClick={() => setRole(r.value)}
+                              className={`w-full flex items-start gap-2.5 px-4 py-2 text-left transition-colors ${
+                                active ? "bg-primary/5" : "hover:bg-surface"
+                              }`}
+                            >
+                              <span className="w-4 h-4 mt-0.5 flex items-center justify-center flex-shrink-0">
+                                {active && <Check className="w-3.5 h-3.5 text-primary" />}
+                              </span>
+                              <span className="min-w-0">
+                                <span className={`block text-xs font-semibold ${active ? "text-primary" : ""}`}>
+                                  {r.label}
+                                </span>
+                                <span className="block text-[11px] text-neutral-dark leading-snug">
+                                  {r.description}
+                                </span>
+                              </span>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    )}
+
+                    {/* Actions */}
+                    <div className="py-1.5">
+                      <Link
+                        href="/settings"
+                        onClick={() => setProfileOpen(false)}
+                        className="flex items-center gap-2.5 px-4 py-2 text-xs font-medium hover:bg-surface transition-colors"
+                      >
+                        <Settings className="w-3.5 h-3.5 text-neutral-dark" />
+                        Settings
+                      </Link>
+                      <button
+                        onClick={handleLogout}
+                        className="w-full flex items-center gap-2.5 px-4 py-2 text-xs font-medium text-red-600 hover:bg-red-50 transition-colors"
+                      >
+                        <LogOut className="w-3.5 h-3.5" />
+                        Log out
+                      </button>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </div>
         </header>

@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import {
   MapPin,
   Shield,
@@ -17,9 +18,6 @@ import {
   Globe,
   Search,
   BarChart3,
-  Satellite,
-  Building2,
-  TreePine,
   Compass,
   Radar,
   Puzzle,
@@ -27,7 +25,6 @@ import {
   FileCheck,
   LucideIcon,
 } from "lucide-react";
-import Hero3DLandVisual from "@/components/Hero3DLandVisual";
 
 /* ------------------------------------------------------------------ */
 /*  ANIMATED COUNTER                                                    */
@@ -206,8 +203,8 @@ export default function LandingPage() {
         <div className="absolute top-20 right-10 w-96 h-96 rounded-full bg-primary/5 blur-3xl pointer-events-none" />
         <div className="absolute bottom-10 left-10 w-72 h-72 rounded-full bg-secondary/40 blur-3xl pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="max-w-3xl">
+        <div className="max-w-7xl mx-auto px-6 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div className="lg:col-span-6 xl:col-span-7 max-w-2xl">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -271,35 +268,25 @@ export default function LandingPage() {
             </motion.div>
           </div>
 
-          {/* Hero visual — animated transformation */}
+          {/* 3D Land Intelligence Visual — Clean borderless fit */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            className="mt-16 md:mt-0 md:absolute md:right-6 md:top-1/2 md:-translate-y-1/2 w-full md:w-[440px]"
+            initial={{ opacity: 0, scale: 0.92, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ delay: 0.35, duration: 0.8, ease: "easeOut" }}
+            className="lg:col-span-6 xl:col-span-5 flex items-center justify-center relative mt-8 lg:mt-0"
           >
-            <div className="relative rounded-2xl border border-border bg-surface-card p-5 shadow-xl shadow-black/5">
-              {/* 3D Land Intelligence Visual */}
-              <Hero3DLandVisual />
+            <div className="relative w-full max-w-[560px] lg:max-w-none flex items-center justify-center">
+              {/* Subtle ambient lighting behind the isometric 3D block */}
+              <div className="absolute -inset-4 bg-gradient-to-tr from-primary/20 via-transparent to-primary/10 rounded-full blur-3xl opacity-70 pointer-events-none" />
 
-              {/* Bottom info strip */}
-              <div className="mt-4 flex items-center justify-between text-xs">
-                <div className="flex items-center gap-2">
-                  <div className="flex -space-x-1">
-                    <div className="w-5 h-5 rounded-full bg-primary/20 border border-primary/40 flex items-center justify-center">
-                      <Satellite className="w-2.5 h-2.5 text-primary" />
-                    </div>
-                    <div className="w-5 h-5 rounded-full bg-secondary border border-secondary-dark/40 flex items-center justify-center">
-                      <Building2 className="w-2.5 h-2.5 text-foreground/60" />
-                    </div>
-                    <div className="w-5 h-5 rounded-full bg-neutral-light border border-neutral/40 flex items-center justify-center">
-                      <TreePine className="w-2.5 h-2.5 text-neutral-dark" />
-                    </div>
-                  </div>
-                  <span className="text-neutral-dark font-medium">Multi-source</span>
-                </div>
-                <span className="text-neutral font-medium">Demo Dataset</span>
-              </div>
+              <Image
+                src="/hero_img.png"
+                alt="GramSeva 3D Land Intelligence Geospatial Visualization"
+                width={1536}
+                height={1024}
+                priority
+                className="w-full h-auto object-contain drop-shadow-[0_20px_45px_rgba(0,0,0,0.35)] select-none hover:scale-[1.02] transition-transform duration-500 ease-out"
+              />
             </div>
           </motion.div>
         </div>

@@ -327,3 +327,38 @@ body {
   font-feature-settings: "tnum" on, "zero" on;
   letter-spacing: -0.02em;
 }
+
+/* Precision interactive hover micro-interaction */
+.interactive-hover {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+}
+
+.interactive-hover:hover {
+  transform: translateY(-1.5px);
+  box-shadow: 0 8px 24px -4px rgba(134, 15, 97, 0.08);
+  border-color: rgba(134, 15, 97, 0.3);
+}
+
+/* Subtle GIS scanline pulse */
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(1000%); }
+}
+
+.scanline-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(134, 15, 97, 0.4), transparent);
+  animation: scanline 6s linear infinite;
+  pointer-events: none;
+}
+
+/* Text selection with primary brand tint */
+::selection {
+  background: rgba(134, 15, 97, 0.18);
+  color: var(--color-foreground);
+}
+

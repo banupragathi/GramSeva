@@ -106,7 +106,7 @@ def _load_model() -> None:
         ImportError: If sentence-transformers or torch are not installed.
         FileNotFoundError: If the model directory or vocabulary CSV does not exist.
     """
-    global _model, _vocab_df, _variant_embeddings, _raw_map, _normalized_map, _loaded, _load_count
+    global _model, _vocab_df, _vocab_rows, _variant_embeddings, _raw_map, _normalized_map, _loaded, _load_count
 
     if _loaded:
         return

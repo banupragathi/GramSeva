@@ -5,13 +5,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Upload,
   Database,
-  File,
   CheckCircle2,
   AlertCircle,
   Clock,
   ChevronDown,
-  ChevronRight,
-  MapPin,
   Layers,
   X,
   FileUp,
@@ -20,7 +17,6 @@ import {
   Search,
   Bot,
   Tag,
-  Sliders,
   Loader2,
 } from "lucide-react";
 import { demoDatasets, type DemoDataset } from "@/lib/demo-data";
@@ -346,7 +342,7 @@ function SbertMatcherPanel() {
                     </div>
                     <div className="text-[11px] text-neutral mt-0.5 flex items-center gap-1">
                       <span>Source:</span>
-                      <span className="font-mono text-neutral-dark">"{result.source_value}"</span>
+                      <span className="font-mono text-neutral-dark">&quot;{result.source_value}&quot;</span>
                     </div>
                   </div>
 

@@ -28,6 +28,7 @@ from unittest.mock import MagicMock, patch
 
 import numpy as np
 
+# Pytest is used when available; falls back to unittest if needed
 try:
     import pytest
 except ImportError:

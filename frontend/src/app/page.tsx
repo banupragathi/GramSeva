@@ -461,6 +461,10 @@ export default function LandingPage() {
             <a href="#features" className="hover:text-primary transition-colors">Features</a>
             <a href="#tech" className="hover:text-primary transition-colors">Technology</a>
             <a href="#datasets" className="hover:text-primary transition-colors">Datasets</a>
+            <Link href="/data-sources" className="text-primary font-semibold hover:opacity-80 transition-opacity flex items-center gap-1">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>AI Models</span>
+            </Link>
           </div>
 
           <div className="flex items-center gap-3">

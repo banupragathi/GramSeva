@@ -1,6 +1,18 @@
+<<<<<<< HEAD
 import os
 import secrets
 from fastapi import FastAPI, Request, Response, HTTPException
+=======
+"""
+GramSeva Backend — FastAPI Application
+Automated Integration and Intelligent Harmonization of Multi-source Geospatial Data
+"""
+
+import logging
+from contextlib import asynccontextmanager
+
+from fastapi import FastAPI
+>>>>>>> fb0ea31aec6de800441deefd97ae3ccb2fee954a
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from slowapi import Limiter, _rate_limit_exceeded_handler
@@ -16,12 +28,36 @@ ensure_env()
 # Initialize Rate Limiter
 limiter = Limiter(key_func=get_remote_address, default_limits=["200/15minutes"])
 
+logger = logging.getLogger(__name__)
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Application lifespan: pre-warm the SegFormer-B2 model at startup."""
+    try:
+        from app.ml.segformer_service import _load_model
+        _load_model()
+        logger.info("SegFormer-B2 model pre-warmed successfully.")
+    except FileNotFoundError as exc:
+        logger.warning("SegFormer model path not found at startup: %s", exc)
+    except ImportError as exc:
+        logger.warning(
+            "ML dependencies not installed (torch/transformers). "
+            "Segmentation endpoints will return 503. Details: %s", exc
+        )
+    except Exception as exc:
+        logger.error("Unexpected error loading SegFormer at startup: %s", exc)
+    yield
+    # Shutdown — nothing to clean up for the model
+
+
 app = FastAPI(
     title="GramSeva API",
     description="Multi-source geospatial data harmonization for urban land record management — SIH26013",
     version="1.0.0",
     docs_url="/docs",
     redoc_url="/redoc",
+    lifespan=lifespan,
 )
 
 app.state.limiter = limiter

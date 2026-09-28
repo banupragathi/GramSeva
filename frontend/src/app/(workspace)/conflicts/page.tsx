@@ -4,28 +4,25 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import {
-  Shield,
   AlertTriangle,
   MapPin,
-  ArrowRight,
   Filter,
-  CheckCircle2,
-  Clock,
-  XCircle,
+  ShieldAlert,
 } from "lucide-react";
 import { demoConflicts, type DemoConflict } from "@/lib/demo-data";
+import { HudBadge, LiveRadarBeacon } from "@/components/ui/geospatial";
 
-const typeFilters = ["all", "boundary", "area", "attribute", "temporal", "topology"] as const;
+type TypeFilter = "all" | "boundary" | "area" | "attribute" | "temporal" | "topology";
 const stateFilters = ["all", "OPEN", "HUMAN_REVIEW", "AUTO_RESOLVE", "RESOLVED", "IRRECONCILABLE"] as const;
 
 function SeverityBadge({ severity }: { severity: DemoConflict["severity"] }) {
   const styles = {
-    high: "bg-error/15 text-error",
-    medium: "bg-warning/15 text-warning",
-    low: "bg-neutral-light text-neutral-dark",
+    high: "bg-error/15 text-error border-error/30",
+    medium: "bg-warning/15 text-warning border-warning/30",
+    low: "bg-neutral/10 text-neutral-dark border-border",
   };
   return (
-    <span className={`text-[10px] font-semibold uppercase px-2 py-0.5 rounded-full ${styles[severity]}`}>
+    <span className={`text-[10px] font-mono uppercase px-2 py-0.5 rounded border ${styles[severity]}`}>
       {severity}
     </span>
   );
@@ -33,21 +30,21 @@ function SeverityBadge({ severity }: { severity: DemoConflict["severity"] }) {
 
 function StateBadge({ state }: { state: DemoConflict["state"] }) {
   const styles: Record<string, string> = {
-    OPEN: "bg-error/10 text-error",
-    HUMAN_REVIEW: "bg-warning/10 text-warning",
-    AUTO_RESOLVE: "bg-info/10 text-info",
-    RESOLVED: "bg-success/10 text-success",
-    IRRECONCILABLE: "bg-neutral-light text-neutral-dark",
+    OPEN: "bg-error/10 text-error border-error/30",
+    HUMAN_REVIEW: "bg-warning/10 text-warning border-warning/30",
+    AUTO_RESOLVE: "bg-info/10 text-info border-info/30",
+    RESOLVED: "bg-success/10 text-success border-success/30",
+    IRRECONCILABLE: "bg-neutral/10 text-neutral-dark border-border",
   };
   return (
-    <span className={`text-[10px] font-semibold uppercase px-2 py-0.5 rounded-full ${styles[state] || styles.OPEN}`}>
+    <span className={`text-[10px] font-mono uppercase px-2 py-0.5 rounded border ${styles[state] || styles.OPEN}`}>
       {state.replace("_", " ")}
     </span>
   );
 }
 
 export default function ConflictsPage() {
-  const [typeFilter, setTypeFilter] = useState<typeof typeFilters[number]>("all");
+  const [typeFilter, setTypeFilter] = useState<TypeFilter>("all");
   const [stateFilter, setStateFilter] = useState<typeof stateFilters[number]>("all");
 
   const filtered = demoConflicts.filter((c) => {
@@ -65,44 +62,70 @@ export default function ConflictsPage() {
   };
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
-      <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
-        <h1 className="text-2xl font-bold mb-1">Conflict Radar</h1>
-        <p className="text-sm text-neutral-dark mb-8">{demoConflicts.length} conflicts detected across data sources</p>
+    <div className="p-6 max-w-7xl mx-auto space-y-6">
+      {/* Header */}
+      <motion.div
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-4 border-b border-border"
+      >
+        <div>
+          <div className="flex items-center gap-2 mb-1.5">
+            <LiveRadarBeacon />
+            <HudBadge variant="error">Anomaly Radar</HudBadge>
+            <span className="font-mono text-[10px] text-neutral">Spatial Integrity Engine</span>
+          </div>
+          <h1 className="text-2xl font-bold tracking-tight">Geospatial Conflict Radar</h1>
+          <p className="text-xs text-neutral-dark mt-0.5">
+            {demoConflicts.length} active discrepancies detected across cadastral and sensor data layers
+          </p>
+        </div>
+
+        <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-error/5 border border-error/20 self-start sm:self-auto">
+          <ShieldAlert className="w-4 h-4 text-error" />
+          <span className="font-mono text-xs font-bold text-error">{filtered.length} Active</span>
+        </div>
       </motion.div>
 
-      {/* Summary cards */}
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-8">
+      {/* Summary count cards */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
         {Object.entries(counts).map(([type, count], i) => (
           <motion.button
             key={type}
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.05 }}
-            onClick={() => setTypeFilter(typeFilter === type ? "all" : type as any)}
-            className={`p-4 rounded-xl border text-center transition-all ${
-              typeFilter === type ? "border-primary bg-primary/5" : "border-border bg-surface-card hover:border-primary/20"
+            transition={{ delay: i * 0.04 }}
+            onClick={() => setTypeFilter(typeFilter === type ? "all" : (type as TypeFilter))}
+            className={`p-4 rounded-xl border text-left transition-all ${
+              typeFilter === type
+                ? "border-primary bg-primary/5 shadow-sm"
+                : "border-border bg-surface-card hover:border-primary/30"
             }`}
           >
-            <div className="text-2xl font-bold">{count}</div>
-            <div className="text-xs text-neutral-dark capitalize font-medium">{type}</div>
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-[10px] uppercase text-neutral-dark tracking-wider">{type}</span>
+              {count > 0 && <span className="w-1.5 h-1.5 rounded-full bg-warning" />}
+            </div>
+            <div className="text-2xl font-bold font-mono text-foreground mt-1">{count}</div>
           </motion.button>
         ))}
       </div>
 
-      {/* Filters */}
-      <div className="flex items-center gap-4 mb-6">
-        <div className="flex items-center gap-2">
-          <Filter className="w-4 h-4 text-neutral-dark" />
-          <span className="text-xs font-semibold text-neutral-dark uppercase tracking-wider">State:</span>
+      {/* Filter Tabs */}
+      <div className="flex items-center gap-3 overflow-x-auto pb-1">
+        <div className="flex items-center gap-1.5 text-xs font-mono text-neutral-dark flex-shrink-0">
+          <Filter className="w-3.5 h-3.5" />
+          <span>Status:</span>
         </div>
         <div className="flex gap-1.5">
           {stateFilters.map((s) => (
             <button
               key={s}
               onClick={() => setStateFilter(s)}
-              className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-                stateFilter === s ? "bg-primary text-white" : "bg-surface border border-border hover:bg-primary/5"
+              className={`px-3 py-1 rounded-lg text-xs font-mono transition-colors whitespace-nowrap ${
+                stateFilter === s
+                  ? "bg-primary text-white font-semibold"
+                  : "bg-surface border border-border text-neutral-dark hover:bg-surface-card"
               }`}
             >
               {s === "all" ? "All" : s.replace("_", " ")}
@@ -116,56 +139,53 @@ export default function ConflictsPage() {
         {filtered.map((c, i) => (
           <motion.div
             key={c.id}
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.04 }}
-            className="p-5 rounded-xl border border-border bg-surface-card hover:border-primary/20 hover:shadow-md transition-all"
+            transition={{ delay: i * 0.03 }}
+            className="p-5 rounded-xl border border-border bg-surface-card shadow-sm hover:border-primary/30 transition-all space-y-3"
           >
-            <div className="flex items-start justify-between mb-3">
-              <div className="flex items-center gap-2">
+            <div className="flex items-start justify-between">
+              <div className="flex flex-wrap items-center gap-2">
                 <AlertTriangle className="w-4 h-4 text-error" />
-                <span className="text-sm font-semibold capitalize">{c.type} Conflict</span>
+                <span className="text-xs font-bold capitalize">{c.type} Discrepancy</span>
                 <SeverityBadge severity={c.severity} />
                 <StateBadge state={c.state} />
               </div>
               <Link
-                href="/map"
-                className="text-xs text-primary hover:underline flex items-center gap-1"
+                href={`/records/${c.parcel_id}`}
+                className="font-mono text-xs text-primary hover:underline flex items-center gap-1 bg-primary/5 px-2.5 py-1 rounded-lg border border-primary/20"
               >
                 <MapPin className="w-3 h-3" />
-                {c.parcel_id}
+                <span>{c.parcel_id}</span>
               </Link>
             </div>
 
-            <p className="text-sm text-neutral-dark mb-3">{c.description}</p>
+            <p className="text-xs text-neutral-dark leading-relaxed">{c.description}</p>
 
-            <div className="flex items-center gap-3 text-xs">
-              <div className="px-3 py-1.5 rounded-lg bg-surface border border-border">
-                <span className="text-neutral-dark">{c.source_a.name}:</span>{" "}
-                <span className="font-semibold">{c.source_a.value}</span>
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2 pt-1 font-mono text-xs">
+              <div className="flex items-center gap-2">
+                <div className="px-3 py-1.5 rounded-lg bg-surface border border-border">
+                  <span className="text-neutral-dark">{c.source_a.name}:</span>{" "}
+                  <span className="font-semibold text-foreground">{c.source_a.value}</span>
+                </div>
+                <span className="text-neutral font-medium">vs</span>
+                <div className="px-3 py-1.5 rounded-lg bg-surface border border-border">
+                  <span className="text-neutral-dark">{c.source_b.name}:</span>{" "}
+                  <span className="font-semibold text-foreground">{c.source_b.value}</span>
+                </div>
               </div>
-              <span className="text-neutral font-medium">vs</span>
-              <div className="px-3 py-1.5 rounded-lg bg-surface border border-border">
-                <span className="text-neutral-dark">{c.source_b.name}:</span>{" "}
-                <span className="font-semibold">{c.source_b.value}</span>
-              </div>
-              <div className="ml-auto px-3 py-1.5 rounded-lg bg-error/5 border border-error/15 text-error font-semibold">
+
+              <div className="sm:ml-auto px-3 py-1 rounded-lg bg-error/10 border border-error/20 text-error font-semibold text-xs">
                 Δ {c.difference}
               </div>
             </div>
 
-            <div className="mt-3 text-xs text-neutral">
-              Created: {new Date(c.created_at).toISOString().replace("T", ", ").slice(0, 19)}
+            <div className="text-[10px] font-mono text-neutral pt-2 border-t border-border flex items-center justify-between">
+              <span>Timestamp: {new Date(c.created_at).toISOString().replace("T", ", ").slice(0, 19)}</span>
+              <span>Resolution: {c.state === "OPEN" ? "Awaiting Reviewer Action" : "In Progress"}</span>
             </div>
           </motion.div>
         ))}
-
-        {filtered.length === 0 && (
-          <div className="text-center py-12 text-neutral-dark">
-            <Shield className="w-8 h-8 mx-auto mb-3 text-neutral" />
-            <p className="text-sm font-medium">No conflicts match the current filters</p>
-          </div>
-        )}
       </div>
     </div>
   );

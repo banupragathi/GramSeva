@@ -27,6 +27,7 @@ import {
   FileCheck,
   LucideIcon,
 } from "lucide-react";
+import Hero3DLandVisual from "@/components/Hero3DLandVisual";
 
 /* ------------------------------------------------------------------ */
 /*  ANIMATED COUNTER                                                    */
@@ -278,79 +279,8 @@ export default function LandingPage() {
             className="mt-16 md:mt-0 md:absolute md:right-6 md:top-1/2 md:-translate-y-1/2 w-full md:w-[440px]"
           >
             <div className="relative rounded-2xl border border-border bg-surface-card p-5 shadow-xl shadow-black/5">
-              {/* Map preview visual */}
-              <div className="aspect-[4/3] rounded-xl bg-gradient-to-br from-[#2a3d2a] to-[#1a2d1a] relative overflow-hidden">
-                {/* Grid pattern to represent parcels */}
-                <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 300">
-                  {/* Simulated parcel boundaries */}
-                  <motion.path
-                    d="M50,50 L150,40 L160,120 L60,130 Z"
-                    fill="none"
-                    stroke="#860F61"
-                    strokeWidth="1.5"
-                    initial={{ pathLength: 0, opacity: 0 }}
-                    animate={{ pathLength: 1, opacity: 0.8 }}
-                    transition={{ delay: 1, duration: 1.5 }}
-                  />
-                  <motion.path
-                    d="M160,35 L280,30 L290,100 L170,115 Z"
-                    fill="none"
-                    stroke="#F4E9D8"
-                    strokeWidth="1.5"
-                    initial={{ pathLength: 0, opacity: 0 }}
-                    animate={{ pathLength: 1, opacity: 0.8 }}
-                    transition={{ delay: 1.3, duration: 1.5 }}
-                  />
-                  <motion.path
-                    d="M55,140 L155,125 L165,220 L65,230 Z"
-                    fill="none"
-                    stroke="#A9ACAD"
-                    strokeWidth="1.5"
-                    initial={{ pathLength: 0, opacity: 0 }}
-                    animate={{ pathLength: 1, opacity: 0.8 }}
-                    transition={{ delay: 1.6, duration: 1.5 }}
-                  />
-                  <motion.path
-                    d="M170,120 L295,105 L305,210 L180,225 Z"
-                    fill="none"
-                    stroke="#860F61"
-                    strokeWidth="1.5"
-                    initial={{ pathLength: 0, opacity: 0 }}
-                    animate={{ pathLength: 1, opacity: 0.7 }}
-                    transition={{ delay: 1.9, duration: 1.5 }}
-                  />
-                  {/* Building footprints */}
-                  <motion.rect x="90" y="70" width="25" height="20" rx="2"
-                    fill="rgba(134,15,97,0.3)" stroke="#860F61" strokeWidth="0.8"
-                    initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.2, duration: 0.5 }}
-                  />
-                  <motion.rect x="200" y="55" width="30" height="22" rx="2"
-                    fill="rgba(134,15,97,0.3)" stroke="#860F61" strokeWidth="0.8"
-                    initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.4, duration: 0.5 }}
-                  />
-                  <motion.rect x="100" y="160" width="22" height="18" rx="2"
-                    fill="rgba(134,15,97,0.3)" stroke="#860F61" strokeWidth="0.8"
-                    initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.6, duration: 0.5 }}
-                  />
-                  {/* Roads */}
-                  <motion.path
-                    d="M0,145 Q200,130 400,140"
-                    fill="none" stroke="rgba(244,233,216,0.4)" strokeWidth="3" strokeDasharray="6 4"
-                    initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 2, duration: 1.5 }}
-                  />
-                </svg>
-
-                {/* Status overlay */}
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 3, duration: 0.5 }}
-                  className="absolute bottom-3 left-3 right-3 flex items-center gap-2 px-3 py-2 rounded-lg bg-black/60 backdrop-blur-sm"
-                >
-                  <div className="w-2 h-2 rounded-full bg-success pulse-status" />
-                  <span className="text-xs text-white/80 font-medium">4 sources harmonized • 94% confidence</span>
-                </motion.div>
-              </div>
+              {/* 3D Land Intelligence Visual */}
+              <Hero3DLandVisual />
 
               {/* Bottom info strip */}
               <div className="mt-4 flex items-center justify-between text-xs">

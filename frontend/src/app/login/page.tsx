@@ -366,45 +366,6 @@ export default function LoginPage() {
 
       </div>
 
-        <div className="relative z-10">
-          <div className="flex items-center gap-3 mb-2">
-            <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center backdrop-blur-sm">
-              <MapPin className="w-5 h-5 text-white" />
-            </div>
-            <span className="text-2xl font-bold text-white">GramSeva</span>
-          </div>
-          <p className="text-white/60 text-sm mt-1">Geospatial Intelligence Platform</p>
-        </div>
-
-        <div className="relative z-10 max-w-md">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            className="text-4xl font-bold text-white leading-tight mb-4"
-          >
-            Connecting the Land
-            <br />That Connects Us
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            className="text-white/70 leading-relaxed"
-          >
-            Multi-source geospatial data integration, intelligent harmonization,
-            and unified land record management.
-          </motion.p>
-        </div>
-
-        <div className="relative z-10">
-          <div className="flex items-center gap-3 text-white/40 text-xs">
-            <Shield className="w-4 h-4" />
-            <span>Government-grade security • Source data preserved • Audit trail maintained</span>
-          </div>
-        </div>
-      </div>
-
       {/* Right — Login Form */}
       <div className="flex-1 flex items-center justify-center p-8 bg-background">
         <motion.div

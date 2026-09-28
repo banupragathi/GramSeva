@@ -22,6 +22,7 @@ Vocabulary:
     - Zero re-encoding of the vocabulary during API requests
 """
 
+import csv
 import logging
 import os
 import re
@@ -30,7 +31,11 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
 
 import numpy as np
-import pandas as pd
+
+try:
+    import pandas as pd
+except ImportError:
+    pd = None
 
 logger = logging.getLogger(__name__)
 
@@ -49,7 +54,8 @@ PRODUCTION_THRESHOLD = 0.40
 # ── Lazy-loaded Singletons ─────────────────────────────────────────────────
 _lock = threading.Lock()
 _model: Optional[Any] = None
-_vocab_df: Optional[pd.DataFrame] = None
+_vocab_df: Optional[Any] = None
+_vocab_rows: List[Dict[str, Any]] = []
 _variant_embeddings: Optional[np.ndarray] = None
 _raw_map: Dict[str, Set[str]] = {}
 _normalized_map: Dict[str, Set[str]] = {}
@@ -137,13 +143,19 @@ def _load_model() -> None:
         _model = SentenceTransformer(str(MODEL_PATH))
 
         logger.info("Loading land-use vocabulary from %s ...", VOCAB_PATH)
-        _vocab_df = pd.read_csv(VOCAB_PATH)
+        if pd is not None:
+            _vocab_df = pd.read_csv(VOCAB_PATH)
+            _vocab_rows = _vocab_df.to_dict("records")
+        else:
+            with open(VOCAB_PATH, "r", encoding="utf-8") as f:
+                _vocab_rows = list(csv.DictReader(f))
+            _vocab_df = _vocab_rows
 
         # Build fast lookup maps
         raw_map: Dict[str, Set[str]] = {}
         normalized_map: Dict[str, Set[str]] = {}
 
-        for _, row in _vocab_df.iterrows():
+        for row in _vocab_rows:
             canonical = str(row["canonical_label"]).strip()
             variant_raw = str(row["variant"]).strip().lower()
             variant_norm = str(row["variant_normalized"]).strip().lower()
@@ -157,9 +169,9 @@ def _load_model() -> None:
         # Precompute vocabulary embeddings ONCE
         logger.info(
             "Precomputing vocabulary embeddings for %d variants ...",
-            len(_vocab_df)
+            len(_vocab_rows)
         )
-        variants = _vocab_df["variant"].tolist()
+        variants = [str(r["variant"]) for r in _vocab_rows]
         _variant_embeddings = _model.encode(
             variants,
             normalize_embeddings=True,
@@ -170,7 +182,7 @@ def _load_model() -> None:
         _loaded = True
         logger.info(
             "SBERT land-use matcher ready. Loaded %d vocabulary entries with %d-dim embeddings.",
-            len(_vocab_df),
+            len(_vocab_rows),
             _variant_embeddings.shape[1],
         )
 
@@ -191,7 +203,7 @@ def model_info() -> Dict[str, Any]:
         "model_name": "sentence-transformers/all-MiniLM-L6-v2",
         "embedding_dimension": 384,
         "production_threshold": PRODUCTION_THRESHOLD,
-        "vocabulary_count": len(_vocab_df) if _vocab_df is not None else 272,
+        "vocabulary_count": len(_vocab_rows) if _vocab_rows else 272,
         "is_loaded": _loaded,
         "load_count": _load_count,
         "model_path": str(MODEL_PATH),
@@ -329,8 +341,8 @@ def match_land_use(query: str, threshold: float = PRODUCTION_THRESHOLD) -> Dict[
     best_idx = int(np.argmax(scores))
     best_score = float(scores[best_idx])
 
-    best_variant = str(_vocab_df.iloc[best_idx]["variant"])
-    best_canonical = str(_vocab_df.iloc[best_idx]["canonical_label"])
+    best_variant = str(_vocab_rows[best_idx]["variant"])
+    best_canonical = str(_vocab_rows[best_idx]["canonical_label"])
 
     # 4. HUMAN REVIEW (threshold check)
     if best_score >= threshold:

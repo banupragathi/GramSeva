@@ -1,10 +1,4 @@
 {
-    "transformer_task": "feature-extraction",
-    "modality_config": {
-        "text": {
-            "method": "forward",
-            "method_output_name": "last_hidden_state"
-        }
-    },
-    "module_output_name": "token_embeddings"
+    "max_seq_length": 256,
+    "do_lower_case": false
 }

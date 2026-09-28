@@ -261,6 +261,8 @@ class LandUseMatchResponse(BaseModel):
     matched_variant: Optional[str] = None
     candidate_labels: Optional[List[str]] = None
 
+    model_config = {"extra": "ignore"}
+
 
 class LandUseBatchMatchRequest(BaseModel):
     land_uses: List[str]

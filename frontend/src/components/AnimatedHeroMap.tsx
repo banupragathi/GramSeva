@@ -504,12 +504,12 @@ export default function AnimatedHeroMap() {
       cancelAnimationFrame(raf);
       renderer.dispose();
       if (renderer.domElement.parentNode === container) container.removeChild(renderer.domElement);
-      scene.traverse((o) => {
+      scene.traverse((o: THREE.Object3D) => {
         if (o instanceof THREE.Mesh) {
           o.geometry.dispose();
           const mats = Array.isArray(o.material) ? o.material : [o.material];
-          mats.forEach((m) => {
-            if (m.map) m.map.dispose();
+          mats.forEach((m: THREE.Material) => {
+            if ("map" in m && m.map) (m.map as THREE.Texture).dispose();
             m.dispose();
           });
         }

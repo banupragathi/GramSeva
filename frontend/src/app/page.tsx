@@ -285,7 +285,7 @@ const FeatureConflictVisual = ({ className }: { className?: string }) => (
     <motion.path d="M100,25 L120,25 L110,75 L91,70.5 Z" fill="currentColor" stroke="currentColor" strokeWidth="1.5" animate={{ fillOpacity: [0.1, 0.4, 0.1], strokeOpacity: [0.4, 1, 0.4] }} transition={{ duration: 1.5, repeat: Infinity }} />
     <motion.g animate={{ y: [0, -4, 0] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}>
       <line x1="105" y1="45" x2="135" y2="25" strokeWidth="1" strokeOpacity="0.5" />
-      <rect x="135" y="10" width="50" height="20" rx="3" fill="white" strokeWidth="1" shadow="sm" />
+      <rect x="135" y="10" width="50" height="20" rx="3" fill="white" strokeWidth="1" />
       <circle cx="145" cy="20" r="3" fill="currentColor" stroke="none" />
       <text x="152" y="23" fontSize="7" fontWeight="bold" fill="currentColor" stroke="none">0.24 Ha Conflict</text>
     </motion.g>

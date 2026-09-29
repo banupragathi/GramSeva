@@ -461,10 +461,7 @@ export default function LandingPage() {
             <a href="#features" className="hover:text-primary transition-colors">Features</a>
             <a href="#tech" className="hover:text-primary transition-colors">Technology</a>
             <a href="#datasets" className="hover:text-primary transition-colors">Datasets</a>
-            <Link href="/data-sources" className="text-primary font-semibold hover:opacity-80 transition-opacity flex items-center gap-1">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>AI Models</span>
-            </Link>
+
           </div>
 
           <div className="flex items-center gap-3">
@@ -1396,12 +1393,11 @@ export default function LandingPage() {
       {/* ========== FOOTER ========== */}
       <footer className="py-8 border-t border-border">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2.5">
-            <div className="w-6 h-6 rounded-md bg-gradient-primary flex items-center justify-center">
-              <MapPin className="w-3 h-3 text-white" />
-            </div>
-            <span className="text-sm font-semibold">GramSeva</span>
-          </div>
+          <img
+            src="/gramseva-logo.png"
+            alt="GramSeva"
+            className="h-9 w-auto object-contain"
+          />
           <div className="text-xs text-neutral-dark">
             Decision-support platform • Source records preserved
           </div>

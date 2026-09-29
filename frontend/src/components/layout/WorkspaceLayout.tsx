@@ -1,13 +1,13 @@
 "use client";
-import {
-  useState,
-  createContext,
-  useContext,
-} from "react";
+
+import { useState, useRef, useEffect, createContext, useContext } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import { useAuth, ROLES, initials } from "@/lib/auth";
 import {
+  Check,
+  LogOut,
   LayoutDashboard,
   Database,
   Map,
@@ -27,15 +27,10 @@ import {
   Search,
   Bell,
   User,
-  UserCog,
-  LogOut,
-  Check,
   Layers,
   LucideIcon,
   Activity,
 } from "lucide-react";
-
-import { useAuth, ROLES, initials, type RoleValue } from "@/lib/auth";
 
 /* ------------------------------------------------------------------ */
 /*  SIDEBAR CONTEXT                                                     */
@@ -138,183 +133,38 @@ function SidebarItem({ item, collapsed }: { item: NavItem; collapsed: boolean })
 }
 
 /* ------------------------------------------------------------------ */
-/*  PROFILE MENU — dynamically reflects the authenticated user          */
-/* ------------------------------------------------------------------ */
-function ProfileMenu() {
-  const { user, ready, signOut, setRole } = useAuth();
-  const [open, setOpen] = useState(false);
-  const [switching, setSwitching] = useState(false);
-
-  if (!ready) {
-    return <div className="w-7 h-7 rounded-full bg-surface animate-pulse" />;
-  }
-
-  if (!user) {
-    return (
-      <Link
-        href="/login"
-        className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center border border-primary/15 hover:bg-primary/20 transition-colors"
-        title="Sign in"
-      >
-        <User className="w-3.5 h-3.5 text-primary" />
-      </Link>
-    );
-  }
-
-  const meta = ROLES[user.role];
-  const availableRoles = Object.values(ROLES);
-
-  return (
-    <div className="relative">
-      <button
-        type="button"
-        onClick={() => {
-          setOpen((value) => !value);
-          setSwitching(false);
-        }}
-        className={`w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-bold border transition-all ${
-          open
-            ? "bg-primary text-white border-primary"
-            : "bg-primary/10 text-primary border-primary/15 hover:bg-primary/20"
-        }`}
-        title={`${user.name} · ${meta.label}`}
-        aria-haspopup="menu"
-        aria-expanded={open}
-      >
-        {initials(user.name)}
-      </button>
-
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, y: 7, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 7, scale: 0.98 }}
-            transition={{ duration: 0.14 }}
-            className="absolute right-0 top-full mt-2 w-64 bg-surface-card border border-border rounded-xl shadow-xl z-50 overflow-hidden"
-          >
-            {!switching ? (
-              <>
-                <div className="p-3 border-b border-border flex items-start gap-3">
-                  <div className="w-9 h-9 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold flex-shrink-0">
-                    {initials(user.name)}
-                  </div>
-
-                  <div className="min-w-0 flex-1">
-                    <div className="text-sm font-semibold truncate">
-                      {user.name}
-                    </div>
-                    <div className="text-[11px] text-neutral-dark truncate mt-0.5">
-                      {user.email}
-                    </div>
-                    <span
-                      className={`inline-block mt-1.5 text-[10px] font-semibold px-2 py-0.5 rounded-full border ${meta.badgeClass}`}
-                    >
-                      {meta.label}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="px-3 py-2 border-b border-border">
-                  <p className="text-[11px] text-neutral-dark leading-snug">
-                    {meta.description}
-                  </p>
-                </div>
-
-                <div className="py-1">
-                  {(user.role === "admin" || user.role === "demo") && (
-                    <Link
-                      href="/settings"
-                      onClick={() => setOpen(false)}
-                      className="w-full flex items-center gap-2.5 px-3 py-2 text-sm hover:bg-surface transition-colors"
-                    >
-                      <Settings className="w-4 h-4 text-neutral-dark" />
-                      <span>Settings</span>
-                    </Link>
-                  )}
-
-                  <button
-                    type="button"
-                    onClick={() => setSwitching(true)}
-                    className="w-full flex items-center gap-2.5 px-3 py-2 text-sm hover:bg-surface transition-colors"
-                  >
-                    <UserCog className="w-4 h-4 text-neutral-dark" />
-                    <span>Switch role</span>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => {
-                      signOut();
-                      setOpen(false);
-                      setSwitching(false);
-                      window.location.href = "/login";
-                    }}
-                    className="w-full flex items-center gap-2.5 px-3 py-2 text-sm text-danger hover:bg-danger/5 transition-colors"
-                  >
-                    <LogOut className="w-4 h-4" />
-                    <span>Sign out</span>
-                  </button>
-                </div>
-              </>
-            ) : (
-              <div className="py-1">
-                <div className="px-3 py-2 text-[10px] font-semibold uppercase tracking-wider text-neutral border-b border-border">
-                  Switch role
-                </div>
-
-                {availableRoles.map((role) => (
-                  <button
-                    key={role.value}
-                    type="button"
-                    onClick={() => {
-                      setRole(role.value as RoleValue);
-                      setSwitching(false);
-                    }}
-                    className="w-full flex items-center justify-between px-3 py-2.5 text-sm hover:bg-surface transition-colors"
-                  >
-                    <span
-                      className={
-                        role.value === user.role
-                          ? "font-semibold text-primary"
-                          : ""
-                      }
-                    >
-                      {role.label}
-                    </span>
-
-                    {role.value === user.role && (
-                      <Check className="w-3.5 h-3.5 text-primary" />
-                    )}
-                  </button>
-                ))}
-
-                <button
-                  type="button"
-                  onClick={() => setSwitching(false)}
-                  className="w-full px-3 py-2 text-[11px] text-neutral-dark border-t border-border hover:bg-surface text-left"
-                >
-                  Back to profile
-                </button>
-              </div>
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-}
-
-/* ------------------------------------------------------------------ */
 /*  WORKSPACE LAYOUT                                                    */
 /* ------------------------------------------------------------------ */
 export default function WorkspaceLayout({ children }: { children: React.ReactNode }) {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [viewMode3D, setViewMode3D] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
+  const profileRef = useRef<HTMLDivElement>(null);
   const collapsed = sidebarCollapsed;
   const setCollapsed = setSidebarCollapsed;
   const pathname = usePathname();
+  const router = useRouter();
+  const { user, setRole, signOut } = useAuth();
+  const currentRole = user ? ROLES[user.role] : null;
+
+  // Close profile menu on outside click
+  useEffect(() => {
+    if (!profileOpen) return;
+    const onClick = (e: MouseEvent) => {
+      if (profileRef.current && !profileRef.current.contains(e.target as Node)) {
+        setProfileOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", onClick);
+    return () => document.removeEventListener("mousedown", onClick);
+  }, [profileOpen]);
+
+  const handleLogout = () => {
+    setProfileOpen(false);
+    signOut();
+    router.push("/login");
+  };
 
   return (
     <SidebarContext.Provider value={{ collapsed, setCollapsed }}>
@@ -327,15 +177,12 @@ export default function WorkspaceLayout({ children }: { children: React.ReactNod
           <Link
             href="/dashboard"
             className="flex items-center mr-2 flex-shrink-0"
-            aria-label="GramSeva"
           >
-            <div className="bg-white rounded-xl px-2.5 py-1 shadow-sm border border-border/70">
-              <img
-                src="/gramseva-logo.png"
-                alt="GramSeva"
-                className="h-7 w-auto object-contain"
-              />
-            </div>
+            <img
+              src="/gramseva-logo.png"
+              alt="GramSeva"
+              className="h-8 w-auto object-contain"
+            />
           </Link>
 
           {/* Vertical divider */}
@@ -368,7 +215,10 @@ export default function WorkspaceLayout({ children }: { children: React.ReactNod
             {/* Notifications */}
             <div className="relative">
               <button
-                onClick={() => setNotificationsOpen(!notificationsOpen)}
+                onClick={() => {
+                  setNotificationsOpen(!notificationsOpen);
+                  setProfileOpen(false);
+                }}
                 className="p-1.5 rounded-lg hover:bg-surface transition-colors relative"
                 title="Notifications"
               >
@@ -430,8 +280,99 @@ export default function WorkspaceLayout({ children }: { children: React.ReactNod
               <Layers className="w-4 h-4" />
             </button>
 
-            {/* Dynamic user profile */}
-            <ProfileMenu />
+            {/* User avatar + profile menu */}
+            <div className="relative" ref={profileRef}>
+              <button
+                onClick={() => {
+                  setProfileOpen(!profileOpen);
+                  setNotificationsOpen(false);
+                }}
+                title="Profile"
+                className="w-6.5 h-6.5 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary/20 transition-colors border border-primary/15 text-[10px] font-bold text-primary"
+              >
+                {user ? initials(user.name) : <User className="w-3 h-3 text-primary" />}
+              </button>
+
+              <AnimatePresence>
+                {profileOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8, scale: 0.97 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 8, scale: 0.97 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute right-0 top-full mt-2 w-72 bg-surface-card border border-border rounded-xl shadow-xl z-50 overflow-hidden"
+                  >
+                    {/* Profile details */}
+                    <div className="px-4 py-3.5 border-b border-border flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-gradient-primary flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
+                        {user ? initials(user.name) : <User className="w-4 h-4" />}
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-sm font-semibold truncate">{user?.name ?? "Guest"}</p>
+                        <p className="text-[11px] text-neutral-dark truncate">{user?.email ?? "Not signed in"}</p>
+                        {currentRole && (
+                          <span className={`inline-block mt-1 text-[10px] font-semibold px-1.5 py-0.5 rounded-md border ${currentRole.badgeClass}`}>
+                            {currentRole.label}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Role switching */}
+                    {user && (
+                      <div className="py-1.5 border-b border-border">
+                        <p className="px-4 pt-1 pb-1.5 font-mono text-[9px] font-semibold text-neutral uppercase tracking-widest">
+                          Switch Role
+                        </p>
+                        {Object.values(ROLES).map((r) => {
+                          const active = user.role === r.value;
+                          return (
+                            <button
+                              key={r.value}
+                              onClick={() => setRole(r.value)}
+                              className={`w-full flex items-start gap-2.5 px-4 py-2 text-left transition-colors ${
+                                active ? "bg-primary/5" : "hover:bg-surface"
+                              }`}
+                            >
+                              <span className="w-4 h-4 mt-0.5 flex items-center justify-center flex-shrink-0">
+                                {active && <Check className="w-3.5 h-3.5 text-primary" />}
+                              </span>
+                              <span className="min-w-0">
+                                <span className={`block text-xs font-semibold ${active ? "text-primary" : ""}`}>
+                                  {r.label}
+                                </span>
+                                <span className="block text-[11px] text-neutral-dark leading-snug">
+                                  {r.description}
+                                </span>
+                              </span>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    )}
+
+                    {/* Actions */}
+                    <div className="py-1.5">
+                      <Link
+                        href="/settings"
+                        onClick={() => setProfileOpen(false)}
+                        className="flex items-center gap-2.5 px-4 py-2 text-xs font-medium hover:bg-surface transition-colors"
+                      >
+                        <Settings className="w-3.5 h-3.5 text-neutral-dark" />
+                        Settings
+                      </Link>
+                      <button
+                        onClick={handleLogout}
+                        className="w-full flex items-center gap-2.5 px-4 py-2 text-xs font-medium text-red-600 hover:bg-red-50 transition-colors"
+                      >
+                        <LogOut className="w-3.5 h-3.5" />
+                        Log out
+                      </button>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </div>
         </header>
 

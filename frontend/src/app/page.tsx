@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import Hero3DFloatingVisual from "@/components/Hero3DFloatingVisual";
 import {
   MapPin,
@@ -482,9 +483,7 @@ export default function LandingPage() {
       <nav className="fixed top-0 w-full z-50 glass-card border-b border-border/50">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center">
-              <MapPin className="w-4 h-4 text-white" />
-            </div>
+            <Image src="/gramseva-logo.png" alt="GramSeva Logo" width={32} height={32} className="w-8 h-8 object-contain" />
             <span className="text-lg font-bold tracking-tight">GramSeva</span>
           </Link>
 

@@ -1395,7 +1395,7 @@ export default function LandingPage() {
           >
             <Link
               href="/login"
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-gradient-primary text-white text-[15px] font-bold hover:opacity-90 transition-opacity shadow-[0_4px_24px_rgba(134,15,97,0.25)]"
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-success text-white text-[15px] font-bold hover:opacity-90 transition-opacity shadow-[0_4px_24px_rgba(45,138,86,0.3)]"
             >
               Open GramSeva Workspace
               <ArrowRight className="w-5 h-5" />

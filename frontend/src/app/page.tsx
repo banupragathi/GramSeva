@@ -482,9 +482,8 @@ export default function LandingPage() {
       {/* ========== NAVIGATION ========== */}
       <nav className="fixed top-0 w-full z-50 glass-card border-b border-border/50">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2.5">
-            <Image src="/gramseva-logo.png" alt="GramSeva Logo" width={32} height={32} className="w-8 h-8 object-contain" />
-            <span className="text-lg font-bold tracking-tight">GramSeva</span>
+          <Link href="/" className="flex items-center py-2">
+            <img src="/gramseva-logo.png" alt="GramSeva Logo" className="h-8 md:h-9 w-auto object-contain" />
           </Link>
 
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-neutral-dark">

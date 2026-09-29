@@ -133,7 +133,7 @@ function FeatureCard({ icon: Icon, title, description, delay }: { icon: any; tit
         {/* Full bleed, realistic GIS micro-visualization */}
         <Icon className="w-full h-full text-[#860F61] transition-transform duration-[1.5s] group-hover:scale-105" />
       </div>
-      
+
       <h3 className="text-sm md:text-base font-bold text-foreground mb-1.5">{title}</h3>
       <p className="text-[13px] md:text-sm text-neutral-dark leading-snug font-medium line-clamp-3">{description}</p>
     </motion.div>
@@ -189,14 +189,14 @@ const NormalizeVisual = ({ className }: { className?: string }) => (
 const ExtractVisual = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor">
     <rect x="2" y="2" width="20" height="20" strokeWidth="1" strokeOpacity="0.3" />
-    <motion.polygon points="6,6 12,6 14,10 6,12" fill="currentColor" strokeWidth="1.5" 
-      initial={{ fillOpacity: 0, pathLength: 0 }} 
-      animate={{ fillOpacity: [0, 0.2, 0], pathLength: [0, 1, 0] }} 
+    <motion.polygon points="6,6 12,6 14,10 6,12" fill="currentColor" strokeWidth="1.5"
+      initial={{ fillOpacity: 0, pathLength: 0 }}
+      animate={{ fillOpacity: [0, 0.2, 0], pathLength: [0, 1, 0] }}
       transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
     />
-    <motion.polygon points="14,14 18,12 20,16 16,18" fill="currentColor" strokeWidth="1" 
-      initial={{ fillOpacity: 0, pathLength: 0 }} 
-      animate={{ fillOpacity: [0, 0.1, 0], pathLength: [0, 1, 0] }} 
+    <motion.polygon points="14,14 18,12 20,16 16,18" fill="currentColor" strokeWidth="1"
+      initial={{ fillOpacity: 0, pathLength: 0 }}
+      animate={{ fillOpacity: [0, 0.1, 0], pathLength: [0, 1, 0] }}
       transition={{ duration: 3, repeat: Infinity, delay: 0.5, ease: "easeInOut" }}
     />
   </svg>
@@ -323,7 +323,7 @@ const FeatureTimeVisual = ({ className }: { className?: string }) => (
     </clipPath>
     <g clipPath="url(#sliderClip)">
       <rect width="100%" height="100%" fill="currentColor" fillOpacity="0.04" />
-      <path d="M30,0 C60,40 100,60 240,40" strokeWidth="4" strokeOpacity="0.2" /> 
+      <path d="M30,0 C60,40 100,60 240,40" strokeWidth="4" strokeOpacity="0.2" />
       <polygon points="50,20 100,10 110,40 60,50" fill="currentColor" fillOpacity="0.1" strokeOpacity="0.4" strokeWidth="1.5" />
       <rect x="70" y="20" width="15" height="10" transform="rotate(15 70 20)" fill="currentColor" fillOpacity="0.3" stroke="currentColor" strokeWidth="1" />
       <rect x="85" y="25" width="10" height="10" transform="rotate(15 85 25)" fill="currentColor" fillOpacity="0.3" stroke="currentColor" strokeWidth="1" />
@@ -362,14 +362,14 @@ const FeatureExplainBaseVisual = ({ className }: { className?: string }) => (
     <text x="25" y="52" fontSize="6" opacity="0.6" stroke="none" fill="currentColor">Cadastral X</text>
     <rect x="20" y="65" width="40" height="20" rx="2" strokeWidth="1" fill="currentColor" fillOpacity="0.02" />
     <text x="25" y="77" fontSize="6" opacity="0.6" stroke="none" fill="currentColor">Satellite Y</text>
-    
+
     <motion.path d="M60,25 C90,25 90,50 120,50" strokeWidth="1.5" strokeOpacity="0.4" strokeDasharray="3 3" animate={{ strokeDashoffset: [10, 0] }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }} />
     <motion.path d="M60,50 C90,50 90,50 120,50" strokeWidth="1.5" strokeOpacity="0.4" strokeDasharray="3 3" animate={{ strokeDashoffset: [10, 0] }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }} />
     <motion.path d="M60,75 C90,75 90,50 120,50" strokeWidth="1.5" strokeOpacity="0.4" strokeDasharray="3 3" animate={{ strokeDashoffset: [10, 0] }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }} />
-    
+
     <circle cx="120" cy="50" r="15" strokeWidth="2" fill="white" />
     <motion.circle cx="120" cy="50" r="8" fill="currentColor" fillOpacity="0.2" animate={{ scale: [1, 1.3, 1] }} transition={{ duration: 2, repeat: Infinity }} />
-    
+
     <motion.path d="M135,50 L170,50" strokeWidth="1.5" strokeOpacity="0.8" />
     <rect x="170" y="35" width="50" height="30" rx="4" strokeWidth="1.5" fill="white" stroke="currentColor" />
     <text x="178" y="50" fontSize="7" fontWeight="bold" stroke="none" fill="currentColor">AI DECISION</text>
@@ -384,7 +384,7 @@ const FeatureReviewVisual = ({ className }: { className?: string }) => (
     <circle cx="20" cy="16" r="2" fill="currentColor" stroke="none" opacity="0.3" />
     <circle cx="28" cy="16" r="2" fill="currentColor" stroke="none" opacity="0.3" />
     <text x="35" y="18" fontSize="6" opacity="0.5" stroke="none" fill="black">Task Queue #4252</text>
-    
+
     <rect x="15" y="28" width="100" height="55" rx="2" strokeWidth="1" strokeOpacity="0.2" fill="currentColor" fillOpacity="0.02" />
     <text x="20" y="35" fontSize="5" opacity="0.5" stroke="none" fill="black">Target A</text>
     <polygon points="30,45 80,40 70,75 40,70" strokeWidth="1" fill="currentColor" fillOpacity="0.05" />
@@ -392,7 +392,7 @@ const FeatureReviewVisual = ({ className }: { className?: string }) => (
     <rect x="125" y="28" width="100" height="55" rx="2" strokeWidth="1" strokeOpacity="0.2" fill="currentColor" fillOpacity="0.02" />
     <text x="130" y="35" fontSize="5" opacity="0.5" stroke="none" fill="black">Target B</text>
     <polygon points="140,40 190,45 185,70 150,75" strokeWidth="1" fill="currentColor" fillOpacity="0.05" />
-    
+
     <motion.g animate={{ x: [0, 15, 0], y: [0, 5, 0] }} transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}>
       <line x1="150" y1="50" x2="170" y2="50" strokeWidth="1" strokeDasharray="2 2" strokeOpacity="0.5" />
       <line x1="160" y1="40" x2="160" y2="60" strokeWidth="1" strokeDasharray="2 2" strokeOpacity="0.5" />
@@ -446,21 +446,21 @@ const FeatureGISVisual = ({ className }: { className?: string }) => (
 /*  JOURNEY STAGE WRAPPER                                             */
 /* ================================================================== */
 const JourneyStage = ({ title, children, delay }: any) => (
-  <motion.div 
-    initial={{ opacity: 0, scale: 0.95 }} 
-    whileInView={{ opacity: 1, scale: 1 }} 
-    viewport={{ once: true }} 
+  <motion.div
+    initial={{ opacity: 0, scale: 0.95 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    viewport={{ once: true }}
     transition={{ delay, duration: 0.5 }}
     className="relative flex flex-col items-center shrink-0 w-[170px] xl:w-[12vw] max-w-[185px] snap-center group gap-2 z-10"
   >
     {/* GIS Window Frame */}
     <div className="relative w-full h-[170px] xl:h-[180px] bg-white/40 backdrop-blur-sm border-[1.5px] border-border hover:border-[#860F61]/50 overflow-hidden transition-colors duration-500 rounded-[2px] shadow-sm">
-       {/* Inner surveyor frame */}
-       <div className="absolute inset-[3px] border border-border/40 pointer-events-none z-20" />
-       {children}
-       {/* Corner markers */}
-       <div className="absolute top-0 left-0 w-2 h-2 border-l-2 border-t-2 border-neutral-400 opacity-60 z-20" />
-       <div className="absolute bottom-0 right-0 w-2 h-2 border-r-2 border-b-2 border-neutral-400 opacity-60 z-20" />
+      {/* Inner surveyor frame */}
+      <div className="absolute inset-[3px] border border-border/40 pointer-events-none z-20" />
+      {children}
+      {/* Corner markers */}
+      <div className="absolute top-0 left-0 w-2 h-2 border-l-2 border-t-2 border-neutral-400 opacity-60 z-20" />
+      <div className="absolute bottom-0 right-0 w-2 h-2 border-r-2 border-b-2 border-neutral-400 opacity-60 z-20" />
     </div>
     {/* Stage Label seamlessly part of the UI, no pill */}
     <span className="text-[11px] font-extrabold tracking-widest uppercase text-neutral-dark group-hover:text-[#860F61] transition-colors relative z-20">
@@ -578,15 +578,15 @@ export default function LandingPage() {
               </motion.div>
             </div>
 
-          {/* Hero visual — 3D Floating Land Intelligence */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            className="md:col-span-6 flex items-center justify-center mt-8 md:mt-0"
-          >
-            <Hero3DFloatingVisual />
-          </motion.div>
+            {/* Hero visual — 3D Floating Land Intelligence */}
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+              className="md:col-span-6 flex items-center justify-center mt-8 md:mt-0"
+            >
+              <Hero3DFloatingVisual />
+            </motion.div>
           </div>
         </div>
       </motion.section>
@@ -599,7 +599,7 @@ export default function LandingPage() {
               <div className="w-1.5 h-1.5 rounded-full bg-[#860F61] animate-pulse" />
               <span className="text-xs font-semibold text-[#860F61] uppercase tracking-wider">Demo Dataset</span>
             </div>
-            
+
             <div className="flex flex-wrap justify-center md:justify-end gap-x-12 gap-y-6 flex-1">
               <AnimatedCounter end={6} label="Sources" delay={0} />
               <AnimatedCounter end={1247} label="Parcels" delay={100} />
@@ -613,7 +613,7 @@ export default function LandingPage() {
       {/* ========== WHY GRAMSEVA ========== */}
       <section className="py-16 md:py-24 overflow-hidden bg-background">
         <SectionReveal className="max-w-5xl mx-auto px-6 flex flex-col items-center">
-          
+
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -629,7 +629,7 @@ export default function LandingPage() {
 
           {/* Main Pipeline Layout: Left (Sources) -> Center (Engine) -> Right (Output) */}
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-4 w-full max-w-5xl mt-6 lg:mt-10 relative">
-            
+
             {/* 1. LEFT: Scattered Sources */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -672,7 +672,7 @@ export default function LandingPage() {
               className="flex-1 relative flex items-center justify-center w-full min-h-[140px] md:min-h-[180px] z-0"
             >
               {/* Dynamic Connecting Lines mapped precisely to Left/Right bounding components */}
-              <svg className="absolute inset-0 w-full h-full pointer-events-none text-border overflow-visible hidden md:block" viewBox="0 0 300 180" preserveAspectRatio="none"> 
+              <svg className="absolute inset-0 w-full h-full pointer-events-none text-border overflow-visible hidden md:block" viewBox="0 0 300 180" preserveAspectRatio="none">
                 {/* 
                   Lines mathematically target the ~3 rows of source nodes sitting on the left side
                   (Approx. X == -110 for Outer column, -20 for Inner column). 
@@ -718,10 +718,10 @@ export default function LandingPage() {
 
               {/* Central GIS Matching Jewel (Enlarged & Dominant) */}
               <div className="relative z-10 w-24 h-24 md:w-28 md:h-28 rounded-[1.25rem] bg-white border border-border shadow-md flex items-center justify-center rotate-45">
-                 <div className="absolute inset-1.5 border border-[#860F61]/20 rounded-xl border-dashed" />
-                 <div className="absolute inset-2.5 border border-[#860F61]/10 rounded-lg bg-[#860F61]/[0.02]" />
-                 <Layers className="w-8 h-8 md:w-10 md:h-10 text-neutral-dark/30 -rotate-45 absolute -translate-x-1.5 translate-y-1.5" strokeWidth={1.5} />
-                 <Layers className="w-8 h-8 md:w-10 md:h-10 text-[#860F61] -rotate-45 absolute shadow-sm" strokeWidth={1.5} />
+                <div className="absolute inset-1.5 border border-[#860F61]/20 rounded-xl border-dashed" />
+                <div className="absolute inset-2.5 border border-[#860F61]/10 rounded-lg bg-[#860F61]/[0.02]" />
+                <Layers className="w-8 h-8 md:w-10 md:h-10 text-neutral-dark/30 -rotate-45 absolute -translate-x-1.5 translate-y-1.5" strokeWidth={1.5} />
+                <Layers className="w-8 h-8 md:w-10 md:h-10 text-[#860F61] -rotate-45 absolute shadow-sm" strokeWidth={1.5} />
               </div>
             </motion.div>
 
@@ -774,25 +774,25 @@ export default function LandingPage() {
           </motion.div>
 
           <div className="relative w-full max-w-[1400px] mx-auto px-4 md:px-12 py-2 mt-2">
-            
+
             {/* The SVG animated background path */}
             <div className="absolute inset-0 pointer-events-none hidden xl:block z-0">
-               <svg viewBox="0 0 1400 446" className="w-full h-full" preserveAspectRatio="none">
-                  {/* Subtle winding path: snake right, drop, snake left, drop, snake right */}
-                  {/* Y values: Row 1 center at 104, Row 2 center at 342, Midpoint at 223 */}
-                  <path id="pipeline-path" 
-                        d="M 140,104 L 1260,104 C 1360,104 1360,223 1260,223 L 280,223 C 140,223 140,342 280,342 L 1120,342" 
-                        fill="none" stroke="#860F61" strokeWidth="1.5" strokeOpacity="0.2" strokeDasharray="4 6" />
-                  
-                  {/* Animated traveling particle */}
-                  <circle r="4" fill="#860F61" filter="drop-shadow(0px 0px 4px rgba(134,15,97,0.8))">
-                     <animateMotion dur="15s" repeatCount="indefinite" path="M 140,104 L 1260,104 C 1360,104 1360,223 1260,223 L 280,223 C 140,223 140,342 280,342 L 1120,342" />
-                  </circle>
-               </svg>
+              <svg viewBox="0 0 1400 446" className="w-full h-full" preserveAspectRatio="none">
+                {/* Subtle winding path: snake right, drop, snake left, drop, snake right */}
+                {/* Y values: Row 1 center at 104, Row 2 center at 342, Midpoint at 223 */}
+                <path id="pipeline-path"
+                  d="M 140,104 L 1260,104 C 1360,104 1360,223 1260,223 L 280,223 C 140,223 140,342 280,342 L 1120,342"
+                  fill="none" stroke="#860F61" strokeWidth="1.5" strokeOpacity="0.2" strokeDasharray="4 6" />
+
+                {/* Animated traveling particle */}
+                <circle r="4" fill="#860F61" filter="drop-shadow(0px 0px 4px rgba(134,15,97,0.8))">
+                  <animateMotion dur="15s" repeatCount="indefinite" path="M 140,104 L 1260,104 C 1360,104 1360,223 1260,223 L 280,223 C 140,223 140,342 280,342 L 1120,342" />
+                </circle>
+              </svg>
             </div>
 
             <div className="flex flex-col gap-6 xl:gap-[30px] relative z-10 w-full overflow-hidden xl:overflow-visible pb-2">
-              
+
               {/* ======== ROW 1 ======== */}
               <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4 xl:gap-8 justify-items-center w-full">
                 {/* 1. INGEST */}
@@ -825,11 +825,11 @@ export default function LandingPage() {
                 <JourneyStage title="Extract" delay={0.2}>
                   <div className="absolute inset-0 bg-[#161f26]">
                     <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full">
-                       <path d="M -10,40 C 40,60 60,30 110,40" stroke="#10171a" strokeWidth="8" fill="none" />
-                       <motion.g initial={{ opacity: 0 }} animate={{ opacity: [0, 1, 0.8, 1] }} transition={{ duration: 6, repeat: Infinity }}>
-                         <polygon points="20,20 40,15 50,30 30,35" fill="#00d8ff" fillOpacity="0.2" stroke="#00d8ff" strokeWidth="1" />
-                         <polygon points="60,60 80,50 90,70 70,80" fill="#00d8ff" fillOpacity="0.2" stroke="#00d8ff" strokeWidth="1" />
-                       </motion.g>
+                      <path d="M -10,40 C 40,60 60,30 110,40" stroke="#10171a" strokeWidth="8" fill="none" />
+                      <motion.g initial={{ opacity: 0 }} animate={{ opacity: [0, 1, 0.8, 1] }} transition={{ duration: 6, repeat: Infinity }}>
+                        <polygon points="20,20 40,15 50,30 30,35" fill="#00d8ff" fillOpacity="0.2" stroke="#00d8ff" strokeWidth="1" />
+                        <polygon points="60,60 80,50 90,70 70,80" fill="#00d8ff" fillOpacity="0.2" stroke="#00d8ff" strokeWidth="1" />
+                      </motion.g>
                     </svg>
                   </div>
                 </JourneyStage>
@@ -839,9 +839,9 @@ export default function LandingPage() {
                   <div className="absolute inset-0 bg-[#fdfcfb]" />
                   <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full">
                     <g transform="translate(0, 10)">
-                       <motion.polygon points="25,25 75,20 85,70 20,80" fill="#a39a88" fillOpacity="0.1" stroke="#a39a88" strokeWidth="1" animate={{ x: [-8, 0, -8] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} />
-                       <motion.polygon points="30,30 80,25 80,80 25,80" fill="none" stroke="#860F61" strokeWidth="1.5" strokeDasharray="3 1" animate={{ x: [8, 0, 8] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} />
-                       <motion.polygon points="32,32 73,27 78,68 28,78" fill="#860F61" animate={{ fillOpacity: [0.05, 0.2, 0.05] }} stroke="none" transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }} />
+                      <motion.polygon points="25,25 75,20 85,70 20,80" fill="#a39a88" fillOpacity="0.1" stroke="#a39a88" strokeWidth="1" animate={{ x: [-8, 0, -8] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} />
+                      <motion.polygon points="30,30 80,25 80,80 25,80" fill="none" stroke="#860F61" strokeWidth="1.5" strokeDasharray="3 1" animate={{ x: [8, 0, 8] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} />
+                      <motion.polygon points="32,32 73,27 78,68 28,78" fill="#860F61" animate={{ fillOpacity: [0.05, 0.2, 0.05] }} stroke="none" transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }} />
                     </g>
                   </svg>
                 </JourneyStage>
@@ -849,12 +849,12 @@ export default function LandingPage() {
                 {/* 5. CHANGE */}
                 <JourneyStage title="Change" delay={0.4}>
                   <div className="flex w-full h-full">
-                     <div className="w-1/2 h-full bg-[#e8e4db] flex items-center justify-center border-r-[1px] border-white">
-                       <div className="w-12 h-10 border border-[#a39a88] bg-[#d3ccbc] rotate-3" />
-                     </div>
-                     <div className="w-1/2 h-full bg-[#f4efe1] flex items-center justify-center">
-                       <motion.div className="w-16 h-14 border border-[#860F61]/60 bg-[#860F61]/10 rotate-3" animate={{ scale: [0.95, 1, 0.95] }} transition={{ duration: 4, repeat: Infinity }} />
-                     </div>
+                    <div className="w-1/2 h-full bg-[#e8e4db] flex items-center justify-center border-r-[1px] border-white">
+                      <div className="w-12 h-10 border border-[#a39a88] bg-[#d3ccbc] rotate-3" />
+                    </div>
+                    <div className="w-1/2 h-full bg-[#f4efe1] flex items-center justify-center">
+                      <motion.div className="w-16 h-14 border border-[#860F61]/60 bg-[#860F61]/10 rotate-3" animate={{ scale: [0.95, 1, 0.95] }} transition={{ duration: 4, repeat: Infinity }} />
+                    </div>
                   </div>
                 </JourneyStage>
               </div>
@@ -865,9 +865,9 @@ export default function LandingPage() {
                 <JourneyStage title="Conflict" delay={0.5}>
                   <div className="absolute inset-0 bg-[#fdfcfb]" />
                   <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full">
-                     <polygon points="10,20 80,20 70,80 20,70" fill="#f4efe1" stroke="#a39a88" strokeWidth="1" />
-                     <polygon points="65,30 90,40 85,85 55,75" fill="#d9534f" fillOpacity="0.1" stroke="#d9534f" strokeWidth="1.5" strokeDasharray="2 2" />
-                     <motion.circle cx="75" cy="55" r="12" fill="#d9534f" fillOpacity="0.1" stroke="#d9534f" strokeWidth="1" animate={{ opacity: [0, 1, 0] }} transition={{ duration: 2, repeat: Infinity }} />
+                    <polygon points="10,20 80,20 70,80 20,70" fill="#f4efe1" stroke="#a39a88" strokeWidth="1" />
+                    <polygon points="65,30 90,40 85,85 55,75" fill="#d9534f" fillOpacity="0.1" stroke="#d9534f" strokeWidth="1.5" strokeDasharray="2 2" />
+                    <motion.circle cx="75" cy="55" r="12" fill="#d9534f" fillOpacity="0.1" stroke="#d9534f" strokeWidth="1" animate={{ opacity: [0, 1, 0] }} transition={{ duration: 2, repeat: Infinity }} />
                   </svg>
                 </JourneyStage>
 
@@ -875,10 +875,10 @@ export default function LandingPage() {
                 <JourneyStage title="Confidence" delay={0.6}>
                   <div className="absolute inset-0 bg-[#fbfaf8]" />
                   <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full">
-                     <polygon points="10,20 50,10 80,50 40,60" fill="#e8e4db" stroke="#a39a88" strokeOpacity="0.3" strokeWidth="0.5" />
-                     <motion.polygon points="40,25 90,20 80,70 30,75" fill="#860F61" animate={{ fillOpacity: [0.1, 0.25, 0.1] }} stroke="#860F61" strokeWidth="1.5" transition={{ duration: 4, repeat: Infinity }} />
-                     <rect x="25" y="80" width="50" height="15" rx="2" fill="white" stroke="#e0e0e0" />
-                     <text x="50" y="90" fontSize="8" fontWeight="bold" fill="#860F61" textAnchor="middle">99.8%</text>
+                    <polygon points="10,20 50,10 80,50 40,60" fill="#e8e4db" stroke="#a39a88" strokeOpacity="0.3" strokeWidth="0.5" />
+                    <motion.polygon points="40,25 90,20 80,70 30,75" fill="#860F61" animate={{ fillOpacity: [0.1, 0.25, 0.1] }} stroke="#860F61" strokeWidth="1.5" transition={{ duration: 4, repeat: Infinity }} />
+                    <rect x="25" y="80" width="50" height="15" rx="2" fill="white" stroke="#e0e0e0" />
+                    <text x="50" y="90" fontSize="8" fontWeight="bold" fill="#860F61" textAnchor="middle">99.8%</text>
                   </svg>
                 </JourneyStage>
 
@@ -891,8 +891,8 @@ export default function LandingPage() {
                       <div className="w-1/2 bg-white rounded-sm border border-border flex p-1"><motion.div className="w-full h-full bg-[#860F61]/10 border border-[#860F61]" animate={{ opacity: [0.5, 1, 0.5] }} transition={{ duration: 2, repeat: Infinity }} /></div>
                     </div>
                     <div className="bg-white rounded border border-border p-1.5 flex flex-col gap-1 flex-1">
-                       <div className="h-1 w-full bg-neutral-100 rounded-full" />
-                       <div className="h-1 w-4/5 bg-[#860F61]/20 rounded-full" />
+                      <div className="h-1 w-full bg-neutral-100 rounded-full" />
+                      <div className="h-1 w-4/5 bg-[#860F61]/20 rounded-full" />
                     </div>
                   </div>
                 </JourneyStage>
@@ -901,12 +901,12 @@ export default function LandingPage() {
                 <JourneyStage title="Unify" delay={0.8}>
                   <div className="absolute inset-0 bg-[#fdfcfb]" />
                   <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full">
-                     <g transform="translate(50, 50)">
-                       <motion.polygon points="0,-25 35,0 0,25 -35,0" fill="#e8e4db" stroke="#a39a88" strokeWidth="0.5" animate={{ y: [-20, 0], opacity: [1, 0] }} transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }} />
-                       <polygon points="0,-10 35,10 0,40 -35,10" fill="white" stroke="#860F61" strokeWidth="1.5" />
-                       <polygon points="0,-10 35,10 0,40 -35,10" fill="#860F61" fillOpacity="0.1" />
-                       <circle cx="0" cy="15" r="2" fill="#860F61" />
-                     </g>
+                    <g transform="translate(50, 50)">
+                      <motion.polygon points="0,-25 35,0 0,25 -35,0" fill="#e8e4db" stroke="#a39a88" strokeWidth="0.5" animate={{ y: [-20, 0], opacity: [1, 0] }} transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }} />
+                      <polygon points="0,-10 35,10 0,40 -35,10" fill="white" stroke="#860F61" strokeWidth="1.5" />
+                      <polygon points="0,-10 35,10 0,40 -35,10" fill="#860F61" fillOpacity="0.1" />
+                      <circle cx="0" cy="15" r="2" fill="#860F61" />
+                    </g>
                   </svg>
                 </JourneyStage>
               </div>
@@ -1000,7 +1000,7 @@ export default function LandingPage() {
           </motion.div>
 
           <div className="flex flex-col lg:flex-row items-stretch justify-center gap-4 lg:gap-0 max-w-5xl mx-auto">
-            
+
             {/* 1. AI Column */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -1055,23 +1055,23 @@ export default function LandingPage() {
                   <path d="M100,150 C150,150 150,246 200,246" fill="none" stroke="currentColor" strokeWidth="2.5" strokeOpacity="0.4" strokeDasharray="4 4" />
                   <circle r="4" fill="currentColor" opacity="1"><animateMotion dur="1.5s" repeatCount="indefinite" path="M100,150 C150,150 150,246 200,246" /></circle>
                   <circle r="4" fill="currentColor" opacity="1"><animateMotion dur="1.5s" begin="0.75s" repeatCount="indefinite" path="M100,150 C150,150 150,246 200,246" /></circle>
-                  
+
                   {/* Integrated Node Hub */}
                   <circle cx="100" cy="150" r="26" fill="white" stroke="currentColor" strokeWidth="1.5" strokeOpacity="0.3" />
                   <circle cx="100" cy="150" r="20" fill="currentColor" fillOpacity="0.04" stroke="currentColor" strokeWidth="1" strokeDasharray="2 2" />
                 </svg>
               </div>
-              
+
               {/* Mobile Connector */}
               <div className="absolute inset-0 flex items-center justify-center lg:hidden">
-                 <div className="h-full w-[2px] rounded-full bg-gradient-to-b from-[#860F61]/10 via-[#860F61]/40 to-[#860F61]/10 relative">
-                   <motion.div className="w-1.5 h-1.5 rounded-full bg-[#860F61] absolute -left-[2px]" animate={{ top: ["0%", "100%"] }} transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }} />
-                 </div>
+                <div className="h-full w-[2px] rounded-full bg-gradient-to-b from-[#860F61]/10 via-[#860F61]/40 to-[#860F61]/10 relative">
+                  <motion.div className="w-1.5 h-1.5 rounded-full bg-[#860F61] absolute -left-[2px]" animate={{ top: ["0%", "100%"] }} transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }} />
+                </div>
               </div>
-              
+
               <div className="relative z-20 hidden lg:flex flex-col items-center justify-center text-center">
-                 <Network className="w-6 h-6 text-[#860F61] mb-1" strokeWidth={1.5} />
-                 <span className="text-[10px] font-extrabold text-[#860F61] uppercase tracking-widest leading-tight">Handoff</span>
+                <Network className="w-6 h-6 text-[#860F61] mb-1" strokeWidth={1.5} />
+                <span className="text-[10px] font-extrabold text-[#860F61] uppercase tracking-widest leading-tight">Handoff</span>
               </div>
             </motion.div>
 
@@ -1092,7 +1092,7 @@ export default function LandingPage() {
                   Spatial Processing
                 </div>
               </div>
-              
+
               <div className="flex flex-wrap gap-2 mb-6 w-full">
                 {["PostGIS", "GeoPandas", "Shapely", "GDAL", "PROJ"].map((m) => (
                   <span key={m} className="px-2.5 py-1.5 rounded-md bg-white border border-[#860F61]/10 text-[11px] font-bold text-[#860F61]/90 shadow-[0_1px_4px_rgba(0,0,0,0.04)] grow text-center">
@@ -1100,35 +1100,35 @@ export default function LandingPage() {
                   </span>
                 ))}
               </div>
-              
+
               {/* GIS Output Visual (Miniature Map Display) */}
               <div className="w-full h-32 rounded-xl bg-surface border border-[#860F61]/30 overflow-hidden relative mt-auto flex items-center justify-center shadow-inner">
-                 <svg viewBox="0 0 200 100" className="absolute inset-0 w-full h-full text-foreground/10" preserveAspectRatio="none">
-                    <pattern id="gridbg" width="20" height="20" patternUnits="userSpaceOnUse">
-                      <path d="M 20 0 L 0 0 0 20 L 20 20 L 20 0 Z" fill="none" stroke="currentColor" strokeWidth="0.5" />
-                    </pattern>
-                    <rect width="100%" height="100%" fill="url(#gridbg)" />
-                    <circle cx="100" cy="50" r="30" stroke="currentColor" strokeWidth="1" strokeDasharray="2 2" fill="none" opacity="0.5" />
-                    
-                    {/* Continuous Data Input Stream picked up from central svg */}
-                    <path d="M0,50 L85,50" stroke="#860F61" strokeWidth="2" strokeOpacity="0.4" strokeDasharray="4 4" />
-                    <circle r="3" fill="#860F61"><animateMotion dur="1.5s" repeatCount="indefinite" path="M0,50 L85,50" /></circle>
-                 </svg>
-                 
-                 <svg viewBox="0 0 200 100" className="absolute inset-0 w-full h-full text-[#860F61]" preserveAspectRatio="xMidYMid slice">
-                    <motion.polygon points="60,30 130,30 140,70 70,75" fill="currentColor" fillOpacity="0.05" stroke="currentColor" strokeWidth="1" strokeDasharray="3 3" />
-                    <motion.polygon points="75,40 145,35 135,80 65,85" fill="currentColor" fillOpacity="0.15" stroke="currentColor" strokeWidth="1.5" />
-                    {/* Pulsing Match Indicator */}
-                    <motion.circle cx="105" cy="58" r="4" fill="currentColor" stroke="white" strokeWidth="1" animate={{ scale: [1, 1.3, 1] }} transition={{ duration: 2, repeat: Infinity }} />
-                 </svg>
-                 
-                 <div className="absolute top-2 right-2 flex gap-1">
-                   <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                   <div className="w-1.5 h-1.5 rounded-full bg-[#860F61]" />
-                 </div>
+                <svg viewBox="0 0 200 100" className="absolute inset-0 w-full h-full text-foreground/10" preserveAspectRatio="none">
+                  <pattern id="gridbg" width="20" height="20" patternUnits="userSpaceOnUse">
+                    <path d="M 20 0 L 0 0 0 20 L 20 20 L 20 0 Z" fill="none" stroke="currentColor" strokeWidth="0.5" />
+                  </pattern>
+                  <rect width="100%" height="100%" fill="url(#gridbg)" />
+                  <circle cx="100" cy="50" r="30" stroke="currentColor" strokeWidth="1" strokeDasharray="2 2" fill="none" opacity="0.5" />
+
+                  {/* Continuous Data Input Stream picked up from central svg */}
+                  <path d="M0,50 L85,50" stroke="#860F61" strokeWidth="2" strokeOpacity="0.4" strokeDasharray="4 4" />
+                  <circle r="3" fill="#860F61"><animateMotion dur="1.5s" repeatCount="indefinite" path="M0,50 L85,50" /></circle>
+                </svg>
+
+                <svg viewBox="0 0 200 100" className="absolute inset-0 w-full h-full text-[#860F61]" preserveAspectRatio="xMidYMid slice">
+                  <motion.polygon points="60,30 130,30 140,70 70,75" fill="currentColor" fillOpacity="0.05" stroke="currentColor" strokeWidth="1" strokeDasharray="3 3" />
+                  <motion.polygon points="75,40 145,35 135,80 65,85" fill="currentColor" fillOpacity="0.15" stroke="currentColor" strokeWidth="1.5" />
+                  {/* Pulsing Match Indicator */}
+                  <motion.circle cx="105" cy="58" r="4" fill="currentColor" stroke="white" strokeWidth="1" animate={{ scale: [1, 1.3, 1] }} transition={{ duration: 2, repeat: Infinity }} />
+                </svg>
+
+                <div className="absolute top-2 right-2 flex gap-1">
+                  <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#860F61]" />
+                </div>
               </div>
             </motion.div>
-            
+
           </div>
         </SectionReveal>
       </section>
@@ -1146,7 +1146,7 @@ export default function LandingPage() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 lg:gap-5">
-            
+
             {/* 1. NAKSHA / DoLR */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
@@ -1320,52 +1320,52 @@ export default function LandingPage() {
       <section className="relative py-28 md:py-36 bg-background overflow-hidden flex items-center justify-center min-h-[60vh]">
         {/* Subtle Background Geospatial Environment */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden flex items-center justify-center">
-           {/* Primary Photorealistic Imagery with Subtle Cinematic Drift */}
-           <motion.img 
-             src="/cta_bg.png" 
-             alt="Aerial Land Parcels" 
-             className="absolute w-full h-full object-cover opacity-[0.65] contrast-[1.15] saturate-[1.1]"
-             animate={{ scale: [1, 1.05, 1] }} 
-             transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-           />
+          {/* Primary Photorealistic Imagery with Subtle Cinematic Drift */}
+          <motion.img
+            src="/cta_bg.png"
+            alt="Aerial Land Parcels"
+            className="absolute w-full h-full object-cover opacity-[0.65] contrast-[1.15] saturate-[1.1]"
+            animate={{ scale: [1, 1.05, 1] }}
+            transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+          />
 
-           {/* Multi-layered Soft Masking Gradients for Text Legibility */}
-           <div className="absolute inset-0 opacity-95" style={{ background: 'radial-gradient(circle at center, #fbfaf8 40%, transparent 90%)' }} />
-           <div className="absolute inset-0 bg-gradient-to-t from-[#fbfaf8] via-[#fbfaf8]/20 to-transparent opacity-90" />
-           <div className="absolute inset-0 bg-gradient-to-b from-[#fbfaf8] via-[#fbfaf8]/20 to-transparent opacity-90" />
+          {/* Multi-layered Soft Masking Gradients for Text Legibility */}
+          <div className="absolute inset-0 opacity-95" style={{ background: 'radial-gradient(circle at center, #fbfaf8 40%, transparent 90%)' }} />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#fbfaf8] via-[#fbfaf8]/20 to-transparent opacity-90" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#fbfaf8] via-[#fbfaf8]/20 to-transparent opacity-90" />
 
-           {/* Minimal Converging Parcel Overlay Vectors */}
-           <svg viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice" className="absolute w-full h-full opacity-60">
-              <defs>
-                 <linearGradient id="cta-line-fade" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#860F61" stopOpacity="0" />
-                    <stop offset="50%" stopColor="#860F61" stopOpacity="0.3" />
-                    <stop offset="100%" stopColor="#860F61" stopOpacity="0" />
-                 </linearGradient>
-              </defs>
-              
-              <g stroke="#860F61" strokeWidth="1" fill="#860F61" fillOpacity="0.02">
-                 {/* Drifting outer boundary fragments */}
-                 <motion.g animate={{ x: [0, 40, 0], opacity: [0, 0.4, 0] }} transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}>
-                    <polygon points="100,100 250,80 300,180 150,220" />
-                    <polygon points="180,250 320,200 380,350 220,380" />
-                 </motion.g>
-                 
-                 <motion.g animate={{ x: [0, -40, 0], opacity: [0, 0.4, 0] }} transition={{ duration: 28, repeat: Infinity, ease: "easeInOut" }}>
-                    <polygon points="1350,150 1150,100 1100,250 1280,280" />
-                    <polygon points="1250,320 1080,280 1050,420 1200,460" />
-                 </motion.g>
-                 
-                 {/* Central unifying grid path drifting */}
-                 <line x1="0" y1="300" x2="1440" y2="300" stroke="url(#cta-line-fade)" strokeWidth="1" strokeDasharray="4 8" />
-                 
-                 {/* Target Unified Polygon behind text */}
-                 <motion.g transform="translate(720, 300)" animate={{ scale: [0.95, 1.05, 0.95] }} transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}>
-                    <polygon points="-120,-80 80,-100 120,60 -80,100" fill="#860F61" fillOpacity="0.03" stroke="#860F61" strokeWidth="1.5" strokeOpacity="0.2" />
-                    <polygon points="-120,-80 80,-100 120,60 -80,100" fill="none" stroke="#860F61" strokeWidth="2" strokeOpacity="0.4" strokeDasharray="4 4" />
-                 </motion.g>
-              </g>
-           </svg>
+          {/* Minimal Converging Parcel Overlay Vectors */}
+          <svg viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice" className="absolute w-full h-full opacity-60">
+            <defs>
+              <linearGradient id="cta-line-fade" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#860F61" stopOpacity="0" />
+                <stop offset="50%" stopColor="#860F61" stopOpacity="0.3" />
+                <stop offset="100%" stopColor="#860F61" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+
+            <g stroke="#860F61" strokeWidth="1" fill="#860F61" fillOpacity="0.02">
+              {/* Drifting outer boundary fragments */}
+              <motion.g animate={{ x: [0, 40, 0], opacity: [0, 0.4, 0] }} transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}>
+                <polygon points="100,100 250,80 300,180 150,220" />
+                <polygon points="180,250 320,200 380,350 220,380" />
+              </motion.g>
+
+              <motion.g animate={{ x: [0, -40, 0], opacity: [0, 0.4, 0] }} transition={{ duration: 28, repeat: Infinity, ease: "easeInOut" }}>
+                <polygon points="1350,150 1150,100 1100,250 1280,280" />
+                <polygon points="1250,320 1080,280 1050,420 1200,460" />
+              </motion.g>
+
+              {/* Central unifying grid path drifting */}
+              <line x1="0" y1="300" x2="1440" y2="300" stroke="url(#cta-line-fade)" strokeWidth="1" strokeDasharray="4 8" />
+
+              {/* Target Unified Polygon behind text */}
+              <motion.g transform="translate(720, 300)" animate={{ scale: [0.95, 1.05, 0.95] }} transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}>
+                <polygon points="-120,-80 80,-100 120,60 -80,100" fill="#860F61" fillOpacity="0.03" stroke="#860F61" strokeWidth="1.5" strokeOpacity="0.2" />
+                <polygon points="-120,-80 80,-100 120,60 -80,100" fill="none" stroke="#860F61" strokeWidth="2" strokeOpacity="0.4" strokeDasharray="4 4" />
+              </motion.g>
+            </g>
+          </svg>
         </div>
 
         <SectionReveal className="relative z-10 max-w-4xl mx-auto px-6 text-center">
@@ -1395,7 +1395,7 @@ export default function LandingPage() {
           >
             <Link
               href="/login"
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-gradient-primary text-white text-[15px] font-bold hover:opacity-90 transition-opacity shadow-[0_4px_24px_rgba(134,15,97,0.25)]"
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-[#013220] text-white text-[15px] font-bold hover:opacity-90 transition-opacity shadow-[0_4px_24px_rgba(134,15,97,0.25)]"
             >
               Open GramSeva Workspace
               <ArrowRight className="w-5 h-5" />

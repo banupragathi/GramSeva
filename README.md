@@ -136,7 +136,7 @@ gramseva/
 
 ## 🎯 SIH Problem Statement
 
-**SIH26013 — Automated Integration and Intelligent Harmonization of Multi-source Geospatial Data for Urban Land Record Management**
+**SIH26013 — Automated Integration and Intelligent Harmonization of Multi-source Geospatial Data for Urban Land Record Management**.
 
 GramSeva focuses on making fragmented land data **interoperable, explainable, conflict-aware, and easier to manage**.
 
